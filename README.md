@@ -33,14 +33,6 @@ CV web personal: estudiante de último año de **Ingeniería de Tecnologías y S
 
 HTML5 · CSS3 (Flexbox, Grid, scroll-snap, `<details>`, `prefers-color-scheme`, `@media print`) · JavaScript vanilla (solo como mejora progresiva)
 
-## 🚀 Publicar con GitHub Pages
-
-1. Sube `index.html` a la raíz del repositorio.
-2. En el repositorio: **Settings → Pages → Build and deployment**. Elige *Deploy from a branch*, la rama `main` y la carpeta `/ (root)`.
-3. En un minuto la web estará en `https://<usuario>.github.io/<repositorio>/`. Si el repositorio se llama `dasuarezang.github.io`, estará en `https://dasuarezang.github.io/`.
-
-Para verlo en local basta con abrir `index.html` en cualquier navegador.
-
 ## 📄 Créditos
 
 - Iconos: [Font Awesome Free](https://fontawesome.com) 6.5.1 (CC BY 4.0)
