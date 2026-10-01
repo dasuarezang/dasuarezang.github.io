@@ -396,6 +396,11 @@
     font:500 .62rem/1.2 var(--mono);letter-spacing:.06em;color:rgba(255,255,255,.88);
     background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);
   }
+  .proj-logo{
+    position:absolute;left:20px;top:20px;width:80px;height:80px;border-radius:18px;background:#fff;
+    box-shadow:0 0 0 1px rgba(255,255,255,.25),0 10px 24px -10px rgba(0,0,0,.6);
+  }
+  .proj-card:has(.proj-logo) summary{padding-top:120px;}
   .proj-toggle{
     position:absolute;right:20px;top:20px;width:40px;height:40px;border-radius:50%;
     display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff;
@@ -638,8 +643,10 @@
     .proj-card{flex-basis:86%;}
   }
   @media (max-width:680px){
-    .proj-card summary{min-height:320px;padding:22px;}
+    .proj-card summary{min-height:336px;padding:22px;}
     .proj-toggle{right:16px;top:16px;}
+    .proj-logo{left:16px;top:16px;width:64px;height:64px;border-radius:15px;}
+    .proj-card:has(.proj-logo) summary{padding-top:96px;}
     .cert-item{grid-template-columns:44px minmax(0,1fr) auto;row-gap:6px;column-gap:14px;}
     .cert-logo{width:44px;height:44px;}
     .cert-item .date{grid-column:2;grid-row:2;}
@@ -674,6 +681,7 @@
   @media (max-width:374px){
     .lang-switch span{min-width:30px;padding:8px 8px;}
     .nav-toggle{width:40px;height:40px;}
+    .proj-card summary{min-height:384px;}
   }
   /* Pantallas táctiles: sin efectos hover que se quedan "pegados" al tocar */
   @media (hover:none){
@@ -761,7 +769,7 @@
     html{font-size:13px;scroll-behavior:auto;}
     *{animation:none !important;transition:none !important;box-shadow:none !important;filter:none !important;}
     body{background:#fff;color:#0f172a;}
-    header.nav,.skip-link,.state,footer,.toast,.to-top,.car-nav,.proj-toggle,.proj-bg,.proj-shade,.typing .cursor,
+    header.nav,.skip-link,.state,footer,.toast,.to-top,.car-nav,.proj-toggle,.proj-logo,.proj-bg,.proj-shade,.typing .cursor,
     .cert-go,.sec-tag,.hero::before,.hero::after,.skill-group:first-child::after{display:none !important;}
     .js .reveal{opacity:1 !important;transform:none !important;}
     a{color:inherit;}
@@ -805,6 +813,7 @@
     .car-track{display:grid !important;grid-template-columns:1fr 1fr;gap:10px;overflow:visible;padding:0;margin:0;scroll-snap-type:none;}
     .proj-card{background:#fff;color:#0f172a;border:1px solid #e2e8f0;border-radius:12px;overflow:visible;}
     .proj-card summary{min-height:0;padding:12px 14px 2px;display:block;}
+    .proj-card:has(.proj-logo) summary{padding-top:12px;}
     .proj-card .date{color:var(--accent-deep);background:rgba(96,165,250,0.12);margin-bottom:6px;}
     .proj-card h3{color:#0f172a;font-size:1rem;max-width:none;}
     .proj-tags{margin:6px 0 2px;gap:4px;}
@@ -970,17 +979,18 @@
       </details>
       <details class="proj-card" id="proyecto-2">
         <summary>
-          <img class="proj-bg" src="assets/proyecto-lora.webp" loading="lazy" alt="Sistema de monitorización remota de salud utilizando LoRa (IoT)" decoding="async">
+          <img class="proj-bg" src="assets/proyecto-lora.webp" loading="lazy" alt="VitalLink: monitorización remota de salud con LoRaWAN" decoding="async">
           <span class="proj-shade" aria-hidden="true"></span>
+          <img class="proj-logo" src="assets/vitallink-logo.webp" alt="Logo de VitalLink" width="80" height="80" loading="lazy" decoding="async">
           <span class="date" data-i18n="p2.date"><span class="t-es">Septiembre 2025 — Diciembre 2025</span><span class="t-en" lang="en">September 2025 — December 2025</span></span>
-          <h3 data-i18n="p2.title"><span class="t-es">Sistema de monitorización remota de salud utilizando LoRa (IoT)</span><span class="t-en" lang="en">Remote health monitoring system using LoRa (IoT)</span></h3>
-          <span class="proj-tags"><span>Raspberry Pi</span><span>Arduino</span><span>LoRaWAN</span><span>BITalino</span><span>IoT</span></span>
+          <h3 data-i18n="p2.title"><span class="t-es">VitalLink: monitorización remota de salud con LoRaWAN</span><span class="t-en" lang="en">VitalLink: remote health monitoring over LoRaWAN</span></h3>
+          <span class="proj-tags"><span>Python</span><span>Raspberry Pi</span><span>LoRaWAN</span><span>TTN</span><span>Node-RED</span><span>PostgreSQL</span><span>Next.js</span></span>
           <span class="proj-toggle" aria-hidden="true"><i class="ic ic-plus"></i></span>
         </summary>
         <ul>
-          <li data-i18n="p2.l1"><span class="t-es">Integré un sistema end-to-end de monitorización remota de salud, capturando constantes vitales mediante sensores BITalino y procesamiento en Raspberry Pi.</span><span class="t-en" lang="en">Integrated an end-to-end remote health monitoring system, capturing vital signs with BITalino sensors and processing on a Raspberry Pi.</span></li>
-          <li data-i18n="p2.l2"><span class="t-es">Configuré integralmente el enlace de comunicación LPWA empleando Arduino y un gateway LoRaWAN para la transmisión de datos a larga distancia.</span><span class="t-en" lang="en">Fully configured the LPWA communication link using Arduino and a LoRaWAN gateway for long-range data transmission.</span></li>
-          <li data-i18n="p2.l3"><span class="t-es">Desarrollé el flujo completo de recepción, almacenamiento y procesamiento de datos, incluyendo un frontend para la visualización de la información.</span><span class="t-en" lang="en">Developed the complete data reception, storage and processing pipeline, including a frontend for data visualization.</span></li>
+          <li data-i18n="p2.l1"><span class="t-es">Integré un sistema end-to-end de monitorización remota de salud, capturando constantes vitales mediante sensores analógicos BITalino vía Bluetooth y procesando la señal localmente en una Raspberry Pi 4 utilizando Python (numpy, biosppy.signals).</span><span class="t-en" lang="en">Integrated an end-to-end remote health monitoring system, capturing vital signs with BITalino analog sensors over Bluetooth and processing the signal locally on a Raspberry Pi 4 using Python (numpy, biosppy.signals).</span></li>
+          <li data-i18n="p2.l2"><span class="t-es">Configuré integralmente el enlace de comunicación LPWA interconectando la Raspberry Pi por UART con un Arduino MKR 1310, empleando un gateway LoRaWAN para la transmisión de datos JSON a larga distancia hacia The Things Network (TTN).</span><span class="t-en" lang="en">Fully configured the LPWA communication link by connecting the Raspberry Pi over UART to an Arduino MKR 1310, using a LoRaWAN gateway to transmit JSON data over long range to The Things Network (TTN).</span></li>
+          <li data-i18n="p2.l3"><span class="t-es">Desarrollé el flujo completo de recepción, almacenamiento y procesamiento de datos mediante Node-RED, MQTT y PostgreSQL (Supabase), incluyendo la programación de un frontend clínico interactivo en Next.js y Recharts para la visualización de la información.</span><span class="t-en" lang="en">Developed the complete data reception, storage and processing pipeline with Node-RED, MQTT and PostgreSQL (Supabase), including an interactive clinical frontend built with Next.js and Recharts for data visualization.</span></li>
         </ul>
       </details>
       <details class="proj-card" id="proyecto-3">

@@ -34,7 +34,7 @@ CV web personal: estudiante de último año de **Ingeniería de Tecnologías y S
 | **Sobre mí** | Perfil profesional |
 | **Educación** | Grado en la ETSETB · UPC |
 | **Experiencia** | Timeline de tarjetas con logos: Fòrum Telecos UPC y Real Madrid Official Store |
-| **Proyectos** | Carrusel deslizable con tarjetas desplegables y las tecnologías de cada proyecto: red P2P para LLMs (con enlace a su código en GitHub), monitorización de salud con LoRa (IoT), medidor de distancia por ultrasonidos y ROUV (vehículo subacuático) |
+| **Proyectos** | Carrusel deslizable con tarjetas desplegables y las tecnologías de cada proyecto: red P2P para LLMs (con enlace a su código en GitHub), VitalLink (monitorización remota de salud con LoRaWAN), medidor de distancia por ultrasonidos y ROUV (vehículo subacuático) |
 | **Habilidades** | Lenguajes, web y bases de datos, infraestructura y sistemas operativos, e idiomas |
 | **Certificados** | Harvard (CS50), IBM y Cisco, con enlace a la validación de cada uno |
 
@@ -45,7 +45,7 @@ CV web personal: estudiante de último año de **Ingeniería de Tecnologías y S
 | `index.html` | El CV completo |
 | `og-image.png` | Imagen de vista previa al compartir el enlace (1200 × 630) |
 | `apple-touch-icon.png` | Icono al guardar la web en la pantalla de inicio del móvil |
-| `assets/` | Foto de perfil, logo de la ETSETB, fotos de los 4 proyectos y fuentes Geist y Geist Mono |
+| `assets/` | Foto de perfil, logo de la ETSETB, fotos de los 4 proyectos, logo de VitalLink y fuentes Geist y Geist Mono |
 
 ## 🛠️ Tecnologías
 
