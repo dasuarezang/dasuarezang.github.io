@@ -111,14 +111,17 @@
     -webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);
     box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 0 1px rgba(255,255,255,.09),0 24px 48px -24px rgba(0,0,0,.55);
   }
-  /* Barra de progreso de lectura en el borde inferior de la isla (CSS puro, sin escuchar el scroll) */
+  /* Barra de progreso de lectura en el borde inferior de la isla.
+     Con JS se mueve con --read (0..1) calculado sobre un recorrido estable que no cambia
+     cuando la barra del navegador móvil aparece/desaparece (eso causaba saltos hacia atrás).
+     Sin JS se usa la animación ligada al scroll como respaldo. */
   .nav-inner::after{
     content:"";position:absolute;left:22px;right:22px;bottom:0;height:2px;border-radius:2px;pointer-events:none;
     background:linear-gradient(90deg,var(--accent-deep),var(--accent));
-    transform-origin:0 50%;transform:scaleX(0);
+    transform-origin:0 50%;transform:scaleX(var(--read,0));will-change:transform;
   }
   @supports (animation-timeline:scroll()){
-    .nav-inner::after{animation:readProgress linear both;animation-timeline:scroll(root);}
+    html:not(.js) .nav-inner::after{animation:readProgress linear both;animation-timeline:scroll(root);}
   }
   @keyframes readProgress{to{transform:scaleX(1);}}
   .brand{
@@ -1279,6 +1282,40 @@
       if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(EMAIL).then(show, fallback);
       else fallback();
     }));
+  })();
+
+  // Barra de progreso de lectura: un solo cálculo por fotograma.
+  // El recorrido se mide contra la altura GRANDE del viewport (100vh = barra del navegador oculta),
+  // que no cambia mientras se desliza, así el progreso solo depende de scrollY y nunca retrocede de golpe.
+  (function () {
+    const bar = document.querySelector('.nav-inner');
+    const root = document.documentElement;
+    const probe = document.createElement('div');
+    probe.setAttribute('aria-hidden', 'true');
+    probe.style.cssText = 'position:fixed;top:0;left:0;width:0;height:100vh;visibility:hidden;pointer-events:none;';
+    document.body.appendChild(probe);
+    let range = 1, last = -1, queued = false;
+    function measure() {
+      const vh = Math.max(probe.offsetHeight, window.innerHeight);
+      range = Math.max(1, root.scrollHeight - vh);
+      draw();
+    }
+    function draw() {
+      queued = false;
+      const p = Math.min(1, Math.max(0, window.scrollY / range));
+      const v = Math.round(p * 10000) / 10000;
+      if (v !== last) { last = v; bar.style.setProperty('--read', v); }
+    }
+    function onScroll() { if (!queued) { queued = true; requestAnimationFrame(draw); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Solo recalcula el recorrido cuando cambia el ancho (giro, ventana) o el contenido, no por la barra de URL
+    let lastW = window.innerWidth;
+    window.addEventListener('resize', () => {
+      if (window.innerWidth !== lastW) { lastW = window.innerWidth; requestAnimationFrame(measure); }
+    });
+    if ('ResizeObserver' in window) new ResizeObserver(() => requestAnimationFrame(measure)).observe(document.body);
+    window.addEventListener('load', measure);
+    measure();
   })();
 
   // Volver arriba: visible cuando el hero sale de la pantalla
