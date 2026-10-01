@@ -112,18 +112,19 @@
     box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 0 1px rgba(255,255,255,.09),0 24px 48px -24px rgba(0,0,0,.55);
   }
   /* Barra de progreso de lectura en el borde inferior de la isla.
-     Con JS se mueve con --read (0..1) calculado sobre un recorrido estable que no cambia
-     cuando la barra del navegador móvil aparece/desaparece (eso causaba saltos hacia atrás).
-     Sin JS se usa la animación ligada al scroll como respaldo. */
-  .nav-inner::after{
-    content:"";position:absolute;left:22px;right:22px;bottom:0;height:2px;border-radius:2px;pointer-events:none;
+     Donde hay animaciones ligadas al scroll la mueve el compositor (no se frena aunque el hilo
+     principal esté ocupado); JS solo fija el final del recorrido en px, medido con la altura grande
+     del viewport, para que la barra de URL del móvil no la haga retroceder.
+     Sin soporte, JS la mueve por fotograma con transform directo sobre el propio elemento. */
+  .read-bar{
+    position:absolute;left:22px;right:22px;bottom:0;height:2px;border-radius:2px;pointer-events:none;
     background:linear-gradient(90deg,var(--accent-deep),var(--accent));
-    transform-origin:0 50%;transform:scaleX(var(--read,0));will-change:transform;
+    transform-origin:0 50%;transform:scaleX(0);will-change:transform;contain:strict;
   }
   @supports (animation-timeline:scroll()){
-    html:not(.js) .nav-inner::after{animation:readProgress linear both;animation-timeline:scroll(root);}
+    .read-bar{animation:readProgress linear both;animation-timeline:scroll(root block);}
   }
-  @keyframes readProgress{to{transform:scaleX(1);}}
+  @keyframes readProgress{from{transform:scaleX(0);}to{transform:scaleX(1);}}
   .brand{
     position:relative;z-index:2;display:flex;align-items:center;gap:10px;min-height:44px;
     font-weight:600;font-size:.94rem;letter-spacing:-.01em;white-space:nowrap;min-width:0;
@@ -702,7 +703,7 @@
     width:48px;height:48px;border-radius:50%;font-size:1.15rem;color:#fff;background:rgba(8,11,20,.82);
     -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
     box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 16px 32px -16px rgba(0,0,0,.55);
-    opacity:0;visibility:hidden;transform:translateY(16px) scale(.9);
+    opacity:0;visibility:hidden;transform:translateY(16px) scale(.9);will-change:opacity,transform;
     transition:opacity .5s var(--spring),transform .7s var(--spring),visibility 0s linear .7s,background-color .5s var(--spring);
   }
   .js .to-top{display:flex;}
@@ -878,6 +879,7 @@
       </div>
       <label class="nav-toggle" id="navToggle" for="nav-state"><span class="burger" aria-hidden="true"><span></span><span></span></span></label><a class="nav-toggle nojs-toggle nojs-open" href="#navLinks"><span class="burger" aria-hidden="true"><span></span><span></span></span><span class="sr"><span class="t-es">Abrir menú</span><span class="t-en" lang="en">Open menu</span></span></a><a class="nav-toggle nojs-toggle nojs-close" href="#nav-closed"><span class="burger is-x" aria-hidden="true"><span></span><span></span></span><span class="sr"><span class="t-es">Cerrar menú</span><span class="t-en" lang="en">Close menu</span></span></a>
     </div>
+    <span class="read-bar" id="readBar" aria-hidden="true"></span>
   </div>
 </header>
 
@@ -1284,12 +1286,17 @@
     }));
   })();
 
-  // Barra de progreso de lectura: un solo cálculo por fotograma.
+  // Barra de progreso de lectura.
   // El recorrido se mide contra la altura GRANDE del viewport (100vh = barra del navegador oculta),
   // que no cambia mientras se desliza, así el progreso solo depende de scrollY y nunca retrocede de golpe.
+  // Con animation-timeline la mueve el compositor y aquí solo se fija dónde acaba (en px);
+  // sin soporte se pinta por fotograma con transform directo sobre la barra.
   (function () {
-    const bar = document.querySelector('.nav-inner');
+    const bar = document.getElementById('readBar');
     const root = document.documentElement;
+    // (con "reducir movimiento" la animación queda anulada y se usa el modo por JS)
+    const native = !!(window.CSS && CSS.supports && CSS.supports('animation-timeline: scroll()'))
+      && getComputedStyle(bar).animationName !== 'none';
     const probe = document.createElement('div');
     probe.setAttribute('aria-hidden', 'true');
     probe.style.cssText = 'position:fixed;top:0;left:0;width:0;height:100vh;visibility:hidden;pointer-events:none;';
@@ -1297,17 +1304,20 @@
     let range = 1, last = -1, queued = false;
     function measure() {
       const vh = Math.max(probe.offsetHeight, window.innerHeight);
-      range = Math.max(1, root.scrollHeight - vh);
-      draw();
+      const next = Math.max(1, root.scrollHeight - vh);
+      if (next === range && last !== -1) return;
+      range = next;
+      if (native) { last = 0; bar.style.setProperty('animation-range', '0px ' + range + 'px'); }
+      else draw();
     }
     function draw() {
       queued = false;
       const p = Math.min(1, Math.max(0, window.scrollY / range));
       const v = Math.round(p * 10000) / 10000;
-      if (v !== last) { last = v; bar.style.setProperty('--read', v); }
+      if (v !== last) { last = v; bar.style.transform = 'scaleX(' + v + ')'; }
     }
     function onScroll() { if (!queued) { queued = true; requestAnimationFrame(draw); } }
-    window.addEventListener('scroll', onScroll, { passive: true });
+    if (!native) window.addEventListener('scroll', onScroll, { passive: true });
     // Solo recalcula el recorrido cuando cambia el ancho (giro, ventana) o el contenido, no por la barra de URL
     let lastW = window.innerWidth;
     window.addEventListener('resize', () => {
