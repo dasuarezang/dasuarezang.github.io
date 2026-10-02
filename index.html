@@ -1027,6 +1027,35 @@
     .cert-item:hover .cert-go{background:rgba(255,255,255,.06);}
   }
 
+  /* ===== Estética de terminal ===== */
+  :root{--r-xl:3px;--bezel:0px;--tick:rgba(37,99,235,.55);--ambient:0 18px 40px -30px rgba(11,16,32,.22);}
+  /* Etiqueta de sección: una orden de terminal con cursor de bloque */
+  .sec-tag{
+    gap:0;padding:0;border-radius:0;background:none;box-shadow:none;
+    font:500 .8rem/1 var(--mono);letter-spacing:.04em;text-transform:none;color:var(--accent-deep);
+  }
+  .sec-tag::before{display:none;}
+  .sec-tag .sp{color:var(--muted);margin-right:1ch;}
+  .sec-tag::after{content:"";display:inline-block;width:.6em;height:1.1em;margin-left:.6ch;vertical-align:-.2em;background:currentColor;opacity:.7;}
+  /* Tarjetas: borde fino (el anillo exterior con --bezel:0) y marcas en las cuatro esquinas */
+  .about,.edu-card,.skill-group,.cert-list,.tl-item{
+    background-image:
+      linear-gradient(var(--tick),var(--tick)),linear-gradient(var(--tick),var(--tick)),
+      linear-gradient(var(--tick),var(--tick)),linear-gradient(var(--tick),var(--tick)),
+      linear-gradient(var(--tick),var(--tick)),linear-gradient(var(--tick),var(--tick)),
+      linear-gradient(var(--tick),var(--tick)),linear-gradient(var(--tick),var(--tick));
+    background-repeat:no-repeat;
+    background-size:18px 2px,2px 18px,18px 2px,2px 18px,18px 2px,2px 18px,18px 2px,2px 18px;
+    background-position:left top,left top,right top,right top,left bottom,left bottom,right bottom,right bottom;
+  }
+  /* Píldoras -> rectángulos de esquinas mínimas */
+  .edu-card .period,.proj-card .date,.proj-tags > span{border-radius:4px;}
+  .eyebrow,.tl-quote,.q-link,.proj-link,.skill-group h3 .ic{border-radius:6px;}
+  @media screen and (prefers-color-scheme: dark){
+    :root{--tick:rgba(96,165,250,.6);--ambient:0 24px 48px -30px rgba(0,0,0,.7);}
+    .sec-tag{color:var(--accent);background:none;box-shadow:none;}
+  }
+
   /* ===== Impresión / Guardar como PDF: CV limpio en blanco, todo visible ===== */
   @media print{
     @page{size:A4;margin:10mm 11mm;}
@@ -1261,7 +1290,7 @@
 
 <section id="sobre-mi" class="reveal">
   <div class="wrap">
-    <div class="section-head"><span class="sec-tag" aria-hidden="true">01 / 06</span><h2 data-i18n="about.title"><span class="t-es">Sobre mí</span><span class="t-en" lang="en">About me</span></h2></div>
+    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">sobre-mi</span><span class="t-en" lang="en">about</span></span><h2 data-i18n="about.title"><span class="t-es">Sobre mí</span><span class="t-en" lang="en">About me</span></h2></div>
     <div class="about">
       <div class="about-text">
         <p data-i18n="about.p1"><span class="t-es">Estudiante de último año de Ingeniería de Tecnologías y Servicios de Telecomunicación (Especialidad Telemática) en la ETSETB UPC, con sólida base técnica en redes, ciberseguridad y desarrollo de sistemas, tanto de software como de hardware.</span><span class="t-en" lang="en">Final-year Telecommunications Technologies and Services Engineering student (Telematics Specialization) at ETSETB UPC, with a strong technical background in networking, cybersecurity and systems development, both software and hardware.</span></p>
@@ -1274,7 +1303,7 @@
 
 <section class="alt reveal" id="educacion">
   <div class="wrap">
-    <div class="section-head"><span class="sec-tag" aria-hidden="true">02 / 06</span><h2 data-i18n="edu.title"><span class="t-es">Educación</span><span class="t-en" lang="en">Education</span></h2></div>
+    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">educacion</span><span class="t-en" lang="en">education</span></span><h2 data-i18n="edu.title"><span class="t-es">Educación</span><span class="t-en" lang="en">Education</span></h2></div>
     <div class="edu-card reveal">
       <div>
         <img class="edu-logo" src="assets/etsetb.webp" decoding="async" alt="UPC · ETSETB (telecos BCN)" width="128" height="48">
@@ -1289,7 +1318,7 @@
 
 <section id="experiencia" class="reveal">
   <div class="wrap">
-    <div class="section-head"><span class="sec-tag" aria-hidden="true">03 / 06</span><h2 data-i18n="exp.title"><span class="t-es">Experiencia laboral</span><span class="t-en" lang="en">Work experience</span></h2></div>
+    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">experiencia</span><span class="t-en" lang="en">experience</span></span><h2 data-i18n="exp.title"><span class="t-es">Experiencia laboral</span><span class="t-en" lang="en">Work experience</span></h2></div>
     <div class="timeline">
       <span class="tl-fill" aria-hidden="true"></span>
       <div class="tl-item reveal">
@@ -1326,7 +1355,7 @@
 
 <section class="alt reveal" id="proyectos">
   <div class="wrap">
-    <div class="section-head"><span class="sec-tag" aria-hidden="true">04 / 06</span><h2 data-i18n="proj.title"><span class="t-es">Proyectos</span><span class="t-en" lang="en">Projects</span></h2></div>
+    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">proyectos</span><span class="t-en" lang="en">projects</span></span><h2 data-i18n="proj.title"><span class="t-es">Proyectos</span><span class="t-en" lang="en">Projects</span></h2></div>
     <div class="carousel">
       <div class="car-track" id="projTrack" tabindex="0" role="region" aria-label="Proyectos / Projects">
       <details class="proj-card" id="proyecto-1">
@@ -1404,7 +1433,7 @@
 
 <section id="habilidades" class="reveal">
   <div class="wrap">
-    <div class="section-head"><span class="sec-tag" aria-hidden="true">05 / 06</span><h2 data-i18n="skills.title"><span class="t-es">Habilidades</span><span class="t-en" lang="en">Skills</span></h2></div>
+    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">habilidades</span><span class="t-en" lang="en">skills</span></span><h2 data-i18n="skills.title"><span class="t-es">Habilidades</span><span class="t-en" lang="en">Skills</span></h2></div>
     <div class="stack-grid">
       <div class="skill-group reveal">
         <h3><i class="ic ic-code"></i><span data-i18n="skills.code"><span class="t-es">Lenguajes, Web y Bases de Datos</span><span class="t-en" lang="en">Languages, Web &amp; Databases</span></span></h3>
@@ -1443,7 +1472,7 @@
 
 <section class="alt reveal" id="certificados">
   <div class="wrap">
-    <div class="section-head"><span class="sec-tag" aria-hidden="true">06 / 06</span><h2 data-i18n="certs.title"><span class="t-es">Certificados</span><span class="t-en" lang="en">Certificates</span></h2></div>
+    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">certificados</span><span class="t-en" lang="en">certificates</span></span><h2 data-i18n="certs.title"><span class="t-es">Certificados</span><span class="t-en" lang="en">Certificates</span></h2></div>
     <div class="cert-list">
       <a class="cert-item" href="https://certificates.cs50.io/64a2128b-6865-4b69-8611-eed262fa5261.pdf?size=letter" target="_blank" rel="noopener">
         <div class="cert-logo logo-harvard" role="img" aria-label="Harvard University"></div>
