@@ -654,7 +654,7 @@
         radial-gradient(60% 45% at 85% 18%,rgba(37,99,235,.34),transparent 70%),
         radial-gradient(50% 40% at 0% 100%,rgba(96,165,250,.14),transparent 70%),
         radial-gradient(35% 25% at 50% 0%,rgba(16,185,129,.08),transparent 70%),
-        rgba(5,7,12,.97);
+        #05070c;
       background-size:auto,28px 28px,auto,auto,auto;
       opacity:0;visibility:hidden;
       transition:opacity .6s var(--spring),visibility 0s linear .6s;
@@ -1056,6 +1056,41 @@
     .sec-tag{color:var(--accent);background:none;box-shadow:none;}
   }
 
+  /* ===== Estética de terminal (2): portada y barra de navegación ===== */
+  /* Título sin degradado; la etiqueta de arriba como comentario de terminal */
+  .hero h1{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#fff;}
+  .eyebrow{display:inline-block;padding:0;border-radius:0;background:none;box-shadow:none;gap:0;color:rgba(255,255,255,.66);}
+  .eyebrow .ic{display:none;}
+  .eyebrow::before{content:"#";margin-right:1.2ch;color:var(--accent);letter-spacing:0;}
+  /* Barra: rectangular, con borde fino y las mismas marcas de esquina que las tarjetas */
+  .nav-inner{border-radius:6px;}
+  .nav-inner::before{
+    border-radius:inherit;
+    background-color:rgba(8,11,20,.8);
+    background-image:
+      linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),
+      linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),
+      linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),
+      linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6));
+    background-repeat:no-repeat;
+    background-size:12px 1.5px,1.5px 12px,12px 1.5px,1.5px 12px,12px 1.5px,1.5px 12px,12px 1.5px,1.5px 12px;
+    background-position:left top,left top,right top,right top,left bottom,left bottom,right bottom,right bottom;
+    box-shadow:0 0 0 1px rgba(255,255,255,.1),0 24px 48px -24px rgba(0,0,0,.55);
+  }
+  .read-bar{border-radius:0;}
+  .lang-switch{border-radius:5px;}
+  .lang-switch span,.lang-switch::before{border-radius:3px;}
+  .nav-toggle{border-radius:5px;}
+  /* Enlaces (solo la barra de escritorio; el menú desplegable del móvil tiene su propio estilo):
+     monoespaciada en minúsculas y el apartado actual marcado con ">" (siempre reserva su hueco: no salta) */
+  @media (min-width:1001px){
+    nav.links a{padding:9px 10px;border-radius:4px;font:500 .8rem/1.2 var(--mono);letter-spacing:.01em;text-transform:lowercase;}
+    nav.links a::before{content:">";margin-right:.7ch;color:var(--accent);opacity:0;transition:opacity .4s var(--spring);}
+    nav.links a:hover,nav.links a:focus-visible{background:rgba(255,255,255,.06);}
+    nav.links a[aria-current="location"]{color:#fff;background:none;box-shadow:none;}
+    nav.links a[aria-current="location"]::before{opacity:1;}
+  }
+
   /* ===== Impresión / Guardar como PDF: CV limpio en blanco, todo visible ===== */
   @media print{
     @page{size:A4;margin:10mm 11mm;}
@@ -1071,6 +1106,9 @@
     .hero-inner{align-items:flex-start;text-align:left;padding:0;margin:0;max-width:none;flex:0 1 auto;}
     .hero .role{display:none !important;}
     .eyebrow{color:var(--accent-deep);background:none;box-shadow:none;border:1px solid #cbd5e1;margin-bottom:8px;}
+    .eyebrow{display:inline-flex;padding:4px 10px;border-radius:999px;gap:8px;}
+    .eyebrow::before{display:none;}
+    .eyebrow .ic{display:inline-block;}
     .hero h1{font-size:2.1rem;letter-spacing:-.03em;background:none;color:#0f172a;-webkit-text-fill-color:#0f172a;}
     .typing{color:#334155;margin-top:6px;}
     .typing .prompt{color:var(--accent-deep);}
