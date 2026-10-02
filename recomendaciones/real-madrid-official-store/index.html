@@ -112,19 +112,52 @@
   html[lang="en"] .t-es{display:none;}
   html[lang="en"] .t-en{display:inline;}
   @media (hover:none){.btn-primary:hover{background:var(--accent-deep);transform:none;}.btn-ghost:hover{transform:none;}}
-  /* Móvil: la imagen se cambia por la carta en texto, como una hoja */
+  /* Selector de idioma (igual que el del CV) */
+  .top-actions{display:flex;align-items:center;gap:10px;}
+  .lang-switch{
+    position:relative;display:inline-flex;align-items:center;padding:3px;border-radius:999px;
+    background:rgba(8,11,20,.72);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
+  }
+  .lang-switch::before{
+    content:"";position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:999px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-deep));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 6px 16px -6px rgba(37,99,235,.7);
+    transition:transform .7s var(--spring);
+  }
+  html[lang="en"] .lang-switch::before{transform:translateX(100%);}
+  .lang-switch button{
+    position:relative;z-index:1;min-width:38px;padding:9px 11px;border:0;border-radius:999px;cursor:pointer;background:none;
+    font:600 .7rem/1 var(--mono);letter-spacing:.08em;color:rgba(255,255,255,.6);transition:color .6s var(--spring);
+    -webkit-tap-highlight-color:transparent;
+  }
+  .lang-switch button[aria-pressed="true"]{color:#fff;}
+  .lang-switch button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  /* Versión inglesa: aviso translúcido sobre la carta que lleva a la traducción.
+     Va "pegado" al borde inferior de la pantalla mientras se ve la carta y descansa al final de ella. */
+  .to-tr{
+    position:sticky;bottom:20px;z-index:2;display:none;align-items:center;gap:10px;width:max-content;max-width:calc(100% - 32px);
+    height:46px;margin:-76px auto 30px;padding:0 18px 0 20px;border-radius:999px;
+    font:600 .92rem/1.2 var(--font);color:#fff;text-decoration:none;
+    background:rgba(8,11,20,.58);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 18px 40px -16px rgba(0,0,0,.7);
+    transition:background-color .4s var(--spring);
+  }
+  html[lang="en"] .to-tr{display:flex;}
+  .to-tr svg{width:18px;height:18px;flex-shrink:0;color:var(--accent);animation:nudge 2.4s var(--spring) infinite;}
+  .to-tr:hover{background:rgba(37,99,235,.55);}
+  .to-tr:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+  @keyframes nudge{0%,60%,100%{transform:none;}30%{transform:translateY(3px);}}
+  html{scroll-behavior:smooth;}
+  .translation{scroll-margin-top:24px;}
   @media (max-width:640px){
-    .paper-img{display:none;}
-    .letter{
-      position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal;
-      padding:26px 22px 30px;text-align:left;color:#1f2937;
-      font:400 .95rem/1.62 'Open Sans','Segoe UI',system-ui,-apple-system,sans-serif;
-    }
-    .letter p{margin-bottom:12px;}
-    .letter .letterhead{margin-bottom:22px;font-size:1.2rem;font-weight:700;line-height:1.25;color:#0b1020;}
-    .letter .sign{margin-top:22px;}
-    .letter .sign ~ p{margin-bottom:6px;}
     .translation{padding:22px 20px;}
+    .to-tr{height:42px;margin:-66px auto 24px;padding:0 16px 0 18px;font-size:.86rem;}
+  }
+  @media (max-width:400px){
+    .top-actions{gap:8px;}
+    .pill{padding:0 12px;}
+    .pill .label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
   }
   @media (max-width:480px){
     .top{padding:12px 16px;}
@@ -134,10 +167,10 @@
     .actions{flex-direction:column;align-items:stretch;width:100%;}
     .btn{justify-content:center;}
   }
-  @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}html{scroll-behavior:auto;}}
   @media print{
     body{background:#fff;}
-    body::before,body::after,.top,.actions,.note,.eyebrow,h1,.from{display:none !important;}
+    body::before,body::after,.top,.actions,.note,.eyebrow,h1,.from,.to-tr{display:none !important;}
     main{padding:0;}
     .frame{background:none;box-shadow:none;padding:0;margin:0;max-width:none;}
     .paper{border-radius:0;}
@@ -147,21 +180,25 @@
 <body>
 <header class="top">
   <a class="logo-term" href="/cv/" aria-label="Daniel Suárez Angosto — CV">&gt;_ DSA</a>
-  <a class="pill" href="/cv/#experiencia"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222,128a6,6,0,0,1-6,6H54.49l61.75,61.76a6,6,0,1,1-8.48,8.48l-72-72a6,6,0,0,1,0-8.48l72-72a6,6,0,0,1,8.48,8.48L54.49,122H216A6,6,0,0,1,222,128Z"/></svg><span class="t-es">Volver al CV</span><span class="t-en" lang="en">Back to the CV</span></a>
+  <div class="top-actions">
+    <div class="lang-switch" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" aria-pressed="true" lang="es" aria-label="Castellano">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en" aria-label="English">EN</button>
+    </div>
+    <a class="pill" href="/cv/#experiencia" aria-label="Volver al CV / Back to the CV"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222,128a6,6,0,0,1-6,6H54.49l61.75,61.76a6,6,0,1,1-8.48,8.48l-72-72a6,6,0,0,1,0-8.48l72-72a6,6,0,0,1,8.48,8.48L54.49,122H216A6,6,0,0,1,222,128Z"/></svg><span class="label"><span class="t-es">Volver al CV</span><span class="t-en" lang="en">Back to the CV</span></span></a>
+  </div>
 </header>
 <main>
   <span class="eyebrow"><span class="t-es">Recomendación</span><span class="t-en" lang="en">Recommendation</span></span>
   <h1><span class="t-es">Carta de recomendación</span><span class="t-en" lang="en">Recommendation letter</span></h1>
   <p class="from"><b>Genys Bernabeu</b> · Area Manager, Real Madrid Official Store Barcelona</p>
   <div class="frame">
-    <!-- Escritorio: la carta original como imagen (enlaza al PDF) -->
+    <!-- La carta original como imagen (enlaza al PDF) -->
     <a class="paper paper-img" href="/cv/recomendaciones/real-madrid-official-store/carta-recomendacion.pdf" target="_blank" rel="noopener" aria-label="Abrir la carta original en PDF / Open the original letter as PDF">
-      <picture>
-        <source media="(max-width: 640px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
-        <img src="/cv/recomendaciones/real-madrid-official-store/carta-820.webp" srcset="/cv/recomendaciones/real-madrid-official-store/carta-820.webp 820w, /cv/recomendaciones/real-madrid-official-store/carta-1640.webp 1640w" sizes="720px" width="1640" height="2319" fetchpriority="high" alt="">
-      </picture>
+      <img src="/cv/recomendaciones/real-madrid-official-store/carta-820.webp" srcset="/cv/recomendaciones/real-madrid-official-store/carta-820.webp 820w, /cv/recomendaciones/real-madrid-official-store/carta-1640.webp 1640w" sizes="(max-width: 776px) calc(100vw - 32px), 720px" width="1640" height="2319" fetchpriority="high" alt="">
     </a>
-    <!-- Móvil: el mismo texto maquetado como una hoja, legible sin zoom (en escritorio solo para lectores de pantalla) -->
+    <a class="to-tr" href="#translation" lang="en">English version below<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204.24,148.24l-72,72a6,6,0,0,1-8.48,0l-72-72a6,6,0,0,1,8.48-8.48L122,201.51V40a6,6,0,0,1,12,0V201.51l61.76-61.75a6,6,0,0,1,8.48,8.48Z"/></svg></a>
+    <!-- El texto de la carta, para lectores de pantalla -->
     <article class="paper letter" lang="es" aria-label="Carta de recomendación (texto original)">
       <p class="letterhead">Real Madrid Official Store</p>
       <p>A quien corresponda:</p>
@@ -178,7 +215,7 @@
     </article>
   </div>
   <p class="note"><span class="t-es">Teléfono de contacto omitido por privacidad</span><span class="t-en" lang="en">Contact phone number omitted for privacy</span></p>
-  <section class="translation only-en" lang="en" aria-labelledby="tr-title">
+  <section class="translation only-en" id="translation" lang="en" aria-labelledby="tr-title">
     <h2 id="tr-title">English translation <span>· unofficial</span></h2>
     <p class="tr-note">Translated from the original Spanish letter above for convenience. The Spanish version is the one signed by the author.</p>
     <div class="tr-body">
@@ -200,15 +237,22 @@
   </div>
 </main>
 <script>
-  // Mismo idioma que el CV: la elección guardada o, si no hay, el del navegador
+  // Idioma: el mismo que el CV (elección guardada o, si no hay, el del navegador);
+  // al cambiarlo aquí se guarda también para el CV
   (function () {
+    const TITLES = { es: 'Carta de recomendación — Daniel Suárez Angosto', en: 'Recommendation letter — Daniel Suárez Angosto' };
+    const buttons = document.querySelectorAll('.lang-switch button');
+    function apply(lang, save) {
+      document.documentElement.lang = lang;
+      document.title = TITLES[lang];
+      buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+      if (save) { try { localStorage.setItem('cv-lang', lang); } catch (e) {} }
+    }
+    buttons.forEach(b => b.addEventListener('click', () => apply(b.dataset.lang, true)));
     let saved = null;
     try { saved = localStorage.getItem('cv-lang'); } catch (e) {}
     const local = (navigator.languages || [navigator.language || '']).some(l => /^(es|ca)\b/i.test(l));
-    if (saved === 'en' || (saved === null && !local)) {
-      document.documentElement.lang = 'en';
-      document.title = 'Recommendation letter — Daniel Suárez Angosto';
-    }
+    apply(saved === 'en' || (saved === null && !local) ? 'en' : 'es', false);
   })();
 </script>
 </body>
