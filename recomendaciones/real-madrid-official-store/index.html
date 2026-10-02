@@ -77,6 +77,24 @@
   }
   .paper{display:block;border-radius:22px;overflow:hidden;background:#fff;}
   .paper img{display:block;width:100%;height:auto;}
+  /* Carta como texto: oculta a la vista en escritorio (la lee el lector de pantalla), visible en móvil */
+  .letter{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+  .redacted{display:inline-block;width:5.4em;height:1.25em;vertical-align:-.25em;background:#000;}
+  /* Traducción (solo con la web en inglés) */
+  .only-en{display:none;}
+  html[lang="en"] .only-en{display:block;}
+  .translation{
+    width:100%;max-width:720px;margin-top:36px;padding:28px 30px;border-radius:22px;text-align:left;
+    background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);
+  }
+  .translation h2{font:500 .7rem/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);}
+  .translation h2 span{color:rgba(255,255,255,.5);}
+  .tr-note{margin-top:8px;font-size:.85rem;line-height:1.5;color:rgba(255,255,255,.5);}
+  .tr-body{margin-top:20px;}
+  .tr-body p{font-size:.98rem;line-height:1.7;color:rgba(255,255,255,.82);margin-bottom:12px;}
+  .tr-body .sign{margin-top:22px;}
+  .tr-body .sign + p{margin-bottom:2px;color:#fff;font-weight:600;}
+  .tr-body .role{color:rgba(255,255,255,.6);}
   .note{margin-top:18px;font:500 .68rem/1.5 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);}
   .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:28px;}
   .btn{
@@ -94,6 +112,20 @@
   html[lang="en"] .t-es{display:none;}
   html[lang="en"] .t-en{display:inline;}
   @media (hover:none){.btn-primary:hover{background:var(--accent-deep);transform:none;}.btn-ghost:hover{transform:none;}}
+  /* Móvil: la imagen se cambia por la carta en texto, como una hoja */
+  @media (max-width:640px){
+    .paper-img{display:none;}
+    .letter{
+      position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal;
+      padding:26px 22px 30px;text-align:left;color:#1f2937;
+      font:400 .95rem/1.62 'Open Sans','Segoe UI',system-ui,-apple-system,sans-serif;
+    }
+    .letter p{margin-bottom:12px;}
+    .letter .letterhead{margin-bottom:22px;font-size:1.2rem;font-weight:700;line-height:1.25;color:#0b1020;}
+    .letter .sign{margin-top:22px;}
+    .letter .sign ~ p{margin-bottom:6px;}
+    .translation{padding:22px 20px;}
+  }
   @media (max-width:480px){
     .top{padding:12px 16px;}
     main{padding:12px 16px 56px;}
@@ -122,21 +154,46 @@
   <h1><span class="t-es">Carta de recomendación</span><span class="t-en" lang="en">Recommendation letter</span></h1>
   <p class="from"><b>Genys Bernabeu</b> · Area Manager, Real Madrid Official Store Barcelona</p>
   <div class="frame">
-    <a class="paper" href="/cv/recomendaciones/real-madrid-official-store/carta-recomendacion.pdf" target="_blank" rel="noopener" aria-label="Abrir la carta en PDF / Open the letter as PDF">
-      <img src="/cv/recomendaciones/real-madrid-official-store/carta-820.webp" srcset="/cv/recomendaciones/real-madrid-official-store/carta-820.webp 820w, /cv/recomendaciones/real-madrid-official-store/carta-1640.webp 1640w" sizes="(max-width: 776px) calc(100vw - 32px), 720px" width="1640" height="2319" fetchpriority="high" alt="Carta de recomendación de Genys Bernabeu para Daniel Suárez (texto completo a continuación)">
+    <!-- Escritorio: la carta original como imagen (enlaza al PDF) -->
+    <a class="paper paper-img" href="/cv/recomendaciones/real-madrid-official-store/carta-recomendacion.pdf" target="_blank" rel="noopener" aria-label="Abrir la carta original en PDF / Open the original letter as PDF">
+      <picture>
+        <source media="(max-width: 640px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+        <img src="/cv/recomendaciones/real-madrid-official-store/carta-820.webp" srcset="/cv/recomendaciones/real-madrid-official-store/carta-820.webp 820w, /cv/recomendaciones/real-madrid-official-store/carta-1640.webp 1640w" sizes="720px" width="1640" height="2319" fetchpriority="high" alt="">
+      </picture>
     </a>
+    <!-- Móvil: el mismo texto maquetado como una hoja, legible sin zoom (en escritorio solo para lectores de pantalla) -->
+    <article class="paper letter" lang="es" aria-label="Carta de recomendación (texto original)">
+      <p class="letterhead">Real Madrid Official Store</p>
+      <p>A quien corresponda:</p>
+      <p>Por medio de la presente, me complace recomendar ampliamente a Daniel Suárez, quien ha formado parte de nuestro equipo demostrando en todo momento un nivel de profesionalidad, compromiso y capacidad muy por encima de lo habitual.</p>
+      <p>Durante el tiempo que trabajó con nosotros, Daniel destacó no solo por su excelente desempeño en sus responsabilidades, sino también por su actitud ejemplar, su ética de trabajo intachable y su constante disposición para asumir nuevos retos. Es una persona organizada, resolutiva y altamente eficiente, capaz de desenvolverse con seguridad incluso en situaciones de presión.</p>
+      <p>Su capacidad analítica, su rapidez de aprendizaje y su habilidad para adaptarse a distintos entornos lo convierten en un perfil versátil y preparado para afrontar con éxito cualquier tipo de puesto, incluso en ámbitos distintos al comercial. Daniel no se limita a cumplir con lo que se le asigna; busca mejorar procesos, aportar soluciones y generar un impacto positivo en el equipo y en la organización.</p>
+      <p>Además, posee excelentes habilidades interpersonales, sabe trabajar en equipo, comunica con claridad y genera confianza tanto en compañeros como en responsables. Su responsabilidad, puntualidad y constancia hacen de él una persona en la que se puede confiar plenamente.</p>
+      <p>Estoy convencido de que Daniel será un activo valioso para cualquier empresa que tenga la oportunidad de incorporarlo a su equipo, y recomiendo su candidatura sin ningún tipo de reserva.</p>
+      <p>Quedo a su disposición para ampliar cualquier información que consideren necesaria.</p>
+      <p class="sign">Atentamente,</p>
+      <p>Genys Bernabeu</p>
+      <p class="role"><em>Area Manager – Real Madrid Official Store, Barcelona</em></p>
+      <p><span class="redacted" role="img" aria-label="Teléfono omitido por privacidad"></span></p>
+    </article>
   </div>
   <p class="note"><span class="t-es">Teléfono de contacto omitido por privacidad</span><span class="t-en" lang="en">Contact phone number omitted for privacy</span></p>
-  <div class="sr" lang="es">
-    <p>A quien corresponda:</p>
-    <p>Por medio de la presente, me complace recomendar ampliamente a Daniel Suárez, quien ha formado parte de nuestro equipo demostrando en todo momento un nivel de profesionalidad, compromiso y capacidad muy por encima de lo habitual.</p>
-    <p>Durante el tiempo que trabajó con nosotros, Daniel destacó no solo por su excelente desempeño en sus responsabilidades, sino también por su actitud ejemplar, su ética de trabajo intachable y su constante disposición para asumir nuevos retos. Es una persona organizada, resolutiva y altamente eficiente, capaz de desenvolverse con seguridad incluso en situaciones de presión.</p>
-    <p>Su capacidad analítica, su rapidez de aprendizaje y su habilidad para adaptarse a distintos entornos lo convierten en un perfil versátil y preparado para afrontar con éxito cualquier tipo de puesto, incluso en ámbitos distintos al comercial. Daniel no se limita a cumplir con lo que se le asigna; busca mejorar procesos, aportar soluciones y generar un impacto positivo en el equipo y en la organización.</p>
-    <p>Además, posee excelentes habilidades interpersonales, sabe trabajar en equipo, comunica con claridad y genera confianza tanto en compañeros como en responsables. Su responsabilidad, puntualidad y constancia hacen de él una persona en la que se puede confiar plenamente.</p>
-    <p>Estoy convencido de que Daniel será un activo valioso para cualquier empresa que tenga la oportunidad de incorporarlo a su equipo, y recomiendo su candidatura sin ningún tipo de reserva.</p>
-    <p>Quedo a su disposición para ampliar cualquier información que consideren necesaria.</p>
-    <p>Atentamente, Genys Bernabeu. Area Manager – Real Madrid Official Store, Barcelona.</p>
-  </div>
+  <section class="translation only-en" lang="en" aria-labelledby="tr-title">
+    <h2 id="tr-title">English translation <span>· unofficial</span></h2>
+    <p class="tr-note">Translated from the original Spanish letter above for convenience. The Spanish version is the one signed by the author.</p>
+    <div class="tr-body">
+      <p>To whom it may concern:</p>
+      <p>I am pleased to give my highest recommendation to Daniel Suárez, who has been part of our team and has consistently shown a level of professionalism, commitment and ability well above the norm.</p>
+      <p>During his time with us, Daniel stood out not only for his excellent performance in his responsibilities, but also for his exemplary attitude, his impeccable work ethic and his constant willingness to take on new challenges. He is organised, resourceful and highly efficient, able to perform with confidence even under pressure.</p>
+      <p>His analytical skills, his ability to learn quickly and his adaptability to different environments make him a versatile profile, prepared to succeed in any type of role, including fields other than sales. Daniel does not limit himself to what he is assigned; he seeks to improve processes, provide solutions and make a positive impact on the team and the organisation.</p>
+      <p>In addition, he has excellent interpersonal skills, works well in a team, communicates clearly and builds trust among both colleagues and managers. His sense of responsibility, punctuality and consistency make him someone who can be fully relied upon.</p>
+      <p>I am convinced that Daniel will be a valuable asset to any company that has the opportunity to bring him onto its team, and I recommend his application without reservation.</p>
+      <p>I remain at your disposal for any further information you may require.</p>
+      <p class="sign">Yours faithfully,</p>
+      <p>Genys Bernabeu</p>
+      <p class="role"><em>Area Manager – Real Madrid Official Store, Barcelona</em></p>
+    </div>
+  </section>
   <div class="actions">
     <a class="btn btn-primary" href="/cv/recomendaciones/real-madrid-official-store/carta-recomendacion.pdf" download="Carta recomendación - Daniel Suárez Angosto.pdf"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222,144v64a14,14,0,0,1-14,14H48a14,14,0,0,1-14-14V144a6,6,0,0,1,12,0v64a2,2,0,0,0,2,2H208a2,2,0,0,0,2-2V144a6,6,0,0,1,12,0Zm-98.24,4.24a6,6,0,0,0,8.48,0l40-40a6,6,0,0,0-8.48-8.48L134,129.51V40a6,6,0,0,0-12,0v89.51L92.24,99.76a6,6,0,0,0-8.48,8.48Z"/></svg><span class="t-es">Descargar PDF</span><span class="t-en" lang="en">Download PDF</span></a>
     <a class="btn btn-ghost" href="/cv/#experiencia"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222,128a6,6,0,0,1-6,6H54.49l61.75,61.76a6,6,0,1,1-8.48,8.48l-72-72a6,6,0,0,1,0-8.48l72-72a6,6,0,0,1,8.48,8.48L54.49,122H216A6,6,0,0,1,222,128Z"/></svg><span class="t-es">Volver al CV</span><span class="t-en" lang="en">Back to the CV</span></a>
