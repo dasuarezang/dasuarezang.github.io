@@ -630,7 +630,6 @@
         radial-gradient(35% 25% at 50% 0%,rgba(16,185,129,.08),transparent 70%),
         rgba(5,7,12,.97);
       background-size:auto,28px 28px,auto,auto,auto;
-      -webkit-backdrop-filter:blur(40px) saturate(140%);backdrop-filter:blur(40px) saturate(140%);
       opacity:0;visibility:hidden;
       transition:opacity .6s var(--spring),visibility 0s linear .6s;
     }
@@ -1455,7 +1454,9 @@
     probe.style.cssText = 'position:fixed;top:0;left:0;width:0;height:100vh;visibility:hidden;pointer-events:none;';
     document.body.appendChild(probe);
     let range = 1, last = -1, queued = false;
+    let lastW = -1;
     function measure() {
+      lastW = window.innerWidth;
       const vh = Math.max(probe.offsetHeight, window.innerHeight);
       const next = Math.max(1, root.scrollHeight - vh);
       if (next === range && last !== -1) return;
@@ -1472,13 +1473,14 @@
     function onScroll() { if (!queued) { queued = true; requestAnimationFrame(draw); } }
     if (!native) window.addEventListener('scroll', onScroll, { passive: true });
     // Solo recalcula el recorrido cuando cambia el ancho (giro, ventana) o el contenido, no por la barra de URL
-    let lastW = window.innerWidth;
+    // (el ancho de referencia se toma en measure(), que ya corre en un fotograma: leerlo aquí forzaría la maquetación)
     window.addEventListener('resize', () => {
-      if (window.innerWidth !== lastW) { lastW = window.innerWidth; requestAnimationFrame(measure); }
+      if (window.innerWidth !== lastW) requestAnimationFrame(measure);
     });
     if ('ResizeObserver' in window) new ResizeObserver(() => requestAnimationFrame(measure)).observe(document.body);
     window.addEventListener('load', measure);
-    measure();
+    // Primera medida en el primer fotograma: así no obliga a maquetar la página mientras aún se está cargando
+    requestAnimationFrame(measure);
   })();
 
   // Volver arriba: visible cuando el hero sale de la pantalla
