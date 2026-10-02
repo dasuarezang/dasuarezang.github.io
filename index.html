@@ -374,6 +374,15 @@
   .tl-quote figcaption{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;margin-top:10px;}
   .tl-quote .q-name{font-weight:600;font-size:.9rem;color:var(--ink);}
   .tl-quote .q-role{font:500 .68rem/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+  .q-link{
+    display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:8px 12px 8px 14px;border-radius:999px;
+    font:600 .82rem/1 var(--font);color:#fff;background:var(--accent-deep);
+    box-shadow:0 10px 22px -12px rgba(37,99,235,.7);transition:transform .6s var(--spring),background-color .4s var(--spring);
+  }
+  .q-link .ic{font-size:1.05em;transition:transform .6s var(--spring);}
+  .q-link:hover{background:#1d4ed8;}
+  .q-link:hover .ic{transform:translate(2px,-2px);}
+  .q-link:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
 
   /* PROJECTS: carrusel con scroll-snap (deslizamiento nativo, funciona sin JS) */
   :root{interpolate-size:allow-keywords;}
@@ -873,6 +882,7 @@
     .tl-quote::before{left:9px;top:3px;font-size:1.6rem;color:var(--accent-deep);}
     .tl-quote blockquote p{font-size:.88rem;line-height:1.45;color:#334155;}
     .tl-quote figcaption{margin-top:3px;}
+    .q-link{display:none !important;}
     .tl-quote .q-name{font-size:.82rem;}
     .tl-quote .q-role{font-size:.6rem;}
     .tl-item li,.proj-card li{margin-bottom:3px;}
@@ -1022,6 +1032,7 @@
         <figure class="tl-quote">
           <blockquote data-i18n="exp2.quote"><p><span class="t-es">Daniel no se limita a cumplir con lo que se le asigna; busca mejorar procesos, aportar soluciones y generar un impacto positivo en el equipo y en la organización.</span><span class="t-en" lang="en">Daniel doesn't just do what he is assigned; he looks to improve processes, bring solutions and make a positive impact on the team and the organization.</span></p></blockquote>
           <figcaption><span class="q-name">Genys Bernabeu</span><span class="q-role">Area Manager · Real Madrid Official Store, Barcelona</span></figcaption>
+          <a class="q-link" href="recomendacion/"><span class="t-es">Ver carta completa</span><span class="t-en" lang="en">Read the full letter</span><i class="ic ic-arrow-up-right" aria-hidden="true"></i></a>
         </figure>
       </div>
     </div>
