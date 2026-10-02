@@ -149,11 +149,11 @@
   }
   .lang-switch button[aria-pressed="true"]{color:#fff;}
   .lang-switch button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
-  /* Versión inglesa: aviso translúcido sobre la carta que lleva a la traducción.
-     Va "pegado" al borde inferior de la pantalla mientras se ve la carta y descansa al final de ella. */
+  /* Versión inglesa: aviso translúcido que lleva a la traducción.
+     Va "pegado" al borde inferior de la pantalla sobre la carta y, al llegar al final, se queda justo debajo de ella. */
   .to-tr{
     position:sticky;bottom:20px;z-index:2;display:none;align-items:center;gap:10px;width:max-content;max-width:calc(100% - 32px);
-    height:46px;margin:-76px auto 30px;padding:0 18px 0 20px;border-radius:999px;
+    height:46px;margin:16px auto 0;padding:0 18px 0 20px;border-radius:999px;
     font:600 .92rem/1.2 var(--font);color:#fff;text-decoration:none;
     background:rgba(8,11,20,.58);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);
     box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 18px 40px -16px rgba(0,0,0,.7);
@@ -168,7 +168,7 @@
   .translation{scroll-margin-top:24px;}
   @media (max-width:640px){
     .translation{padding:22px 20px;}
-    .to-tr{height:42px;margin:-66px auto 24px;padding:0 16px 0 18px;font-size:.86rem;}
+    .to-tr{height:42px;margin:14px auto 0;padding:0 16px 0 18px;font-size:.86rem;}
   }
   @media (max-width:400px){
     .top-actions{gap:8px;}
@@ -211,9 +211,8 @@
   <div class="frame">
     <!-- La carta original como imagen (enlaza al PDF) -->
     <a class="paper paper-img" href="/cv/recomendaciones/real-madrid-official-store/carta-recomendacion.pdf" target="_blank" rel="noopener" aria-label="Abrir la carta original en PDF / Open the original letter as PDF">
-      <img src="/cv/recomendaciones/real-madrid-official-store/carta-820.webp" srcset="/cv/recomendaciones/real-madrid-official-store/carta-820.webp 820w, /cv/recomendaciones/real-madrid-official-store/carta-1240.webp 1240w, /cv/recomendaciones/real-madrid-official-store/carta-1640.webp 1640w" sizes="(max-width: 776px) calc(100vw - 32px), 720px" width="1640" height="2319" fetchpriority="high" alt="">
+      <img src="/cv/recomendaciones/real-madrid-official-store/carta-820.webp" srcset="/cv/recomendaciones/real-madrid-official-store/carta-820.webp 820w, /cv/recomendaciones/real-madrid-official-store/carta-1240.webp 1240w, /cv/recomendaciones/real-madrid-official-store/carta-1640.webp 1640w" sizes="(max-width: 776px) calc(100vw - 32px), 720px" width="1640" height="2097" fetchpriority="high" alt="">
     </a>
-    <a class="to-tr" href="#translation" lang="en">English version below<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204.24,148.24l-72,72a6,6,0,0,1-8.48,0l-72-72a6,6,0,0,1,8.48-8.48L122,201.51V40a6,6,0,0,1,12,0V201.51l61.76-61.75a6,6,0,0,1,8.48,8.48Z"/></svg></a>
     <!-- El texto de la carta, para lectores de pantalla -->
     <article class="paper letter" lang="es" aria-label="Carta de recomendación (texto original)">
       <p class="letterhead">Real Madrid Official Store</p>
@@ -230,6 +229,7 @@
       <p><span class="redacted" role="img" aria-label="Teléfono omitido por privacidad"></span></p>
     </article>
   </div>
+  <a class="to-tr" href="#translation" lang="en">English version below<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204.24,148.24l-72,72a6,6,0,0,1-8.48,0l-72-72a6,6,0,0,1,8.48-8.48L122,201.51V40a6,6,0,0,1,12,0V201.51l61.76-61.75a6,6,0,0,1,8.48,8.48Z"/></svg></a>
   <p class="note"><span class="t-es">Teléfono de contacto omitido por privacidad</span><span class="t-en" lang="en">Contact phone number omitted for privacy</span></p>
   <section class="translation only-en" id="translation" lang="en" aria-labelledby="tr-title">
     <h2 id="tr-title">English translation <span>· unofficial</span></h2>
