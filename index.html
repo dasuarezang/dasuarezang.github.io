@@ -194,6 +194,7 @@
   .hero::before{
     content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
     background:
+      linear-gradient(180deg,transparent calc(100% - 120px),color-mix(in srgb,var(--paper) 45%,transparent) calc(100% - 50px),var(--paper)),
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 2.2 -1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.07'/%3E%3C/svg%3E"),
       radial-gradient(42% 55% at 82% 38%,rgba(37,99,235,.38),transparent 70%),
       radial-gradient(38% 45% at 6% 92%,rgba(96,165,250,.16),transparent 70%),
@@ -264,7 +265,10 @@
     position:relative;z-index:1;justify-self:center;align-self:end;
     max-height:540px;width:auto;object-fit:contain;
     filter:drop-shadow(0 40px 48px rgba(0,0,0,.28));
-    -webkit-mask-image:linear-gradient(180deg,#000 82%,transparent);mask-image:linear-gradient(180deg,#000 82%,transparent);
+    -webkit-mask-image:linear-gradient(180deg,#000 58%,transparent 88%),linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent);
+    -webkit-mask-composite:source-in;
+    mask-image:linear-gradient(180deg,#000 58%,transparent 88%),linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent);
+    mask-composite:intersect;
   }
 
   /* LOAD-IN ANIMATION */
@@ -289,6 +293,13 @@
   /* SECTIONS */
   section{padding:clamp(96px,11vw,152px) 0;}
   section.alt{background:var(--paper-alt);}
+  /* Transición suave: cada sección arranca con el color de la anterior y se funde con el suyo */
+  .hero + section{--prev:var(--paper);}
+  section.alt + section:not(.alt){--prev:var(--paper-alt);}
+  section:not(.alt) + section.alt{--prev:var(--paper);}
+  section:not(.hero) + section:not(.hero){
+    background-image:linear-gradient(180deg,var(--prev) 0,color-mix(in srgb,var(--prev) 72%,transparent) 60px,color-mix(in srgb,var(--prev) 38%,transparent) 130px,color-mix(in srgb,var(--prev) 12%,transparent) 195px,transparent 240px);
+  }
   .section-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;margin:0 0 clamp(44px,6vw,72px);}
   .sec-tag{
     display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;
