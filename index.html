@@ -810,6 +810,114 @@
   @media screen and (prefers-color-scheme: dark){
     .toast{box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 20px 40px -16px rgba(0,0,0,.8);}
   }
+
+  /* ===== Red de la portada: el recorrido de los datos de VitalLink, detrás de la foto ===== */
+  .hero-net{position:absolute;z-index:0;pointer-events:none;overflow:visible;opacity:0;--net-scale:1.7;--net-shift:-.12;}
+  .hero-net.ready{animation:netIn 1.8s var(--out) .5s forwards;}
+  @keyframes netIn{from{opacity:0;}to{opacity:1;}}
+  html:not(.js) .hero-net{display:none;}
+  .net-link{fill:none;stroke:rgba(96,165,250,.3);stroke-width:1.2;vector-effect:non-scaling-stroke;}
+  .net-dot{fill:#05070c;stroke:#60a5fa;stroke-width:1.5;vector-effect:non-scaling-stroke;}
+  .net-ring{fill:none;stroke:#60a5fa;stroke-width:1;vector-effect:non-scaling-stroke;}
+  .net-label{font:500 17px var(--mono);letter-spacing:.02em;fill:rgba(226,232,240,.55);}
+  .net-proto{font:500 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;fill:rgba(96,165,250,.62);}
+  .net-label.l-short{display:none;}
+  .net-pk-core{fill:#bfdbfe;}
+  .net-pk-halo{fill:rgba(96,165,250,.22);}
+
+  /* ===== Experiencia como un traceroute: la línea se ilumina al bajar y cada salto se enciende ===== */
+  .timeline::after{
+    content:"";position:absolute;left:calc(var(--mk) / 2 - 1px);top:calc(var(--tl-card) + var(--mk) / 2);bottom:48px;width:2px;border-radius:2px;
+    background:linear-gradient(180deg,var(--accent),var(--accent-deep));box-shadow:0 0 10px rgba(96,165,250,.55);
+    transform-origin:top;transform:scaleY(var(--fill,0));
+  }
+  .tl-logo{transition:transform .8s var(--spring),box-shadow .6s var(--spring);}
+  .tl-item.lit .tl-logo{box-shadow:0 0 0 4px var(--paper),0 0 0 6px var(--accent),0 0 22px 2px rgba(96,165,250,.45);}
+  .tl-hop{display:block;margin-bottom:10px;font:500 .66rem/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);transition:color .6s var(--spring);}
+  .tl-item.lit .tl-hop{color:var(--accent-deep);}
+
+  /* ===== Terminal escondida (º o ` para abrirla, o el botón del pie) ===== */
+  .term-open{
+    display:none;align-items:center;gap:8px;height:32px;padding:0 10px 0 11px;border:0;border-radius:7px;cursor:pointer;
+    font:500 .72rem/1 var(--mono);letter-spacing:.04em;color:#e2e8f0;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
+    transition:background-color .4s var(--spring),transform .6s var(--spring);
+  }
+  .js .term-open{display:inline-flex;}
+  .term-open-ic{font:400 .6rem/1 'Press Start 2P',monospace;color:var(--accent);}
+  .term-hint{
+    display:none;margin-top:10px;padding:0;border:0;background:none;cursor:pointer;text-align:left;
+    font:400 .74rem/1.5 var(--mono);color:rgba(255,255,255,.62);transition:color .4s var(--spring);
+  }
+  .term-hint kbd{display:inline-block;min-width:1.7em;margin:0 2px;padding:2px 6px;border-radius:5px;text-align:center;
+    font:500 .74rem/1.2 var(--mono);color:#e2e8f0;background:rgba(255,255,255,.08);box-shadow:inset 0 -1px 0 rgba(255,255,255,.12),inset 0 0 0 1px rgba(255,255,255,.1);}
+  .term-hint:hover,.term-hint:focus-visible{color:var(--accent);}
+  .term-hint:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px;}
+  @media (hover:hover) and (pointer:fine){ .js .term-hint{display:block;} }
+  .term-open:hover,.term-open:focus-visible{background:rgba(37,99,235,.35);transform:translateY(-2px);}
+  .term-open:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+  .term{
+    position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:24px;
+    background:rgba(3,5,10,.6);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    opacity:0;transition:opacity .35s var(--spring);
+  }
+  .term[hidden]{display:none;}
+  .term.open{opacity:1;}
+  .term-win{
+    width:min(760px,100%);height:min(540px,calc(100vh - 48px));height:min(540px,calc(100dvh - 48px));
+    display:flex;flex-direction:column;border-radius:16px;overflow:hidden;
+    font:400 .86rem/1.6 var(--mono);color:#cbd5e1;background:#070a12;
+    box-shadow:inset 0 0 0 1px rgba(96,165,250,.22),0 40px 90px -30px rgba(0,0,0,.9),0 30px 80px -40px rgba(37,99,235,.45);
+    transform:translateY(16px) scale(.98);transition:transform .5s var(--spring);
+  }
+  .term.open .term-win{transform:none;}
+  .term-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 16px;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02);}
+  .term-title{font:500 .74rem/1.4 var(--mono);letter-spacing:.04em;color:var(--accent);}
+  .term-close{
+    display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:0;border-radius:50%;cursor:pointer;
+    color:#fff;background:rgba(255,255,255,.06);transition:background-color .3s var(--spring);
+  }
+  .term-close svg{width:16px;height:16px;}
+  .term-close:hover{background:rgba(255,255,255,.12);}
+  .term-out{flex:1;overflow-y:auto;padding:16px 18px 4px;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent;}
+  .t-ln{white-space:pre-wrap;overflow-wrap:anywhere;min-height:1.6em;}
+  .t-cmd{color:#fff;margin-top:8px;}
+  .t-cmd .t-pr,.term-prompt{color:var(--accent);}
+  .t-dim{color:rgba(203,213,225,.55);}
+  .t-ok{color:#4ade80;}
+  .t-err{color:#fca5a5;}
+  .t-h{color:#fff;font-weight:600;}
+  .t-k{display:inline-block;min-width:12ch;color:var(--accent);}
+  .t-ln a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;}
+  .term-line{display:flex;align-items:center;gap:10px;padding:6px 18px 12px;}
+  .term-prompt{flex-shrink:0;}
+  .term-in{flex:1;min-width:0;padding:4px 0;border:0;outline:0;background:none;color:#fff;font:inherit;caret-color:var(--accent);}
+  .term-chips{display:flex;flex-wrap:wrap;gap:8px;padding:10px 18px 14px;border-top:1px solid rgba(255,255,255,.07);}
+  .term-chips button{
+    padding:8px 12px;border:0;border-radius:999px;cursor:pointer;font:500 .72rem/1 var(--mono);color:#bfdbfe;
+    background:rgba(96,165,250,.1);box-shadow:inset 0 0 0 1px rgba(96,165,250,.25);transition:background-color .3s var(--spring);
+  }
+  .term-chips button:hover{background:rgba(96,165,250,.2);}
+  .term-close:focus-visible,.term-chips button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  html.term-lock,html.term-lock body{overflow:hidden;}
+  @media (hover:none){
+    .term-in{font-size:16px;}
+  }
+  @media (max-width:600px){
+    .term{padding:0;align-items:flex-end;}
+    .term-win{width:100%;height:min(80vh,640px);height:min(80dvh,640px);border-radius:18px 18px 0 0;font-size:.82rem;}
+  }
+  @media (max-width:900px){
+    .hero-net{--net-shift:-.02;}
+    .net-label{font-size:24px;}
+    .net-label.l-full{display:none;}
+    .net-label.l-short{display:inline;}
+    .net-proto{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-net.ready{opacity:1;}
+    .net-pk,.net-ring{display:none;}
+  }
+
   /* ===== Accesibilidad: saltar al contenido ===== */
   .skip-link{
     position:fixed;top:12px;left:12px;z-index:60;padding:10px 18px;border-radius:999px;
@@ -837,6 +945,7 @@
     .sec-tag{color:var(--accent);background:rgba(96,165,250,.08);box-shadow:inset 0 0 0 1px rgba(96,165,250,.18);}
     .edu-card .school,.tl-head .period{color:var(--accent);}
     .tl-quote{background:rgba(96,165,250,.07);box-shadow:inset 0 0 0 1px rgba(96,165,250,.14);}
+    .tl-item.lit .tl-hop{color:var(--accent);}
     .q-link{color:var(--accent);box-shadow:inset 0 0 0 1px rgba(96,165,250,.4);}
     .q-link:hover{background:rgba(96,165,250,.1);box-shadow:inset 0 0 0 1px rgba(96,165,250,.7);}
     .edu-card .period{background:rgba(255,255,255,.05);}
@@ -859,7 +968,7 @@
     html{font-size:12.5px;scroll-behavior:auto;}
     *{animation:none !important;transition:none !important;box-shadow:none !important;filter:none !important;}
     body{background:#fff;color:#0f172a;}
-    header.nav,.skip-link,.state,footer,.toast,.to-top,.car-nav,.proj-toggle,.proj-logo,.proj-bg,.proj-shade,.typing .cursor,
+    header.nav,.skip-link,.state,footer,.toast,.to-top,.hero-net,.tl-hop,.term,.term-hint,.timeline::after,.car-nav,.proj-toggle,.proj-logo,.proj-bg,.proj-shade,.typing .cursor,
     .cert-go,.sec-tag,.hero::before,.hero::after,.skill-group:first-child::after{display:none !important;}
     .js .reveal{opacity:1 !important;transform:none !important;}
     a{color:inherit;}
@@ -1014,6 +1123,56 @@
 
 <main id="main" tabindex="-1">
 <section class="hero" id="top">
+  <!-- Red de la portada: el recorrido real de los datos en VitalLink (sensores → … → web) -->
+  <svg class="hero-net" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false">
+    <path id="netPath" class="net-link" d="M150 860 L175 600 L250 360 L420 200 L620 215 L790 390 L840 640"/>
+    <text class="net-proto" x="132" y="751" text-anchor="end">Bluetooth</text>
+    <text class="net-proto" x="180" y="477" text-anchor="end">UART</text>
+    <text class="net-proto" x="318" y="257" text-anchor="end">LoRaWAN</text>
+    <text class="net-proto" x="522" y="180" text-anchor="middle">MQTT</text>
+    <text class="net-proto" x="726" y="282" text-anchor="start">SQL</text>
+    <text class="net-proto" x="849" y="516" text-anchor="start">API</text>
+    <g class="net-node" transform="translate(150 860)">
+      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="0.00s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="0.00s" repeatCount="indefinite"/></circle>
+      <circle class="net-dot" r="7"/>
+      <text class="net-label" x="0" y="34" text-anchor="middle">BITalino</text>
+    </g>
+    <g class="net-node" transform="translate(175 600)">
+      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="1.63s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="1.63s" repeatCount="indefinite"/></circle>
+      <circle class="net-dot" r="7"/>
+      <text class="net-label l-full" x="-18" y="-18" text-anchor="end">Raspberry Pi 4</text>
+      <text class="net-label l-short" x="-18" y="-18" text-anchor="end">RPi 4</text>
+    </g>
+    <g class="net-node" transform="translate(250 360)">
+      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="0.19s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="0.19s" repeatCount="indefinite"/></circle>
+      <circle class="net-dot" r="7"/>
+      <text class="net-label l-full" x="-18" y="-16" text-anchor="end">Arduino MKR 1310</text>
+      <text class="net-label l-short" x="-18" y="-16" text-anchor="end">MKR 1310</text>
+    </g>
+    <g class="net-node" transform="translate(420 200)">
+      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="1.65s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="1.65s" repeatCount="indefinite"/></circle>
+      <circle class="net-dot" r="7"/>
+      <text class="net-label" x="0" y="-24" text-anchor="middle">TTN</text>
+    </g>
+    <g class="net-node" transform="translate(620 215)">
+      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="2.89s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="2.89s" repeatCount="indefinite"/></circle>
+      <circle class="net-dot" r="7"/>
+      <text class="net-label" x="0" y="-24" text-anchor="middle">Node-RED</text>
+    </g>
+    <g class="net-node" transform="translate(790 390)">
+      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="1.41s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="1.41s" repeatCount="indefinite"/></circle>
+      <circle class="net-dot" r="7"/>
+      <text class="net-label" x="18" y="-16" text-anchor="start">PostgreSQL</text>
+    </g>
+    <g class="net-node" transform="translate(840 640)">
+      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="0.00s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="0.00s" repeatCount="indefinite"/></circle>
+      <circle class="net-dot" r="7"/>
+      <text class="net-label" x="18" y="-16" text-anchor="start">Next.js</text>
+    </g>
+    <g class="net-pk"><circle class="net-pk-halo" r="16"/><circle class="net-pk-core" r="5.5"/><animateMotion dur="9s" begin="-0s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1" keyTimes="0;1"><mpath href="#netPath"/></animateMotion></g>
+    <g class="net-pk"><circle class="net-pk-halo" r="16"/><circle class="net-pk-core" r="5.5"/><animateMotion dur="9s" begin="-3s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1" keyTimes="0;1"><mpath href="#netPath"/></animateMotion></g>
+    <g class="net-pk"><circle class="net-pk-halo" r="16"/><circle class="net-pk-core" r="5.5"/><animateMotion dur="9s" begin="-6s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1" keyTimes="0;1"><mpath href="#netPath"/></animateMotion></g>
+  </svg>
   <div class="hero-inner">
     <div class="eyebrow"><i class="ic ic-network"></i><span data-i18n="hero.eyebrow"><span class="t-es">Ingeniería de Telecomunicación · Especialidad Telemática</span><span class="t-en" lang="en">Telecommunications Engineering · Telematics Specialization</span></span></div>
     <h1>Daniel Suárez Angosto</h1>
@@ -1067,6 +1226,7 @@
     <div class="timeline">
       <div class="tl-item reveal">
         <div class="tl-logo"><img src="data:image/webp;base64,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" alt="Fòrum Telecos UPC" width="36" height="36"></div>
+        <span class="tl-hop" aria-hidden="true">hop 01</span>
         <div class="tl-head"><h3 data-i18n="exp1.role"><span class="t-es">Vicepresidente</span><span class="t-en" lang="en">Vice President</span></h3><span class="period" data-i18n="exp1.period"><span class="t-es">Septiembre 2025 — Actualidad</span><span class="t-en" lang="en">September 2025 — Present</span></span></div>
         <div class="tl-role">Fòrum Telecos UPC</div>
         <ul>
@@ -1078,6 +1238,7 @@
       </div>
       <div class="tl-item reveal">
         <div class="tl-logo"><img src="data:image/webp;base64,UklGRlwKAABXRUJQVlA4IFAKAABwLQCdASqAAIAAPjEYiUOiIaEUDHysIAMEsoA8eMyvtPwl92+n2ffQB5gHOP8wH7Resn/pvVH6AH/A6hn0Y/Lr9m3927Dg/C+DP4h8h/WPyC/qXrH4j+iX+A/I73H/jP1l+zfkb+X3xF/T/AH39/w34m/AF+H/yn+9fkv/T/3C446Z38ZvgC9ZfnH93/K3+6ehpqTd6/7F7gH8t/mX+Z/N31gP7N4qfdfsAfzz+z/63+0/kB9If7//z/7z+TntK/Lf7T/r/8h+7H+N+wX+Pfzv/O/3v/Hf9T/Bf//6evY1+z3sq/sIUk4bdVdyB4zJkuv4JnYXbbnNGx+qUBITqGJBGVMalDUthTPcisNlv9OgmUltLYJ2DokpTItbJSzfO4MgAHRo5MaUl6Ffx0EWQuv98YovgM2P4ZxPB60NxPq5+jPcGzEFD7X17o+EI0TAssii66BNByMBpPg3kVaPL96OsxKJatgn+ysEVL/3xEVd+cNufAAA/v7deACP/0h8xl1N9Q5kg2GGCvltqaID7m35e513iIt30XF9A00bJA983n1keWbzAdIrsdJ8f+xG4HA3TWvUXsyxTN1JGXG6Khh4/omeaZe4+s90sjB4e9DMBVLroBq/8ZqwIJEA1uqRwpuHrzK/9Wc5SlSqdiDNHFkY14gArDiblNHUIAXbJSeyDQHOGm7z9G54oEFMVzksCIYjpv/VYsELBV+26f4lrPVRGzXpXebQqOjRa1WyOmJFV8jeUdT4jZ5+6D3auc2ozui7utP3VLDWyQHLQi91PTwcWCT6uyDOz/yiBzO7WbywOOS2JH9jgpBH94pwCYo0kb7ybvzqHV8Nzd05/DX+getjpPln6MLawLzHitMqZ4vWeiBPS4Qv4uCfgNO5vOmxEhYvNN+ELDmlu0UgCTf/jlwZ1I7aJYM/+Q219o3txCctvGoPdF5wox1ggTS1Y2a/65m4w6/+3taPxTdEGk6/OD/yr/GIRHzlXsN0dS5Bg36Mhx/VYPTugo6FVDWsCY6I4p8xsypuXFYn9CZp5m7CJOY1k6R/xU3dImBvGZhjhZBnerWCieoZMJPYwwjzO7E5RgjhFlfHi970yWCQ9vP0HKuuG+XU9rKAOeyubHZi5JnOE1/atOOz8dDd8e/GWAn7PSOB1bOwFZMplrfVboH+OiF87pVBQCIXj+aIhh+GzXAWTz1MhP0j6KBRQSrY7Ne8ByiHbt6bWGaizujeJ2FyClG92+RF7LJ0xvoXV+0HYrc1J+9AN9nEZbcpxHqalwZiNwdmjREU6wkJRH0PAo9Lb22PvzYYbSDn9N+FqE8ueCP6DVrByzBsnhD0nylcuv1AZhbORU9nzNUpT8Ng3aEEx8IosTdPqAdG3Kft/G6IGLaY62NDp/Ki3fbVO5C5M2pE4uz10EKHcV/4qKSUrPhBZ7gVjgAdHkDmsWh2cFlfCz5XMkzVleh4lSa4PIk+QIVqszhWqe3uatMOwywNkgBRduKoa/H5k5/Ch7EpZExjiwDl/aCrhzfNR39ZlzHtAV+ymwcSfmyif3zH/mC5mE4q/6tCyqtBwGs1/oXoLfzWbrbUdvaVRdIPbplsIPCXT+TmtH9MAOV9JgjncFdGYNQOgiJJvRrEccVYISd+wGI6v4OYhmTi+6JWeExnUPQ3/eOYlt5/P4UxESJyNeqIQl5TNY2Jvoj2ZXTMaBrdMO9o8nSGkEhuIfT6VRLHO0qHhDgYrXaw2BaJzIvWWG5kJQ9EZZR9GJOt8ZQ7MBrwGxwW0v1j5bwjLNd83HFAtcvAmRPEMtB58lnHCcu6WLTka0P9086FZuN0pqzOmc3/APELdb8u2YB7T79RjiI4dgOYIhYYi8s6OwczBbTGwU2SGdKXlYaGxS++oKJGgUI7qik+GxwjvmALFjZGHbdO5ICtX8EbDyhG/ESdA2z+J7Ko4p1CYNF73NPvjVwut2UQTqCAw/qnZ0t2lqqXuCw83Vxagygi0GoAjgSPi9IwDCjaUVRuvUUXBJcILxRiFfOgjYnu7BfXe0dTGeE+OvR4Cf5Wn8EHRM2vksT3rQWWjI4YUSGwW+X1sIw8Kfv505fcziae62P4rl5uLImZ6pM/FMziscrH0LNKIpHaRpTCTlu4hl1CBA75XwrIYAfq64VJuMhoSBSJqenCeyclMuhvIYkR5NJPKskYz0xORfq3PUMKYeL7pK9VbokLP17IU41srnY95SFMu28qqF+IF0R+nec3TDLS5D+FezxOfZu1PrOEjygRTDNI4wdj1o13YI9pgsxgl2BgAjSkxDGBeiKsJQnukSdQgzy2ybgsmvSanuStjAr7tSyBGPCnhwfpEj/oK1jfeT7fKEoZYBG4AJKT7uNthOJ0S5G/oozYFIRWocylWq2Ja9sLNzG42cgmvJAMoL9uc33Gae0FTgPv9HWw+cYCpPlzhBxPaazsUwTZsSrf0n7VKZN/nPK7KdR4mvsUL8/xJRPS8b64v41G0rw4a4JEYWuuxRhZG+vldXNw/UtuUC6P+s/OMDBOR2rxiaTf//1nsCOmWAv0QYluGjfyEflriV5ueoIM/IekLTC7yBQAet+bd6ckRgiGpLI5Zr0LTFyoFxTkYWoSMK9YtKMxGx6npUWhfomLJhcFKsOjxoeIwc2cIRmsvTergZNhp74ZjgwomBcW9o5UiV1Mc/3g+xE/ZCNZ5QgAoMZi6IBciDj03JZ8tqO0HANMT5cccgwK/Tud6ruT5UfsQc6Ig53OdgBk1vUsL8BShITJW3wMXLmve37Q0XGl8rRXWJR+I7JLmkuzwezqwTb7/mY/EuQeh6rU0fWENAeE6qt2QXYeZoi7pVbs5L/hKQ0Gcvk/kA6FCEO/0LV68catNJI/Ber4yEcZ60Kiolgc0z8AktYRIyYY2LI+Qz3CtWsAmm7WDRio4B3m9mOj5P1QazW0ft3Tsp4O4uEJKmxqOVu2FY09bM0ZAfYORYNH9lYKDEEDYnFhhbtKl7gf0n7xMtSt849oLdmZK29NCCOb3wIhaJDAh6UJgWj2gwasOe8pwyCApy3aFURwlR6HG+Lstc778mdC/lqCdbw6ahd1yQc48wL/EG0XrKvTGn0BQTrlA45JVKOv4K0SxrZgu81nduoEWqN9YP/0DhsSKSwQEc37qW++wfKbwxBar1xuwUDbT8+G5t9/OdDf5r01OPA5U9CNjPUjcO2QXHnpZvG0A23vp8XMYcokyM6ESOcIERbJfQcUks8z265UzN1b00H02FbFYuNbsZ5oHD73z0Bz5I/kgz9Vo9y+RwylOkSzlt5YUSZa1fKPav+PfxCJrj1iACOwgF+PjDZLbk5DkGYvUf2vGAUCD3n3IcI69eAndiQp/F5gWXFhBTH3bUBx6AzNqMADBw9OKvtUD/y2P0yKZpljlpsFPrJW/XrCwsxPKDpqy5c4lDrX5TypSvoU2lFYnE8dly/WBXyKSVloT+K9b2dqzfLyLyN5fAfM+oFrP+He+0s0nReweEYFGrjMp4/4Qn03D0Pt0PAAAAAAAAA=" alt="Real Madrid Official Store" width="36" height="36"></div>
+        <span class="tl-hop" aria-hidden="true">hop 02</span>
         <div class="tl-head"><h3 data-i18n="exp2.role"><span class="t-es">Asistente de ventas</span><span class="t-en" lang="en">Sales Assistant</span></h3><span class="period" data-i18n="exp2.period"><span class="t-es">Junio–Septiembre 2023, 2024 y 2025</span><span class="t-en" lang="en">June–September 2023, 2024 and 2025</span></span></div>
         <div class="tl-role">Real Madrid Official Store</div>
         <ul>
@@ -1268,8 +1429,10 @@
     <div>
       <div class="fname"><span class="logo-term" aria-hidden="true">&gt;_ DSA</span>Daniel Suárez Angosto</div>
       <div class="copyright">&copy; <span id="year">2026</span> — <span data-i18n="footer.rights"><span class="t-es">Todos los derechos reservados</span><span class="t-en" lang="en">All rights reserved</span></span></div>
+      <button class="term-hint" type="button" id="termHint"><span class="t-es">psst… pulsa <kbd>º</kbd> en cualquier momento para abrir la terminal</span><span class="t-en" lang="en">psst… press <kbd>`</kbd> anytime to open the terminal</span></button>
     </div>
     <div class="footer-links">
+      <button class="term-open" type="button" id="termOpen" aria-haspopup="dialog"><span class="term-open-ic" aria-hidden="true">&gt;_</span>Terminal</button>
       <button class="dl-cv" type="button" id="dlCv"><i class="ic ic-download-simple" aria-hidden="true"></i><span class="t-es">Descargar CV</span><span class="t-en" lang="en">Download CV</span></button>
       <a href="mailto:daniel.suarez.angosto@gmail.com" aria-label="Email"><i class="ic ic-envelope-simple"></i></a>
       <a href="https://github.com/dasuarezang" target="_blank" rel="noopener" aria-label="GitHub"><i class="ic ic-github-logo"></i></a>
@@ -1489,6 +1652,385 @@
     const hero = document.getElementById('top');
     if (!('IntersectionObserver' in window)) { btn.classList.add('show'); return; }
     new IntersectionObserver(([e]) => btn.classList.toggle('show', !e.isIntersecting)).observe(hero);
+  })();
+
+  // Red de la portada: se coloca y escala respecto a la foto (offset*, sin transformaciones de la animación de entrada)
+  // y se pausa cuando la portada no se ve o si se pide reducir movimiento
+  (function () {
+    const net = document.querySelector('.hero-net');
+    const photo = document.querySelector('.profile-img');
+    const hero = document.getElementById('top');
+    if (!net || !photo || !hero) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function place() {
+      const w = photo.offsetWidth, h = photo.offsetHeight;
+      if (!w || !h) return;
+      const cs = getComputedStyle(net);
+      const scale = parseFloat(cs.getPropertyValue('--net-scale')) || 1.7;
+      const shift = parseFloat(cs.getPropertyValue('--net-shift')) || 0;
+      const nw = photo.naturalWidth || 500, nh = photo.naturalHeight || 500;
+      const side = Math.min(w / nw, h / nh) * nw;           // lado de la foto tal como se dibuja (object-fit: contain)
+      const size = side * scale;
+      const cx = photo.offsetLeft + w / 2, cy = photo.offsetTop + h / 2 + shift * side;
+      net.style.width = net.style.height = size + 'px';
+      net.style.left = (cx - size / 2) + 'px';
+      net.style.top = (cy - size / 2) + 'px';
+      net.classList.add('ready');
+      fit();
+    }
+    // Etiquetas que no caben en la portada: pasan al otro lado de su nodo y, si tampoco caben, se ocultan
+    const labels = [...net.querySelectorAll('.net-label')].map(el => ({ el, x: el.getAttribute('x'), a: el.getAttribute('text-anchor') }));
+    function fit() {
+      const hb = hero.getBoundingClientRect();
+      labels.forEach(l => { l.el.setAttribute('x', l.x); l.el.setAttribute('text-anchor', l.a); l.el.style.visibility = ''; });
+      labels.forEach(l => {
+        if (getComputedStyle(l.el).display === 'none') return;
+        const out = () => { const r = l.el.getBoundingClientRect(); return r.left < hb.left + 6 || r.right > hb.right - 6; };
+        if (!out()) return;
+        if (l.a !== 'middle') {
+          l.el.setAttribute('text-anchor', l.a === 'end' ? 'start' : 'end');
+          l.el.setAttribute('x', String(-parseFloat(l.x)));
+          if (!out()) return;
+        }
+        l.el.style.visibility = 'hidden';
+      });
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (net.classList.contains('ready')) fit(); });
+    if ('ResizeObserver' in window) new ResizeObserver(() => place()).observe(photo);
+    else window.addEventListener('load', place);
+    if (!photo.complete) photo.addEventListener('load', place, { once: true });
+    let visible = true;
+    function sync() {
+      if (!net.pauseAnimations) return;
+      if (visible && !reduce.matches) net.unpauseAnimations(); else net.pauseAnimations();
+    }
+    if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }).observe(hero);
+    if (reduce.addEventListener) reduce.addEventListener('change', sync);
+    sync();
+  })();
+
+  // Experiencia como un traceroute: la línea se rellena con el scroll y cada salto se enciende al alcanzarlo
+  (function () {
+    const tl = document.querySelector('.timeline');
+    if (!tl) return;
+    const items = [...tl.querySelectorAll('.tl-item')];
+    const first = items[0] && items[0].querySelector('.tl-logo');
+    if (!first) return;
+    let queued = false;
+    function update() {
+      queued = false;
+      const trigger = window.innerHeight * 0.62;
+      const r = tl.getBoundingClientRect();
+      const f = first.getBoundingClientRect();
+      const start = f.top + f.height / 2, end = r.bottom - 48;
+      const p = Math.min(1, Math.max(0, (trigger - start) / Math.max(1, end - start)));
+      tl.style.setProperty('--fill', p.toFixed(4));
+      items.forEach(it => {
+        const m = it.querySelector('.tl-logo').getBoundingClientRect();
+        it.classList.toggle('lit', m.top + m.height / 2 <= trigger);
+      });
+    }
+    function onScroll() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { window.addEventListener('scroll', onScroll, { passive: true }); onScroll(); }
+        else { window.removeEventListener('scroll', onScroll); onScroll(); }
+      }).observe(tl);
+    } else {
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+    window.addEventListener('resize', onScroll);
+  })();
+
+  // Terminal escondida: responde con el propio contenido del CV, en el idioma activo
+  (function () {
+    const openBtn = document.getElementById('termOpen');
+    const EMAIL = 'daniel.suarez.angosto@gmail.com';
+    const LINKEDIN = 'https://linkedin.com/in/daniel-suarez-angosto';
+    const GITHUB = 'https://github.com/dasuarezang';
+    const lang = () => (document.documentElement.lang === 'en' ? 'en' : 'es');
+    const S = {
+      es: {
+        title: 'daniel@cv: ~', close: 'Cerrar terminal', input: 'Comando',
+        welcome: ['Terminal de Daniel Suárez Angosto.', "Escribe 'help' para ver los comandos, o pulsa uno de abajo."],
+        notFound: c => `${c}: comando no encontrado. Escribe 'help'.`,
+        help: [['whoami', 'quién soy'], ['about', 'sobre mí'], ['education', 'formación'], ['experience', 'experiencia'],
+               ['traceroute', 'mi trayectoria, salto a salto'], ['projects', 'proyectos'], ['skills', 'habilidades'],
+               ['certs', 'certificados'], ['contact', 'cómo contactarme'], ['email', 'copia mi correo'], ['cv', 'descarga el CV en PDF'],
+               ['ping', 'comprueba que sigo en línea'], ['hire', 'ya sabes qué hace ;)'], ['lang es|en', 'cambia el idioma'],
+               ['clear', 'limpia la pantalla'], ['exit', 'cierra la terminal']],
+        helpHead: 'Comandos disponibles:', helpFoot: '↑ ↓ para el historial · Tab para autocompletar · Esc para salir',
+        copied: 'Correo copiado al portapapeles.', copyFail: 'No he podido copiarlo; aquí lo tienes:',
+        cv: 'Abriendo el diálogo para guardar el CV en PDF…', opening: 'Abriendo',
+        langOk: 'Idioma cambiado a castellano.', langUse: 'Uso: lang es | lang en',
+        trHead: 'traceroute a daniel (cv), 30 saltos máx.', trNext: 'siguiente salto: tu empresa',
+        ping: h => `PING ${h}: 56 bytes de datos`, pingSum: (h, n) => `--- estadísticas de ping a ${h} ---\n${n} paquetes enviados, ${n} recibidos, 0% perdidos`,
+        hire: ['[sudo] contraseña para recruiter: ********', 'Acceso concedido. Abriendo tu correo con un mensaje para mí…'],
+        hireSubject: 'Oportunidad para Daniel Suárez Angosto',
+        chips: ['help', 'whoami', 'traceroute', 'projects', 'contact', 'cv'],
+        role: 'Estudiante de Telecomunicaciones', where: 'Ubicación', links: 'Enlaces'
+      },
+      en: {
+        title: 'daniel@cv: ~', close: 'Close terminal', input: 'Command',
+        welcome: ['Daniel Suárez Angosto’s terminal.', "Type 'help' to see the commands, or tap one below."],
+        notFound: c => `${c}: command not found. Type 'help'.`,
+        help: [['whoami', 'who I am'], ['about', 'about me'], ['education', 'education'], ['experience', 'experience'],
+               ['traceroute', 'my path, hop by hop'], ['projects', 'projects'], ['skills', 'skills'],
+               ['certs', 'certificates'], ['contact', 'how to reach me'], ['email', 'copy my email'], ['cv', 'download the CV as PDF'],
+               ['ping', 'check I’m still online'], ['hire', 'you know what it does ;)'], ['lang es|en', 'switch language'],
+               ['clear', 'clear the screen'], ['exit', 'close the terminal']],
+        helpHead: 'Available commands:', helpFoot: '↑ ↓ for history · Tab to autocomplete · Esc to quit',
+        copied: 'Email copied to clipboard.', copyFail: 'Couldn’t copy it; here it is:',
+        cv: 'Opening the dialog to save the CV as PDF…', opening: 'Opening',
+        langOk: 'Language switched to English.', langUse: 'Usage: lang es | lang en',
+        trHead: 'traceroute to daniel (cv), 30 hops max', trNext: 'next hop: your company',
+        ping: h => `PING ${h}: 56 data bytes`, pingSum: (h, n) => `--- ${h} ping statistics ---\n${n} packets transmitted, ${n} received, 0% packet loss`,
+        hire: ['[sudo] password for recruiter: ********', 'Access granted. Opening your email with a message for me…'],
+        hireSubject: 'Opportunity for Daniel Suárez Angosto',
+        chips: ['help', 'whoami', 'traceroute', 'projects', 'contact', 'cv'],
+        role: 'Telecommunications student', where: 'Location', links: 'Links'
+      }
+    };
+    const t = () => S[lang()];
+
+    // Texto de un elemento en el idioma activo (sin las mayúsculas que pone el CSS)
+    function txt(el) {
+      if (!el) return '';
+      const c = el.cloneNode(true);
+      c.querySelectorAll(lang() === 'en' ? '.t-es' : '.t-en').forEach(n => n.remove());
+      return c.textContent.replace(/\s+/g, ' ').trim();
+    }
+    const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+    const visibleImg = img => !img.classList.contains(lang() === 'en' ? 't-es' : 't-en');
+    const lower = s => s.charAt(0) + s.slice(1).toLowerCase();
+
+    // Interfaz (se crea solo si hay JavaScript)
+    const term = document.createElement('div');
+    term.className = 'term';
+    term.hidden = true;
+    term.setAttribute('role', 'dialog');
+    term.setAttribute('aria-modal', 'true');
+    term.setAttribute('aria-labelledby', 'termTitle');
+    term.innerHTML =
+      '<div class="term-win">' +
+        '<div class="term-bar"><span class="term-title" id="termTitle"></span>' +
+          '<button class="term-close" type="button"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204.24,195.76a6,6,0,1,1-8.48,8.48L128,136.49,60.24,204.24a6,6,0,0,1-8.48-8.48L119.51,128,51.76,60.24a6,6,0,0,1,8.48-8.48L128,119.51l67.76-67.75a6,6,0,0,1,8.48,8.48L136.49,128Z"/></svg></button></div>' +
+        '<div class="term-out" role="log" aria-live="polite"></div>' +
+        '<form class="term-line" autocomplete="off"><label class="term-prompt" for="termIn">daniel@cv:~$</label>' +
+          '<input class="term-in" id="termIn" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send"></form>' +
+        '<div class="term-chips"></div>' +
+      '</div>';
+    document.body.appendChild(term);
+    const out = term.querySelector('.term-out');
+    const form = term.querySelector('.term-line');
+    const input = term.querySelector('.term-in');
+    const closeBtn = term.querySelector('.term-close');
+    const chips = term.querySelector('.term-chips');
+
+    function labels() {
+      term.querySelector('.term-title').textContent = t().title;
+      closeBtn.setAttribute('aria-label', t().close);
+      input.setAttribute('aria-label', t().input);
+      chips.innerHTML = '';
+      t().chips.forEach(c => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.textContent = c;
+        b.addEventListener('click', () => { run(c); input.focus({ preventScroll: true }); });
+        chips.appendChild(b);
+      });
+    }
+
+    // Salida: cada línea es texto plano, un enlace o un par clave/valor
+    function line(parts, cls) {
+      const d = document.createElement('div');
+      d.className = 't-ln' + (cls ? ' ' + cls : '');
+      (Array.isArray(parts) ? parts : [parts]).forEach(p => {
+        if (p == null) return;
+        if (typeof p === 'string') { d.appendChild(document.createTextNode(p)); return; }
+        if (p.href) {
+          const a = document.createElement('a');
+          a.href = p.href; a.textContent = p.text || p.href;
+          if (!p.href.startsWith('mailto:')) { a.target = '_blank'; a.rel = 'noopener'; }
+          d.appendChild(a); return;
+        }
+        if (p.pr) { const s = document.createElement('span'); s.className = 't-pr'; s.textContent = p.pr; d.appendChild(s); return; }
+        if (p.k) { const k = document.createElement('span'); k.className = 't-k'; k.textContent = p.k; d.appendChild(k); return; }
+        if (p.h) { const h = document.createElement('span'); h.className = 't-h'; h.textContent = p.h; d.appendChild(h); }
+      });
+      out.appendChild(d);
+      out.scrollTop = out.scrollHeight;
+    }
+    const blank = () => line('');
+
+    function copyEmail() {
+      const done = ok => ok ? line(t().copied + ' ' + EMAIL, 't-ok') : line([t().copyFail + ' ', { href: 'mailto:' + EMAIL, text: EMAIL }]);
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(EMAIL).then(() => done(true), () => done(false));
+      else done(false);
+    }
+
+    const CMDS = {
+      help() {
+        line(t().helpHead, 't-h');
+        t().help.forEach(([c, d]) => line([{ k: c }, ' ' + d]));
+        line(t().helpFoot, 't-dim');
+      },
+      whoami() {
+        line({ h: txt(document.querySelector('.hero h1')) });
+        txt(document.querySelector('.typing .sr')).split('·').forEach(r => line('  › ' + r.trim()));
+        line([{ k: t().where }, ' ' + txt(document.querySelector('.hero .loc'))]);
+      },
+      about() { $$('.about-text p').forEach((p, i) => { if (i) blank(); line(txt(p)); }); },
+      education() {
+        $$('.edu-card').forEach(c => {
+          line({ h: txt(c.querySelector('h3')) });
+          line(txt(c.querySelector('.school')) + ' · ' + txt(c.querySelector('.mention')));
+          line(lower(txt(c.querySelector('.period'))), 't-dim');
+        });
+      },
+      experience() {
+        $$('.tl-item').forEach((c, i) => {
+          if (i) blank();
+          line([{ h: txt(c.querySelector('.tl-head h3')) }, ' · ' + txt(c.querySelector('.tl-role'))]);
+          line(lower(txt(c.querySelector('.tl-head .period'))), 't-dim');
+          $$('li', c).forEach(li => line('  - ' + txt(li)));
+        });
+      },
+      traceroute() {
+        line(t().trHead, 't-dim');
+        const items = $$('.tl-item');
+        items.forEach((c, i) => {
+          const ms = (0.4 + i * 0.7 + Math.random() * 0.3).toFixed(2);
+          line([' ' + (i + 1) + '  ', { h: txt(c.querySelector('.tl-head h3')) }, ' · ' + txt(c.querySelector('.tl-role')) + '  ', lower(txt(c.querySelector('.tl-head .period'))) + '  ' + ms + ' ms']);
+        });
+        line(' ' + (items.length + 1) + '  * * *  ' + t().trNext, 't-ok');
+      },
+      projects() {
+        $$('.proj-card').forEach((c, i) => {
+          if (i) blank();
+          line({ h: txt(c.querySelector('h3')) });
+          line(lower(txt(c.querySelector('.date'))) + ' · ' + $$('.proj-tags > span', c).map(txt).join(', '), 't-dim');
+          const a = c.querySelector('.proj-link');
+          if (a) line([{ href: a.href, text: a.href.replace('https://', '') }]);
+        });
+      },
+      skills() {
+        $$('.skill-group').forEach(g => {
+          line([{ k: lower(txt(g.querySelector('h3'))) }]);
+          line('  ' + $$('.badges img', g).filter(visibleImg).map(i => i.alt).join(' · '));
+        });
+      },
+      certs() {
+        $$('.cert-item').forEach(c => line([{ href: c.href, text: txt(c.querySelector('.name')) }, ' · ' + txt(c.querySelector('.issuer')) + ' · ' + lower(txt(c.querySelector('.date')))]));
+      },
+      contact() {
+        line([{ k: 'email' }, { href: 'mailto:' + EMAIL, text: EMAIL }]);
+        line([{ k: 'linkedin' }, { href: LINKEDIN, text: LINKEDIN.replace('https://', '') }]);
+        line([{ k: 'github' }, { href: GITHUB, text: GITHUB.replace('https://', '') }]);
+      },
+      email() { copyEmail(); },
+      cv() {
+        line(t().cv, 't-ok');
+        setTimeout(() => { close(); const b = document.getElementById('dlCv'); if (b) b.click(); }, 450);
+      },
+      linkedin() { line(t().opening + ' ' + LINKEDIN.replace('https://', '') + '…', 't-ok'); window.open(LINKEDIN, '_blank', 'noopener'); },
+      github() { line(t().opening + ' ' + GITHUB.replace('https://', '') + '…', 't-ok'); window.open(GITHUB, '_blank', 'noopener'); },
+      ping(args) {
+        const host = args[0] || 'daniel';
+        line(t().ping(host), 't-dim');
+        let i = 0;
+        const tick = () => {
+          i++;
+          line(`64 bytes ${lang() === 'en' ? 'from' : 'desde'} ${host}: icmp_seq=${i} ttl=64 time=${(0.2 + Math.random() * 0.6).toFixed(3)} ms`);
+          if (i < 4) setTimeout(tick, 420); else line(t().pingSum(host, 4), 't-ok');
+        };
+        setTimeout(tick, 300);
+      },
+      hire() {
+        t().hire.forEach((l, i) => setTimeout(() => line(l, i ? 't-ok' : 't-dim'), i * 700));
+        setTimeout(() => { window.location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(t().hireSubject); }, 1600);
+      },
+      lang(args) {
+        const l = (args[0] || '').toLowerCase();
+        if (l !== 'es' && l !== 'en') { line(t().langUse, 't-err'); return; }
+        const radio = document.getElementById(l === 'en' ? 'lang-en' : 'lang-es');
+        if (radio && !radio.checked) radio.click();
+        labels();
+        line(t().langOk, 't-ok');
+      },
+      clear() { out.innerHTML = ''; },
+      exit() { close(); }
+    };
+    const ALIAS = { exp: 'experience', edu: 'education', proj: 'projects', cert: 'certs', certificates: 'certs', skill: 'skills',
+                    '?': 'help', ayuda: 'help', quit: 'exit', salir: 'exit', cls: 'clear', sudo: 'hire', contacto: 'contact', correo: 'email', idioma: 'lang' };
+    const names = Object.keys(CMDS);
+
+    const history = [];
+    let hIndex = 0;
+    function run(raw) {
+      const value = raw.trim();
+      line([{ pr: 'daniel@cv:~$ ' }, value], 't-cmd');
+      if (!value) return;
+      history.push(value); hIndex = history.length;
+      let [cmd, ...args] = value.split(/\s+/);
+      cmd = cmd.toLowerCase();
+      if (cmd === 'sudo' && args[0]) { cmd = args.shift().toLowerCase(); }
+      cmd = ALIAS[cmd] || cmd;
+      if (CMDS[cmd]) CMDS[cmd](args); else line(t().notFound(value.split(/\s+/)[0]), 't-err');
+    }
+
+    let lastFocus = null, greeted = false;
+    function open() {
+      if (!term.hidden) return;
+      lastFocus = document.activeElement;
+      labels();
+      term.hidden = false;
+      document.documentElement.classList.add('term-lock');
+      requestAnimationFrame(() => term.classList.add('open'));
+      if (!greeted) { greeted = true; t().welcome.forEach((l, i) => line(l, i ? 't-dim' : 't-h')); }
+      input.focus({ preventScroll: true });
+    }
+    function close() {
+      if (term.hidden) return;
+      term.classList.remove('open');
+      document.documentElement.classList.remove('term-lock');
+      setTimeout(() => { term.hidden = true; }, 300);
+      if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+    }
+
+    form.addEventListener('submit', e => { e.preventDefault(); const v = input.value; input.value = ''; run(v); });
+    input.addEventListener('keydown', e => {
+      if (e.key === 'ArrowUp' && history.length) { e.preventDefault(); hIndex = Math.max(0, hIndex - 1); input.value = history[hIndex]; }
+      else if (e.key === 'ArrowDown' && history.length) { e.preventDefault(); hIndex = Math.min(history.length, hIndex + 1); input.value = history[hIndex] || ''; }
+      else if (e.key === 'Tab' && input.value.trim() && !e.shiftKey) {
+        e.preventDefault();
+        const v = input.value.trim().toLowerCase();
+        const m = names.filter(n => n.startsWith(v));
+        if (m.length === 1) input.value = m[0] + ' ';
+        else if (m.length > 1) line(m.join('   '), 't-dim');
+      }
+    });
+    closeBtn.addEventListener('click', close);
+    term.addEventListener('click', e => { if (e.target === term) close(); });
+    // Foco atrapado dentro de la terminal mientras está abierta
+    term.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+      if (e.key !== 'Tab' || (e.target === input && input.value.trim() && !e.shiftKey)) return;
+      const f = [closeBtn, input, ...chips.querySelectorAll('button')];
+      const i = f.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+    });
+    // Atajo: la tecla a la izquierda del 1 (º en teclado español, ` en inglés)
+    document.addEventListener('keydown', e => {
+      if (!term.hidden || e.ctrlKey || e.metaKey || e.altKey) return;
+      const tag = (e.target.tagName || '').toLowerCase();
+      if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
+      if (e.code === 'Backquote' || e.key === 'º' || e.key === '`') { e.preventDefault(); open(); }
+    });
+    if (openBtn) openBtn.addEventListener('click', open);
+    const hint = document.getElementById('termHint');
+    if (hint) hint.addEventListener('click', open);
+    document.querySelectorAll('#lang-es,#lang-en').forEach(r => r.addEventListener('change', () => { if (!term.hidden) labels(); }));
   })();
 
   // Scroll reveal: fade + slide up elements as they enter the viewport
