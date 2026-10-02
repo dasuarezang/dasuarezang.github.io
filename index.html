@@ -11,7 +11,7 @@
 <meta property="og:title" content="Daniel Suárez Angosto — Network Engineer">
 <meta property="og:description" content="CV de Daniel Suárez Angosto, estudiante de Ingeniería de Telecomunicación (Telemática) y futuro Network Engineer.">
 <meta property="og:url" content="https://dasuarezang.github.io/cv/">
-<meta property="og:image" content="https://dasuarezang.github.io/cv/og-image.png">
+<meta property="og:image" content="https://dasuarezang.github.io/cv/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Daniel Suárez Angosto — Network Engineer">
@@ -20,10 +20,10 @@
 <meta property="profile:first_name" content="Daniel">
 <meta property="profile:last_name" content="Suárez Angosto">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Daniel Suárez Angosto", "jobTitle": "Estudiante de Ingeniería de Telecomunicación (Telemática)", "description": "CV de Daniel Suárez Angosto, estudiante de Ingeniería de Telecomunicación (Telemática) y futuro Network Engineer.", "url": "https://dasuarezang.github.io/cv/", "image": "https://dasuarezang.github.io/cv/og-image.png", "email": "mailto:daniel.suarez.angosto@gmail.com", "address": {"@type": "PostalAddress", "addressLocality": "Barcelona", "addressCountry": "ES"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Universitat Politècnica de Catalunya (UPC) · ETSETB"}, "knowsLanguage": ["es", "ca", "en"], "knowsAbout": ["Redes", "Ciberseguridad", "IoT", "Docker", "Kubernetes", "Linux", "Python", "Java", "SQL"], "sameAs": ["https://linkedin.com/in/daniel-suarez-angosto", "https://github.com/dasuarezang"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Daniel Suárez Angosto", "jobTitle": "Estudiante de Ingeniería de Telecomunicación (Telemática)", "description": "CV de Daniel Suárez Angosto, estudiante de Ingeniería de Telecomunicación (Telemática) y futuro Network Engineer.", "url": "https://dasuarezang.github.io/cv/", "image": "https://dasuarezang.github.io/cv/og-image.jpg", "email": "mailto:daniel.suarez.angosto@gmail.com", "address": {"@type": "PostalAddress", "addressLocality": "Barcelona", "addressCountry": "ES"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Universitat Politècnica de Catalunya (UPC) · ETSETB"}, "knowsLanguage": ["es", "ca", "en"], "knowsAbout": ["Redes", "Ciberseguridad", "IoT", "Docker", "Kubernetes", "Linux", "Python", "Java", "SQL"], "sameAs": ["https://linkedin.com/in/daniel-suarez-angosto", "https://github.com/dasuarezang"]}</script>
 <meta name="twitter:title" content="Daniel Suárez Angosto — Network Engineer">
 <meta name="twitter:description" content="CV de Daniel Suárez Angosto, estudiante de Ingeniería de Telecomunicación (Telemática) y futuro Network Engineer.">
-<meta name="twitter:image" content="https://dasuarezang.github.io/cv/og-image.png">
+<meta name="twitter:image" content="https://dasuarezang.github.io/cv/og-image.jpg">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#05070c">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' rx='3.5' fill='%2305070c'/%3E%3Cpath d='M3 4h1v1h-1zM4 4h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM13 10h1v1h-1zM9 11h1v1h-1zM10 11h1v1h-1zM11 11h1v1h-1zM12 11h1v1h-1zM13 11h1v1h-1z' fill='%2360a5fa'/%3E%3C/svg%3E">
@@ -177,8 +177,8 @@
   /* Menú sin JavaScript: se abre con #navLinks:target y se cierra solo al ir a cualquier apartado */
   .nav-toggle.nojs-toggle{display:none;}
   .nav-anchor{position:fixed;top:0;left:0;width:0;height:0;overflow:hidden;}
-  #nav-state:checked ~ header .burger span:first-child{transform:translateY(4.25px) rotate(45deg);}
-  #nav-state:checked ~ header .burger span:last-child{transform:translateY(-4.25px) rotate(-45deg);}
+  #nav-state:checked ~ .nav-inner .burger span:first-child{transform:translateY(4.25px) rotate(45deg);}
+  #nav-state:checked ~ .nav-inner .burger span:last-child{transform:translateY(-4.25px) rotate(-45deg);}
 
   /* HERO: Editorial Split sobre negro OLED con orbes de luz */
   .hero{
@@ -288,7 +288,7 @@
   .sec-tag{
     display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;
     font:500 .66rem/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
-    color:var(--accent-deep);background:rgba(37,99,235,.07);box-shadow:inset 0 0 0 1px rgba(37,99,235,.14);
+    color:#1d4ed8;background:rgba(37,99,235,.07);box-shadow:inset 0 0 0 1px rgba(37,99,235,.14);
   }
   .sec-tag::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;}
   .section-head h2{font-size:clamp(2.25rem,5.2vw,4rem);font-weight:600;line-height:1;letter-spacing:-.04em;color:var(--ink);}
@@ -548,9 +548,9 @@
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
   /* Idioma */
   .t-en{display:none;}
-  #lang-en:checked ~ * .t-es{display:none;}
-  #lang-en:checked ~ * span.t-en{display:inline;}
-  #lang-en:checked ~ * img.t-en{display:block;}
+  html[lang="en"] .t-es,body:has(#lang-en:checked) .t-es,#lang-en:checked ~ * .t-es{display:none;}
+  html[lang="en"] span.t-en,body:has(#lang-en:checked) span.t-en,#lang-en:checked ~ * span.t-en{display:inline;}
+  html[lang="en"] img.t-en,body:has(#lang-en:checked) img.t-en,#lang-en:checked ~ * img.t-en{display:block;}
   .lang-hit{position:absolute;inset:0;z-index:2;border-radius:999px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
   .to-es{display:none;}
   #lang-en:checked ~ * .to-en{display:none;}
@@ -559,8 +559,8 @@
   #lang-en:checked ~ * .lang-switch::before{transform:translateX(100%);}
   #lang-en:checked ~ * .lang-switch .l-es{color:inherit;}
   #lang-en:checked ~ * .lang-switch .l-en{color:#fff;}
-  #lang-es:focus-visible ~ header .lang-switch,#lang-en:focus-visible ~ header .lang-switch,
-  #nav-state:focus-visible ~ header .nav-toggle{outline:2px solid var(--accent);outline-offset:3px;}
+  #lang-es:focus-visible ~ .nav-inner .lang-switch,#lang-en:focus-visible ~ .nav-inner .lang-switch,
+  #nav-state:focus-visible ~ .nav-inner .nav-toggle{outline:2px solid var(--accent);outline-offset:3px;}
   /* Frase animada (castellano / inglés) */
   .typing{white-space:nowrap;font-size:min(clamp(1rem,2.6vw,1.3rem), calc((100vw - 64px) / 25));}
   .tw > span{display:inline-block;vertical-align:bottom;overflow:hidden;white-space:nowrap;width:0;
@@ -598,7 +598,7 @@
       opacity:0;visibility:hidden;
       transition:opacity .6s var(--spring),visibility 0s linear .6s;
     }
-    #nav-state:checked ~ header nav.links{opacity:1;visibility:visible;transition:opacity .6s var(--spring);}
+    #nav-state:checked ~ .nav-inner nav.links{opacity:1;visibility:visible;transition:opacity .6s var(--spring);}
     nav.links a{
       padding:6px 0;border-radius:0;background:none;
       font-size:clamp(2rem,7.5vw,3.25rem);font-weight:500;letter-spacing:-.04em;color:#fff;
@@ -607,13 +607,13 @@
     }
     nav.links a:hover,nav.links a:focus-visible{background:none;color:var(--accent);}
     nav.links a[aria-current="location"]{background:none;box-shadow:none;color:var(--accent);}
-    #nav-state:checked ~ header nav.links a{opacity:1;transform:none;}
-    #nav-state:checked ~ header nav.links a:nth-child(1){transition-delay:.10s;}
-    #nav-state:checked ~ header nav.links a:nth-child(2){transition-delay:.15s;}
-    #nav-state:checked ~ header nav.links a:nth-child(3){transition-delay:.20s;}
-    #nav-state:checked ~ header nav.links a:nth-child(4){transition-delay:.25s;}
-    #nav-state:checked ~ header nav.links a:nth-child(5){transition-delay:.30s;}
-    #nav-state:checked ~ header nav.links a:nth-child(6){transition-delay:.35s;}
+    #nav-state:checked ~ .nav-inner nav.links a{opacity:1;transform:none;}
+    #nav-state:checked ~ .nav-inner nav.links a:nth-child(1){transition-delay:.10s;}
+    #nav-state:checked ~ .nav-inner nav.links a:nth-child(2){transition-delay:.15s;}
+    #nav-state:checked ~ .nav-inner nav.links a:nth-child(3){transition-delay:.20s;}
+    #nav-state:checked ~ .nav-inner nav.links a:nth-child(4){transition-delay:.25s;}
+    #nav-state:checked ~ .nav-inner nav.links a:nth-child(5){transition-delay:.30s;}
+    #nav-state:checked ~ .nav-inner nav.links a:nth-child(6){transition-delay:.35s;}
     body:has(#nav-state:checked){overflow:hidden;}
     html:not(.js) .nav-toggle:not(.nojs-toggle){display:none;}
     html:not(.js) .nav-toggle.nojs-open{display:inline-flex;}
@@ -747,8 +747,6 @@
     transform:translateY(-160%);transition:transform .6s var(--spring);
   }
   .skip-link:focus{transform:none;}
-  body:has(#lang-en:checked) .skip-link .t-es{display:none;}
-  body:has(#lang-en:checked) .skip-link .t-en{display:inline;}
   main:focus{outline:none;}
 
   /* ===== Modo oscuro automático (según el ajuste del sistema; solo pantalla) ===== */
@@ -784,8 +782,8 @@
 
   /* ===== Impresión / Guardar como PDF: CV limpio en blanco, todo visible ===== */
   @media print{
-    @page{margin:12mm;}
-    html{font-size:13px;scroll-behavior:auto;}
+    @page{size:A4;margin:10mm 11mm;}
+    html{font-size:12.5px;scroll-behavior:auto;}
     *{animation:none !important;transition:none !important;box-shadow:none !important;filter:none !important;}
     body{background:#fff;color:#0f172a;}
     header.nav,.skip-link,.state,footer,.toast,.to-top,.car-nav,.proj-toggle,.proj-logo,.proj-bg,.proj-shade,.typing .cursor,
@@ -793,8 +791,9 @@
     .js .reveal{opacity:1 !important;transform:none !important;}
     a{color:inherit;}
     /* Cabecera del CV */
-    .hero{display:block;min-height:0;background:none;color:#0f172a;padding:0;overflow:visible;text-align:center;}
-    .hero-inner{align-items:center;text-align:center;padding:0 0 6px;}
+    .hero{display:flex;flex-direction:row-reverse;align-items:center;justify-content:center;gap:22px;min-height:0;background:none;color:#0f172a;padding:0 0 4px;overflow:visible;text-align:left;}
+    .hero-inner{align-items:flex-start;text-align:left;padding:0;margin:0;max-width:none;flex:0 1 auto;}
+    .hero .role{display:none !important;}
     .eyebrow{color:var(--accent-deep);background:none;box-shadow:none;border:1px solid #cbd5e1;margin-bottom:8px;}
     .hero h1{font-size:2.1rem;letter-spacing:-.03em;background:none;color:#0f172a;-webkit-text-fill-color:#0f172a;}
     .typing{color:#334155;margin-top:6px;}
@@ -802,16 +801,16 @@
     .tw > span{width:0 !important;}
     .tw .tw1{width:auto !important;}
     .hero .role,.hero .loc{color:#475569;}
-    .hero .loc{justify-content:center;}
+    .hero .loc{justify-content:flex-start;margin-top:6px;}
     .hero .loc .ic,.contact-row .ic{color:var(--accent-deep) !important;}
-    .contact-row{justify-content:center;margin-top:12px;gap:8px;}
+    .contact-row{justify-content:flex-start;margin-top:10px;gap:8px;}
     .contact-row a:not(.badge-link),.contact-row a:first-child{color:#0f172a;background:none;border:1px solid #cbd5e1;height:auto;padding:5px 10px;border-radius:7px;
       font:500 .9rem/1.3 var(--font);letter-spacing:0;text-transform:none;}
     .contact-row a[href^="mailto"] > span{display:none !important;}
     .contact-row a[href^="mailto"]::after{content:"daniel.suarez.angosto@gmail.com";}
     .contact-row a[href^="http"]:not(.badge-link)::after{content:attr(href);font-size:.75rem;color:#475569;margin-left:2px;align-self:center;}
     a.badge-link img{height:26px;}
-    .profile-img{max-height:105px;margin:0 auto 2px;-webkit-mask-image:none;mask-image:none;}
+    .profile-img{width:112px;height:112px;max-height:none;margin:0;flex-shrink:0;object-fit:cover;border-radius:50%;-webkit-mask-image:none;mask-image:none;}
     /* Secciones compactas */
     section,section.alt{background:none;padding:10px 0 2px;}
     .wrap{padding:0;}
@@ -859,6 +858,33 @@
     .proj-link .ic,.proj-link span{display:none !important;}
     .proj-link::after{content:attr(href);}
     .cert-item .date{grid-column:auto;grid-row:auto;}
+    /* Compacto para que el CV quepa en 2 páginas A4 */
+    .contact-row a{white-space:nowrap;}
+    .about{padding:10px 16px;}
+    .about-text{text-align:left;max-width:none;}
+    .about p,.about p:first-child{margin:0 0 4px;}
+    .edu-card{flex-direction:row;align-items:center;justify-content:space-between;gap:14px;text-align:left;padding:10px 16px;}
+    .edu-card > div:first-child{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:center;}
+    .edu-card .edu-logo{grid-row:1 / 4;height:34px;margin:0;}
+    .edu-card h3{margin:0;font-size:1rem;}
+    .edu-card .school,.edu-card .mention{margin-top:1px;font-size:.85rem;}
+    .edu-card .period{padding:5px 10px;}
+    .stack-grid{grid-template-columns:1fr 1fr 1fr;gap:8px;}
+    .skill-group,.skill-group:first-child,.skill-group.full{grid-column:auto;padding:8px 10px 10px;}
+    .skill-group h3{flex-direction:row;gap:8px;margin-bottom:8px;font-size:.62rem;letter-spacing:.12em;}
+    .skill-group h3 .ic{width:24px;height:24px;font-size:.9rem;border-radius:7px;}
+    .skill-group.full .badges{flex-direction:column;align-items:center;}
+    .cert-list{display:grid;grid-template-columns:1fr 1fr;column-gap:22px;padding:6px 14px;}
+    .cert-item{position:relative;grid-template-columns:30px minmax(0,1fr);padding:3px 0;}
+    .cert-item .date{position:absolute;right:0;bottom:4px;font-size:.6rem;}
+    .cert-item .name{font-size:.86rem;}
+    .cert-item .issuer{font-size:.76rem;}
+    /* Proyectos y secciones algo más densos */
+    section,section.alt{padding:6px 0 0;}
+    .section-head{margin:0 0 7px;}
+    .proj-card ul{font-size:.82rem;line-height:1.45;padding:2px 12px 8px 26px;}
+    .proj-card summary{padding:10px 12px 2px;}
+    .proj-link{padding:0 12px 8px 26px;}
   }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
@@ -870,12 +896,12 @@
 </head>
 <body>
 <a class="skip-link" href="#main"><span class="t-es">Saltar al contenido</span><span class="t-en" lang="en">Skip to content</span></a>
-<input class="state" type="radio" name="cv-lang" id="lang-es" aria-label="Castellano" checked>
-<input class="state" type="radio" name="cv-lang" id="lang-en" aria-label="English">
-<input class="state" type="checkbox" id="nav-state" aria-label="Menú / Menu" aria-controls="navLinks">
 
 <span class="nav-anchor" id="nav-closed" aria-hidden="true"></span>
 <header class="nav">
+  <input class="state" type="radio" name="cv-lang" id="lang-es" aria-label="Castellano" checked>
+  <input class="state" type="radio" name="cv-lang" id="lang-en" aria-label="English">
+  <input class="state" type="checkbox" id="nav-state" aria-label="Menú / Menu" aria-controls="navLinks">
   <div class="nav-inner">
     <a href="#top" class="brand"><span class="logo-term" aria-hidden="true">&gt;_ DSA</span><span class="brand-name">Daniel <span>Suárez Angosto</span></span></a>
     <nav class="links" id="navLinks">
@@ -1143,9 +1169,8 @@
   </div>
 </section>
 </main>
-<a class="to-top" id="toTop" href="#top"><i class="ic ic-arrow-up" aria-hidden="true"></i><span class="sr"><span class="t-es">Volver arriba</span><span class="t-en" lang="en">Back to top</span></span></a>
-
 <footer>
+  <a class="to-top" id="toTop" href="#top"><i class="ic ic-arrow-up" aria-hidden="true"></i><span class="sr"><span class="t-es">Volver arriba</span><span class="t-en" lang="en">Back to top</span></span></a>
   <div class="footer-inner">
     <div>
       <div class="fname"><span class="logo-term" aria-hidden="true">&gt;_ DSA</span>Daniel Suárez Angosto</div>
