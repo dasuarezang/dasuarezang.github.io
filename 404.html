@@ -48,8 +48,22 @@
     font:600 clamp(5.5rem,24vw,9rem)/.9 var(--font);letter-spacing:-.06em;
     background:linear-gradient(180deg,#fff 30%,rgba(255,255,255,.4));-webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  .typing{margin-top:22px;font:400 clamp(.95rem,3.6vw,1.2rem)/1.4 var(--mono);color:#e2e8f0;}
-  .typing .prompt{color:var(--accent);margin-right:10px;}
+  /* Bloque de terminal: traceroute que se pierde en el último salto */
+  .trace{
+    width:min(100%,520px);margin-top:28px;padding:16px 20px;border-radius:14px;text-align:left;
+    font:400 .88rem/1.7 var(--mono);color:#cbd5e1;
+    background:rgba(255,255,255,.03);box-shadow:inset 0 0 0 1px rgba(96,165,250,.2),0 24px 50px -30px rgba(37,99,235,.6);
+  }
+  .tr-line{color:#fff;overflow-wrap:anywhere;}
+  .trace .prompt{color:var(--accent);margin-right:6px;}
+  .tr-target{color:#e2e8f0;}
+  .tr-hops{list-style:none;margin:4px 0;}
+  .tr-hops li{display:grid;grid-template-columns:2ch minmax(0,1fr) auto;gap:14px;}
+  .tr-hops .n{color:rgba(203,213,225,.72);text-align:right;}
+  .tr-hops .h{overflow-wrap:anywhere;}
+  .tr-hops .ms{color:rgba(203,213,225,.78);}
+  .tr-hops .lost .h{color:rgba(203,213,225,.72);}
+  .tr-hops .lost .ms{color:#fca5a5;}
   .cursor{display:inline-block;width:.55em;height:1.1em;margin-left:4px;vertical-align:-.2em;background:var(--accent);border-radius:1px;animation:blink 1s steps(1) infinite;}
   @keyframes blink{50%{opacity:0;}}
   p.msg{margin-top:18px;max-width:42ch;font-size:1rem;line-height:1.6;color:rgba(255,255,255,.62);}
@@ -66,7 +80,7 @@
   html[lang="en"] .t-es{display:none;}
   html[lang="en"] .t-en{display:inline;}
   @media (hover:none){.back:hover{transform:none;background:var(--accent-deep);}}
-  @media (max-width:480px){body{padding:40px 16px;}.logo-term{margin-bottom:32px;}}
+  @media (max-width:480px){body{padding:40px 16px;}.logo-term{margin-bottom:32px;}.trace{padding:14px 16px;font-size:.78rem;}.tr-hops li{gap:10px;}}
   @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
 </style>
 </head>
@@ -74,7 +88,15 @@
 <main>
   <a class="logo-term" href="/cv/" aria-label="Daniel Suárez Angosto — CV">&gt;_ DSA</a>
   <h1 class="code" aria-label="Error 404">404</h1>
-  <p class="typing" aria-hidden="true"><span class="prompt">&gt;_</span><span class="t-es">ruta no encontrada</span><span class="t-en">route not found</span><span class="cursor"></span></p>
+  <div class="trace">
+    <p class="tr-line"><span class="prompt">$</span> traceroute <span class="tr-target" id="trTarget">dasuarezang.github.io/cv/…</span></p>
+    <ol class="tr-hops">
+      <li><span class="n">1</span><span class="h">dasuarezang.github.io</span><span class="ms">0.42 ms</span></li>
+      <li><span class="n">2</span><span class="h">/cv/</span><span class="ms">0.87 ms</span></li>
+      <li class="lost"><span class="n">3</span><span class="h">* * *</span><span class="ms"><span class="t-es">destino inalcanzable</span><span class="t-en" lang="en">destination unreachable</span></span></li>
+    </ol>
+    <p class="tr-line"><span class="prompt">$</span> <span class="cursor"></span></p>
+  </div>
   <p class="msg"><span class="t-es">Esta página no existe o se ha movido. El paquete se ha perdido por el camino, pero el CV sigue en línea.</span><span class="t-en" lang="en">This page doesn't exist or has moved. The packet got lost on the way, but the CV is still online.</span></p>
   <a class="back" href="/cv/">
     <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222,128a6,6,0,0,1-6,6H54.49l61.75,61.76a6,6,0,1,1-8.48,8.48l-72-72a6,6,0,0,1,0-8.48l72-72a6,6,0,0,1,8.48,8.48L54.49,122H216A6,6,0,0,1,222,128Z"/></svg>
@@ -82,6 +104,14 @@
   </a>
 </main>
 <script>
+  // La ruta que se ha intentado abrir (recortada si es muy larga)
+  (function () {
+    const el = document.getElementById('trTarget');
+    if (!el) return;
+    let target = location.host + decodeURIComponent(location.pathname);
+    if (target.length > 48) target = target.slice(0, 47) + '…';
+    el.textContent = target;
+  })();
   // Mismo idioma que el CV: la elección guardada o, si no hay, el del navegador
   (function () {
     let saved = null;
