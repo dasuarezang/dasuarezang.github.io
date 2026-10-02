@@ -714,17 +714,32 @@
   .to-top:hover .ic{transform:translateY(-2px);}
   /* Aviso flotante (correo copiado) */
   .toast{
-    position:fixed;left:50%;bottom:24px;z-index:50;display:flex;align-items:center;gap:10px;
-    padding:10px 18px 10px 12px;border-radius:999px;max-width:calc(100% - 32px);
-    font-size:.88rem;font-weight:500;color:#fff;background:rgba(8,11,20,.9);
+    position:fixed;left:50%;bottom:max(24px,calc(env(safe-area-inset-bottom) + 12px));z-index:50;
+    display:flex;align-items:center;gap:12px;width:max-content;max-width:calc(100% - 32px);
+    padding:10px 20px 10px 10px;border-radius:999px;color:#fff;background:rgba(8,11,20,.9);
     -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
     box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),0 20px 40px -16px rgba(0,0,0,.55);
-    opacity:0;transform:translate(-50%,16px);pointer-events:none;
-    transition:opacity .5s var(--spring),transform .7s var(--spring);
+    opacity:0;visibility:hidden;transform:translate(-50%,16px) scale(.96);pointer-events:none;
+    transition:opacity .5s var(--spring),transform .7s var(--spring),visibility 0s linear .7s;
   }
-  .toast.show{opacity:1;transform:translate(-50%,0);}
-  .toast .ic{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-    font-size:.9rem;color:#05070c;background:#4ade80;flex-shrink:0;}
+  .toast.show{opacity:1;visibility:visible;transform:translate(-50%,0);
+    transition:opacity .5s var(--spring),transform .7s var(--spring);}
+  .toast > .ic{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:1rem;color:#05070c;background:#4ade80;flex-shrink:0;}
+  .toast-txt{display:flex;flex-direction:column;gap:2px;min-width:0;}
+  .toast-txt b{font-size:.88rem;font-weight:600;line-height:1.25;}
+  .toast-txt span{font:400 .74rem/1.3 var(--mono);color:rgba(255,255,255,.66);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  /* En pantallas estrechas sube por encima del botón "volver arriba" para no taparlo */
+  @media (max-width:600px){
+    .toast{bottom:calc(max(16px,env(safe-area-inset-bottom)) + 56px);}
+  }
+  @media (max-width:374px){
+    .toast{gap:10px;padding-right:14px;}
+    .toast-txt span{font-size:.66rem;}
+  }
+  @media screen and (prefers-color-scheme: dark){
+    .toast{box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 20px 40px -16px rgba(0,0,0,.8);}
+  }
   /* ===== Accesibilidad: saltar al contenido ===== */
   .skip-link{
     position:fixed;top:12px;left:12px;z-index:60;padding:10px 18px;border-radius:999px;
@@ -1265,20 +1280,37 @@
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.setAttribute('role', 'status');
-    toast.innerHTML = '<i class="ic ic-check" aria-hidden="true"></i><span></span>';
+    toast.setAttribute('aria-live', 'polite');
+    toast.setAttribute('aria-atomic', 'true');
+    toast.innerHTML = '<i class="ic ic-check" aria-hidden="true"></i><span class="toast-txt"><b></b><span></span></span>';
     document.body.appendChild(toast);
-    let timer;
+    const title = toast.querySelector('b'), addr = toast.querySelector('.toast-txt span');
+    let timer, pending = false;
+    const hide = () => toast.classList.remove('show');
     const show = () => {
-      toast.lastChild.textContent = document.documentElement.lang === 'en'
-        ? 'Email copied: ' + EMAIL : 'Correo copiado: ' + EMAIL;
-      toast.classList.add('show');
+      title.textContent = document.documentElement.lang === 'en'
+        ? 'Email copied to clipboard' : 'Correo copiado al portapapeles';
+      addr.textContent = EMAIL;
+      // Reinicia la entrada si ya estaba visible (varios clics seguidos)
+      toast.classList.remove('show'); void toast.offsetWidth; toast.classList.add('show');
       clearTimeout(timer);
-      timer = setTimeout(() => toast.classList.remove('show'), 2600);
+      // En móvil el enlace abre la app de correo y la página queda oculta:
+      // el aviso se guarda y se muestra al volver, para que no se pierda
+      pending = document.visibilityState === 'hidden';
+      if (!pending) timer = setTimeout(hide, 2800);
     };
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') {
+        if (toast.classList.contains('show')) { clearTimeout(timer); pending = true; }
+      } else if (pending) { pending = false; show(); }
+    });
     const fallback = () => {
       const t = document.createElement('textarea');
-      t.value = EMAIL; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
-      document.body.appendChild(t); t.select();
+      t.value = EMAIL; t.setAttribute('readonly', ''); t.setAttribute('aria-hidden', 'true');
+      // 16px evita el zoom automático de iOS; contentEditable + selección explícita para Safari
+      t.style.cssText = 'position:fixed;top:0;left:0;opacity:0;font-size:16px;pointer-events:none;';
+      document.body.appendChild(t);
+      t.contentEditable = 'true'; t.select(); t.setSelectionRange(0, EMAIL.length);
       let ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
       t.remove(); if (ok) show();
     };
