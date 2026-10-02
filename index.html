@@ -818,12 +818,35 @@
   html:not(.js) .hero-net{display:none;}
   .net-link{fill:none;stroke:rgba(96,165,250,.3);stroke-width:1.2;vector-effect:non-scaling-stroke;}
   .net-dot{fill:#05070c;stroke:#60a5fa;stroke-width:1.5;vector-effect:non-scaling-stroke;}
-  .net-ring{fill:none;stroke:#60a5fa;stroke-width:1;vector-effect:non-scaling-stroke;}
   .net-label{font:500 17px var(--mono);letter-spacing:.02em;fill:rgba(226,232,240,.55);}
   .net-proto{font:500 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;fill:rgba(96,165,250,.62);}
   .net-label.l-short{display:none;}
-  .net-pk-core{fill:#bfdbfe;}
-  .net-pk-halo{fill:rgba(96,165,250,.22);}
+  /* Capa animada encima de las líneas (y debajo de la foto): solo transform y opacity, que van por la GPU */
+  .net-fx{position:absolute;z-index:0;pointer-events:none;opacity:0;}
+  .net-fx.ready{animation:netIn 1.8s var(--out) .5s forwards;}
+  html:not(.js) .net-fx{display:none;}
+  .net-fx-in{position:absolute;left:0;top:0;width:1000px;height:1000px;transform-origin:0 0;}
+  .net-pk{
+    position:absolute;left:0;top:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;
+    background:#bfdbfe;box-shadow:0 0 0 7px rgba(96,165,250,.18),0 0 18px 6px rgba(96,165,250,.28);will-change:transform;
+  }
+  .net-pulse{
+    position:absolute;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;
+    border:2px solid #60a5fa;opacity:0;will-change:transform,opacity;
+  }
+  @keyframes netPulse{0%{transform:scale(.27);opacity:.7;}45%{transform:scale(1);opacity:0;}100%{transform:scale(1);opacity:0;}}
+  @keyframes netPacket{
+    0.000%{transform:translate(150px,860px);}
+    18.069%{transform:translate(175px,600px);}
+    35.463%{transform:translate(250px,360px);}
+    51.612%{transform:translate(420px,200px);}
+    65.486%{transform:translate(620px,215px);}
+    82.364%{transform:translate(790px,390px);}
+    100.000%{transform:translate(840px,640px);}
+  }
+  .net-pk{animation:netPacket 9s linear infinite;}
+  .net-pulse{animation:netPulse 3s ease-out infinite backwards;}
+  .net-fx.paused .net-pk,.net-fx.paused .net-pulse{animation-play-state:paused;}
 
   /* ===== Experiencia como un traceroute: la línea se ilumina al bajar y cada salto se enciende ===== */
   .timeline::after{
@@ -845,7 +868,7 @@
   .js .term-open{display:inline-flex;}
   .term-open-ic{font:400 .6rem/1 'Press Start 2P',monospace;color:var(--accent);}
   .term-hint{
-    display:none;margin-top:10px;padding:0;border:0;background:none;cursor:pointer;text-align:left;
+    display:none;flex-basis:100%;margin-top:-4px;padding:0;border:0;background:none;cursor:pointer;text-align:right;
     font:400 .74rem/1.5 var(--mono);color:rgba(255,255,255,.62);transition:color .4s var(--spring);
   }
   .term-hint kbd{display:inline-block;min-width:1.7em;margin:0 2px;padding:2px 6px;border-radius:5px;text-align:center;
@@ -853,6 +876,7 @@
   .term-hint:hover,.term-hint:focus-visible{color:var(--accent);}
   .term-hint:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px;}
   @media (hover:hover) and (pointer:fine){ .js .term-hint{display:block;} }
+  @media (max-width:680px){ .term-hint{text-align:center;} }
   .term-open:hover,.term-open:focus-visible{background:rgba(37,99,235,.35);transform:translateY(-2px);}
   .term-open:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
   .term{
@@ -897,6 +921,11 @@
     background:rgba(96,165,250,.1);box-shadow:inset 0 0 0 1px rgba(96,165,250,.25);transition:background-color .3s var(--spring);
   }
   .term-chips button:hover{background:rgba(96,165,250,.2);}
+  .term-out:focus{outline:none;}
+  .term-caret{display:none;width:.6em;height:1.15em;background:var(--accent);border-radius:1px;animation:blink 1s steps(1) infinite;}
+  .term.touch .term-in{display:none;}
+  .term.touch .term-caret{display:inline-block;}
+  .term.touch .term-chips{max-height:44%;overflow-y:auto;}
   .term-close:focus-visible,.term-chips button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
   html.term-lock,html.term-lock body{overflow:hidden;}
   @media (hover:none){
@@ -915,7 +944,7 @@
   }
   @media (prefers-reduced-motion: reduce){
     .hero-net.ready{opacity:1;}
-    .net-pk,.net-ring{display:none;}
+    .net-fx{display:none;}
   }
 
   /* ===== Accesibilidad: saltar al contenido ===== */
@@ -968,7 +997,7 @@
     html{font-size:12.5px;scroll-behavior:auto;}
     *{animation:none !important;transition:none !important;box-shadow:none !important;filter:none !important;}
     body{background:#fff;color:#0f172a;}
-    header.nav,.skip-link,.state,footer,.toast,.to-top,.hero-net,.tl-hop,.term,.term-hint,.timeline::after,.car-nav,.proj-toggle,.proj-logo,.proj-bg,.proj-shade,.typing .cursor,
+    header.nav,.skip-link,.state,footer,.toast,.to-top,.hero-net,.net-fx,.tl-hop,.term,.term-hint,.timeline::after,.car-nav,.proj-toggle,.proj-logo,.proj-bg,.proj-shade,.typing .cursor,
     .cert-go,.sec-tag,.hero::before,.hero::after,.skill-group:first-child::after{display:none !important;}
     .js .reveal{opacity:1 !important;transform:none !important;}
     a{color:inherit;}
@@ -1125,7 +1154,7 @@
 <section class="hero" id="top">
   <!-- Red de la portada: el recorrido real de los datos en VitalLink (sensores → … → web) -->
   <svg class="hero-net" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false">
-    <path id="netPath" class="net-link" d="M150 860 L175 600 L250 360 L420 200 L620 215 L790 390 L840 640"/>
+    <path class="net-link" d="M150 860 L175 600 L250 360 L420 200 L620 215 L790 390 L840 640"/>
     <text class="net-proto" x="132" y="751" text-anchor="end">Bluetooth</text>
     <text class="net-proto" x="180" y="477" text-anchor="end">UART</text>
     <text class="net-proto" x="318" y="257" text-anchor="end">LoRaWAN</text>
@@ -1133,46 +1162,48 @@
     <text class="net-proto" x="726" y="282" text-anchor="start">SQL</text>
     <text class="net-proto" x="849" y="516" text-anchor="start">API</text>
     <g class="net-node" transform="translate(150 860)">
-      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="0.00s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="0.00s" repeatCount="indefinite"/></circle>
       <circle class="net-dot" r="7"/>
       <text class="net-label" x="0" y="34" text-anchor="middle">BITalino</text>
     </g>
     <g class="net-node" transform="translate(175 600)">
-      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="1.63s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="1.63s" repeatCount="indefinite"/></circle>
       <circle class="net-dot" r="7"/>
       <text class="net-label l-full" x="-18" y="-18" text-anchor="end">Raspberry Pi 4</text>
       <text class="net-label l-short" x="-18" y="-18" text-anchor="end">RPi 4</text>
     </g>
     <g class="net-node" transform="translate(250 360)">
-      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="0.19s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="0.19s" repeatCount="indefinite"/></circle>
       <circle class="net-dot" r="7"/>
       <text class="net-label l-full" x="-18" y="-16" text-anchor="end">Arduino MKR 1310</text>
       <text class="net-label l-short" x="-18" y="-16" text-anchor="end">MKR 1310</text>
     </g>
     <g class="net-node" transform="translate(420 200)">
-      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="1.65s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="1.65s" repeatCount="indefinite"/></circle>
       <circle class="net-dot" r="7"/>
       <text class="net-label" x="0" y="-24" text-anchor="middle">TTN</text>
     </g>
     <g class="net-node" transform="translate(620 215)">
-      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="2.89s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="2.89s" repeatCount="indefinite"/></circle>
       <circle class="net-dot" r="7"/>
       <text class="net-label" x="0" y="-24" text-anchor="middle">Node-RED</text>
     </g>
     <g class="net-node" transform="translate(790 390)">
-      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="1.41s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="1.41s" repeatCount="indefinite"/></circle>
       <circle class="net-dot" r="7"/>
       <text class="net-label" x="18" y="-16" text-anchor="start">PostgreSQL</text>
     </g>
     <g class="net-node" transform="translate(840 640)">
-      <circle class="net-ring" r="8" opacity="0"><animate attributeName="r" values="8;30;30" keyTimes="0;.45;1" dur="3.00s" begin="0.00s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;0" keyTimes="0;.45;1" dur="3.00s" begin="0.00s" repeatCount="indefinite"/></circle>
       <circle class="net-dot" r="7"/>
       <text class="net-label" x="18" y="-16" text-anchor="start">Next.js</text>
     </g>
-    <g class="net-pk"><circle class="net-pk-halo" r="16"/><circle class="net-pk-core" r="5.5"/><animateMotion dur="9s" begin="-0s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1" keyTimes="0;1"><mpath href="#netPath"/></animateMotion></g>
-    <g class="net-pk"><circle class="net-pk-halo" r="16"/><circle class="net-pk-core" r="5.5"/><animateMotion dur="9s" begin="-3s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1" keyTimes="0;1"><mpath href="#netPath"/></animateMotion></g>
-    <g class="net-pk"><circle class="net-pk-halo" r="16"/><circle class="net-pk-core" r="5.5"/><animateMotion dur="9s" begin="-6s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1" keyTimes="0;1"><mpath href="#netPath"/></animateMotion></g>
   </svg>
+  <div class="net-fx" aria-hidden="true"><div class="net-fx-in">
+    <span class="net-pulse" style="left:150px;top:860px;animation-delay:0.00s"></span>
+    <span class="net-pulse" style="left:175px;top:600px;animation-delay:1.63s"></span>
+    <span class="net-pulse" style="left:250px;top:360px;animation-delay:0.19s"></span>
+    <span class="net-pulse" style="left:420px;top:200px;animation-delay:1.65s"></span>
+    <span class="net-pulse" style="left:620px;top:215px;animation-delay:2.89s"></span>
+    <span class="net-pulse" style="left:790px;top:390px;animation-delay:1.41s"></span>
+    <span class="net-pulse" style="left:840px;top:640px;animation-delay:0.00s"></span>
+    <span class="net-pk" style="animation-delay:-0s"></span>
+    <span class="net-pk" style="animation-delay:-3s"></span>
+    <span class="net-pk" style="animation-delay:-6s"></span>
+  </div></div>
   <div class="hero-inner">
     <div class="eyebrow"><i class="ic ic-network"></i><span data-i18n="hero.eyebrow"><span class="t-es">Ingeniería de Telecomunicación · Especialidad Telemática</span><span class="t-en" lang="en">Telecommunications Engineering · Telematics Specialization</span></span></div>
     <h1>Daniel Suárez Angosto</h1>
@@ -1226,7 +1257,7 @@
     <div class="timeline">
       <div class="tl-item reveal">
         <div class="tl-logo"><img src="data:image/webp;base64,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" alt="Fòrum Telecos UPC" width="36" height="36"></div>
-        <span class="tl-hop" aria-hidden="true">hop 01</span>
+        <span class="tl-hop" aria-hidden="true">hop 02</span>
         <div class="tl-head"><h3 data-i18n="exp1.role"><span class="t-es">Vicepresidente</span><span class="t-en" lang="en">Vice President</span></h3><span class="period" data-i18n="exp1.period"><span class="t-es">Septiembre 2025 — Actualidad</span><span class="t-en" lang="en">September 2025 — Present</span></span></div>
         <div class="tl-role">Fòrum Telecos UPC</div>
         <ul>
@@ -1238,7 +1269,7 @@
       </div>
       <div class="tl-item reveal">
         <div class="tl-logo"><img src="data:image/webp;base64,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" alt="Real Madrid Official Store" width="36" height="36"></div>
-        <span class="tl-hop" aria-hidden="true">hop 02</span>
+        <span class="tl-hop" aria-hidden="true">hop 01</span>
         <div class="tl-head"><h3 data-i18n="exp2.role"><span class="t-es">Asistente de ventas</span><span class="t-en" lang="en">Sales Assistant</span></h3><span class="period" data-i18n="exp2.period"><span class="t-es">Junio–Septiembre 2023, 2024 y 2025</span><span class="t-en" lang="en">June–September 2023, 2024 and 2025</span></span></div>
         <div class="tl-role">Real Madrid Official Store</div>
         <ul>
@@ -1429,7 +1460,6 @@
     <div>
       <div class="fname"><span class="logo-term" aria-hidden="true">&gt;_ DSA</span>Daniel Suárez Angosto</div>
       <div class="copyright">&copy; <span id="year">2026</span> — <span data-i18n="footer.rights"><span class="t-es">Todos los derechos reservados</span><span class="t-en" lang="en">All rights reserved</span></span></div>
-      <button class="term-hint" type="button" id="termHint"><span class="t-es">psst… pulsa <kbd>º</kbd> en cualquier momento para abrir la terminal</span><span class="t-en" lang="en">psst… press <kbd>`</kbd> anytime to open the terminal</span></button>
     </div>
     <div class="footer-links">
       <button class="term-open" type="button" id="termOpen" aria-haspopup="dialog"><span class="term-open-ic" aria-hidden="true">&gt;_</span>Terminal</button>
@@ -1440,6 +1470,7 @@
         <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22111%22 height=%2228%22 role=%22img%22 aria-label=%22LINKEDIN%22%3E%3Ctitle%3ELINKEDIN%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%22111%22 height=%2228%22 fill=%22%230077b5%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2MtMS4xNDQgMC0yLjA2My0uOTI2LTIuMDYzLTIuMDY1IDAtMS4xMzguOTItMi4wNjMgMi4wNjMtMi4wNjMgMS4xNCAwIDIuMDY0LjkyNSAyLjA2NCAyLjA2MyAwIDEuMTM5LS45MjUgMi4wNjUtMi4wNjQgMi4wNjV6bTEuNzgyIDEzLjAxOUgzLjU1NVY5aDMuNTY0djExLjQ1MnpNMjIuMjI1IDBIMS43NzFDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzc0IDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPg==%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22655%22 y=%22175%22 textLength=%22670%22 font-weight=%22bold%22%3ELINKEDIN%3C/text%3E%3C/g%3E%3C/svg%3E" alt="LinkedIn">
       </a>
     </div>
+    <button class="term-hint" type="button" id="termHint"><span class="t-es">psst… pulsa <kbd>º</kbd> en cualquier momento para abrir la terminal</span><span class="t-en" lang="en">psst… press <kbd>`</kbd> anytime to open the terminal</span></button>
   </div>
 </footer>
 
@@ -1654,13 +1685,16 @@
     new IntersectionObserver(([e]) => btn.classList.toggle('show', !e.isIntersecting)).observe(hero);
   })();
 
-  // Red de la portada: se coloca y escala respecto a la foto (offset*, sin transformaciones de la animación de entrada)
-  // y se pausa cuando la portada no se ve o si se pide reducir movimiento
+  // Red de la portada: el SVG (líneas y etiquetas) y la capa animada (paquetes y pulsos) se colocan y escalan
+  // respecto a la foto (offset*, sin las transformaciones de la animación de entrada) y la animación
+  // se pausa cuando la portada no se ve o si se pide reducir movimiento
   (function () {
     const net = document.querySelector('.hero-net');
+    const fx = document.querySelector('.net-fx');
+    const fxIn = fx && fx.querySelector('.net-fx-in');
     const photo = document.querySelector('.profile-img');
     const hero = document.getElementById('top');
-    if (!net || !photo || !hero) return;
+    if (!net || !fx || !photo || !hero) return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
     function place() {
       const w = photo.offsetWidth, h = photo.offsetHeight;
@@ -1672,10 +1706,13 @@
       const side = Math.min(w / nw, h / nh) * nw;           // lado de la foto tal como se dibuja (object-fit: contain)
       const size = side * scale;
       const cx = photo.offsetLeft + w / 2, cy = photo.offsetTop + h / 2 + shift * side;
-      net.style.width = net.style.height = size + 'px';
-      net.style.left = (cx - size / 2) + 'px';
-      net.style.top = (cy - size / 2) + 'px';
-      net.classList.add('ready');
+      [net, fx].forEach(el => {
+        el.style.width = el.style.height = size + 'px';
+        el.style.left = (cx - size / 2) + 'px';
+        el.style.top = (cy - size / 2) + 'px';
+        el.classList.add('ready');
+      });
+      fxIn.style.transform = 'scale(' + (size / 1000) + ')';
       fit();
     }
     // Etiquetas que no caben en la portada: pasan al otro lado de su nodo y, si tampoco caben, se ocultan
@@ -1700,10 +1737,8 @@
     else window.addEventListener('load', place);
     if (!photo.complete) photo.addEventListener('load', place, { once: true });
     let visible = true;
-    function sync() {
-      if (!net.pauseAnimations) return;
-      if (visible && !reduce.matches) net.unpauseAnimations(); else net.pauseAnimations();
-    }
+    // Pausar no detiene el compositor de golpe: solo congela las animaciones de la capa mientras no se ve
+    function sync() { fx.classList.toggle('paused', !visible || reduce.matches); }
     if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }).observe(hero);
     if (reduce.addEventListener) reduce.addEventListener('change', sync);
     sync();
@@ -1753,13 +1788,14 @@
       es: {
         title: 'daniel@cv: ~', close: 'Cerrar terminal', input: 'Comando',
         welcome: ['Terminal de Daniel Suárez Angosto.', "Escribe 'help' para ver los comandos, o pulsa uno de abajo."],
+        welcomeTouch: ['Terminal de Daniel Suárez Angosto.', 'Toca cualquier comando de abajo para ejecutarlo.'],
         notFound: c => `${c}: comando no encontrado. Escribe 'help'.`,
         help: [['whoami', 'quién soy'], ['about', 'sobre mí'], ['education', 'formación'], ['experience', 'experiencia'],
                ['traceroute', 'mi trayectoria, salto a salto'], ['projects', 'proyectos'], ['skills', 'habilidades'],
                ['certs', 'certificados'], ['contact', 'cómo contactarme'], ['email', 'copia mi correo'], ['cv', 'descarga el CV en PDF'],
                ['ping', 'comprueba que sigo en línea'], ['hire', 'ya sabes qué hace ;)'], ['lang es|en', 'cambia el idioma'],
                ['clear', 'limpia la pantalla'], ['exit', 'cierra la terminal']],
-        helpHead: 'Comandos disponibles:', helpFoot: '↑ ↓ para el historial · Tab para autocompletar · Esc para salir',
+        helpHead: 'Comandos disponibles:', helpFoot: '↑ ↓ para el historial · Tab para autocompletar · Esc para salir', helpFootTouch: 'Toca un comando de abajo para ejecutarlo.',
         copied: 'Correo copiado al portapapeles.', copyFail: 'No he podido copiarlo; aquí lo tienes:',
         cv: 'Abriendo el diálogo para guardar el CV en PDF…', opening: 'Abriendo',
         langOk: 'Idioma cambiado a castellano.', langUse: 'Uso: lang es | lang en',
@@ -1773,13 +1809,14 @@
       en: {
         title: 'daniel@cv: ~', close: 'Close terminal', input: 'Command',
         welcome: ['Daniel Suárez Angosto’s terminal.', "Type 'help' to see the commands, or tap one below."],
+        welcomeTouch: ['Daniel Suárez Angosto’s terminal.', 'Tap any command below to run it.'],
         notFound: c => `${c}: command not found. Type 'help'.`,
         help: [['whoami', 'who I am'], ['about', 'about me'], ['education', 'education'], ['experience', 'experience'],
                ['traceroute', 'my path, hop by hop'], ['projects', 'projects'], ['skills', 'skills'],
                ['certs', 'certificates'], ['contact', 'how to reach me'], ['email', 'copy my email'], ['cv', 'download the CV as PDF'],
                ['ping', 'check I’m still online'], ['hire', 'you know what it does ;)'], ['lang es|en', 'switch language'],
                ['clear', 'clear the screen'], ['exit', 'close the terminal']],
-        helpHead: 'Available commands:', helpFoot: '↑ ↓ for history · Tab to autocomplete · Esc to quit',
+        helpHead: 'Available commands:', helpFoot: '↑ ↓ for history · Tab to autocomplete · Esc to quit', helpFootTouch: 'Tap a command below to run it.',
         copied: 'Email copied to clipboard.', copyFail: 'Couldn’t copy it; here it is:',
         cv: 'Opening the dialog to save the CV as PDF…', opening: 'Opening',
         langOk: 'Language switched to English.', langUse: 'Usage: lang es | lang en',
@@ -1792,6 +1829,11 @@
       }
     };
     const t = () => S[lang()];
+    // Pantallas táctiles: no se abre el teclado; se usan botones con todos los comandos
+    const touchMQ = window.matchMedia('(hover: none) and (pointer: coarse)');
+    const isTouch = () => touchMQ.matches;
+    const allChips = () => ['help', 'whoami', 'about', 'education', 'experience', 'traceroute', 'projects', 'skills', 'certs',
+                            'contact', 'email', 'cv', 'ping', 'hire', lang() === 'en' ? 'lang es' : 'lang en', 'clear', 'exit'];
 
     // Texto de un elemento en el idioma activo (sin las mayúsculas que pone el CSS)
     function txt(el) {
@@ -1802,7 +1844,8 @@
     }
     const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
     const visibleImg = img => !img.classList.contains(lang() === 'en' ? 't-es' : 't-en');
-    const lower = s => s.charAt(0) + s.slice(1).toLowerCase();
+    // Fechas y títulos en minúscula tras la inicial solo en castellano (en inglés los meses van con mayúscula)
+    const lower = s => (lang() === 'en' ? s : s.charAt(0) + s.slice(1).toLowerCase());
 
     // Interfaz (se crea solo si hay JavaScript)
     const term = document.createElement('div');
@@ -1815,9 +1858,10 @@
       '<div class="term-win">' +
         '<div class="term-bar"><span class="term-title" id="termTitle"></span>' +
           '<button class="term-close" type="button"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204.24,195.76a6,6,0,1,1-8.48,8.48L128,136.49,60.24,204.24a6,6,0,0,1-8.48-8.48L119.51,128,51.76,60.24a6,6,0,0,1,8.48-8.48L128,119.51l67.76-67.75a6,6,0,0,1,8.48,8.48L136.49,128Z"/></svg></button></div>' +
-        '<div class="term-out" role="log" aria-live="polite"></div>' +
+        '<div class="term-out" role="log" aria-live="polite" tabindex="-1"></div>' +
         '<form class="term-line" autocomplete="off"><label class="term-prompt" for="termIn">daniel@cv:~$</label>' +
-          '<input class="term-in" id="termIn" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send"></form>' +
+          '<input class="term-in" id="termIn" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send">' +
+          '<span class="term-caret" aria-hidden="true"></span></form>' +
         '<div class="term-chips"></div>' +
       '</div>';
     document.body.appendChild(term);
@@ -1832,10 +1876,13 @@
       closeBtn.setAttribute('aria-label', t().close);
       input.setAttribute('aria-label', t().input);
       chips.innerHTML = '';
-      t().chips.forEach(c => {
+      const touch = isTouch();
+      term.classList.toggle('touch', touch);
+      input.disabled = touch;
+      (touch ? allChips() : t().chips).forEach(c => {
         const b = document.createElement('button');
         b.type = 'button'; b.textContent = c;
-        b.addEventListener('click', () => { run(c); input.focus({ preventScroll: true }); });
+        b.addEventListener('click', () => { run(c); if (!isTouch()) input.focus({ preventScroll: true }); });
         chips.appendChild(b);
       });
     }
@@ -1872,7 +1919,7 @@
       help() {
         line(t().helpHead, 't-h');
         t().help.forEach(([c, d]) => line([{ k: c }, ' ' + d]));
-        line(t().helpFoot, 't-dim');
+        line(isTouch() ? t().helpFootTouch : t().helpFoot, 't-dim');
       },
       whoami() {
         line({ h: txt(document.querySelector('.hero h1')) });
@@ -1897,7 +1944,8 @@
       },
       traceroute() {
         line(t().trHead, 't-dim');
-        const items = $$('.tl-item');
+        // En orden cronológico: del primer puesto al más reciente, y luego la próxima empresa
+        const items = $$('.tl-item').reverse();
         items.forEach((c, i) => {
           const ms = (0.4 + i * 0.7 + Math.random() * 0.3).toFixed(2);
           line([' ' + (i + 1) + '  ', { h: txt(c.querySelector('.tl-head h3')) }, ' · ' + txt(c.querySelector('.tl-role')) + '  ', lower(txt(c.querySelector('.tl-head .period'))) + '  ' + ms + ' ms']);
@@ -1986,8 +2034,9 @@
       term.hidden = false;
       document.documentElement.classList.add('term-lock');
       requestAnimationFrame(() => term.classList.add('open'));
-      if (!greeted) { greeted = true; t().welcome.forEach((l, i) => line(l, i ? 't-dim' : 't-h')); }
-      input.focus({ preventScroll: true });
+      if (!greeted) { greeted = true; (isTouch() ? t().welcomeTouch : t().welcome).forEach((l, i) => line(l, i ? 't-dim' : 't-h')); }
+      // En táctil el foco va a la salida (no al campo de texto) para que no salga el teclado
+      if (isTouch()) out.focus({ preventScroll: true }); else input.focus({ preventScroll: true });
     }
     function close() {
       if (term.hidden) return;
