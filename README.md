@@ -9,7 +9,7 @@ CV web personal: estudiante de último año de **Ingeniería de Tecnologías y S
 ## ✨ Características
 
 - **Sin dependencias externas.** Estilos, scripts, iconos y logos pequeños van dentro de `index.html`. Las fotos y las fuentes principales están en la carpeta `assets/`, para que la página cargue antes. No se carga nada de otros servidores.
-- **Bilingüe ES / EN.** Cambio de idioma al instante, también en la frase animada. La primera visita se abre en inglés si el navegador no está en castellano ni en catalán, y la elección manual se recuerda entre visitas.
+- **Trilingüe ES / EN / CA.** Cambio de idioma al instante, también en la frase animada y en la terminal. La primera visita se abre en castellano o en catalán según el idioma del navegador (y en inglés si no es ninguno de los dos), y la elección manual se recuerda entre visitas.
 - **Funciona sin JavaScript.** El cambio de idioma, el menú móvil (que se cierra solo al elegir un apartado), la frase animada y el carrusel están hechos con HTML y CSS, así que funcionan también en visores de archivos del móvil que bloquean JavaScript. El JavaScript solo añade extras.
 - **Diseño adaptable.** Probado de 280 px (móvil plegable) a 1920 px, en vertical y en horizontal, con los motores de Chrome, Safari y Firefox y sin scroll horizontal. Con el móvil en horizontal, el menú se reparte en dos columnas.
 - **Modo oscuro automático** según el ajuste del sistema.
@@ -30,7 +30,7 @@ CV web personal: estudiante de último año de **Ingeniería de Tecnologías y S
 
 | Sección | Detalle |
 |---|---|
-| **Portada** | Nombre, frase animada tipo terminal en ES / EN y contacto (correo, LinkedIn, GitHub) |
+| **Portada** | Nombre, frase animada tipo terminal en ES / EN / CA y contacto (correo, LinkedIn, GitHub) |
 | **Sobre mí** | Perfil profesional |
 | **Educación** | Grado en la ETSETB · UPC |
 | **Experiencia** | Timeline de tarjetas con logos: Fòrum Telecos UPC y Real Madrid Official Store |

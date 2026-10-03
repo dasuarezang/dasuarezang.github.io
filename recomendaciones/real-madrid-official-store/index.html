@@ -124,9 +124,9 @@
   .btn-ghost{background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);}
   .btn-ghost:hover{background:rgba(255,255,255,.1);transform:translateY(-2px);}
   .btn:active{transform:scale(.97);}
-  .t-en{display:none;}
-  html[lang="en"] .t-es{display:none;}
-  html[lang="en"] .t-en{display:inline;}
+  .t-en,.t-ca{display:none;}
+  html[lang="en"] .t-es,html[lang="ca"] .t-es{display:none;}
+  html[lang="en"] .t-en,html[lang="ca"] .t-ca{display:inline;}
   @media (hover:none){.btn-primary:hover{background:var(--accent-deep);transform:none;}.btn-ghost:hover{transform:none;}}
   /* Selector de idioma (igual que el del CV) */
   .top-actions{display:flex;align-items:center;gap:10px;}
@@ -136,12 +136,13 @@
     box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
   }
   .lang-switch::before{
-    content:"";position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:999px;
+    content:"";position:absolute;top:3px;bottom:3px;left:3px;width:calc((100% - 6px) / 3);border-radius:999px;
     background:linear-gradient(135deg,var(--accent),var(--accent-deep));
     box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 6px 16px -6px rgba(37,99,235,.7);
     transition:transform .7s var(--spring);
   }
   html[lang="en"] .lang-switch::before{transform:translateX(100%);}
+  html[lang="ca"] .lang-switch::before{transform:translateX(200%);}
   .lang-switch button{
     position:relative;z-index:1;min-width:38px;padding:9px 11px;border:0;border-radius:999px;cursor:pointer;background:none;
     font:600 .7rem/1 var(--mono);letter-spacing:.08em;color:rgba(255,255,255,.6);transition:color .6s var(--spring);
@@ -200,13 +201,14 @@
     <div class="lang-switch" role="group" aria-label="Idioma / Language">
       <button type="button" data-lang="es" aria-pressed="true" lang="es" aria-label="Castellano">ES</button>
       <button type="button" data-lang="en" aria-pressed="false" lang="en" aria-label="English">EN</button>
+      <button type="button" data-lang="ca" aria-pressed="false" lang="ca" aria-label="Català">CA</button>
     </div>
-    <a class="pill" href="/cv/#experiencia" aria-label="Volver al CV / Back to the CV"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222,128a6,6,0,0,1-6,6H54.49l61.75,61.76a6,6,0,1,1-8.48,8.48l-72-72a6,6,0,0,1,0-8.48l72-72a6,6,0,0,1,8.48,8.48L54.49,122H216A6,6,0,0,1,222,128Z"/></svg><span class="label"><span class="t-es">Volver al CV</span><span class="t-en" lang="en">Back to the CV</span></span></a>
+    <a class="pill" href="/cv/#experiencia" aria-label="Volver al CV / Back to the CV / Tornar al CV"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222,128a6,6,0,0,1-6,6H54.49l61.75,61.76a6,6,0,1,1-8.48,8.48l-72-72a6,6,0,0,1,0-8.48l72-72a6,6,0,0,1,8.48,8.48L54.49,122H216A6,6,0,0,1,222,128Z"/></svg><span class="label"><span class="t-es">Volver al CV</span><span class="t-en" lang="en">Back to the CV</span><span class="t-ca" lang="ca">Tornar al CV</span></span></a>
   </div>
 </header>
 <main>
-  <span class="eyebrow"><span class="t-es">Recomendación</span><span class="t-en" lang="en">Recommendation</span></span>
-  <h1><span class="t-es">Carta de recomendación</span><span class="t-en" lang="en">Recommendation letter</span></h1>
+  <span class="eyebrow"><span class="t-es">Recomendación</span><span class="t-en" lang="en">Recommendation</span><span class="t-ca" lang="ca">Recomanació</span></span>
+  <h1><span class="t-es">Carta de recomendación</span><span class="t-en" lang="en">Recommendation letter</span><span class="t-ca" lang="ca">Carta de recomanació</span></h1>
   <p class="from"><b>Genys Bernabeu</b> · Area Manager, Real Madrid Official Store Barcelona</p>
   <div class="frame">
     <!-- La carta original como imagen (enlaza al PDF) -->
@@ -230,7 +232,7 @@
     </article>
   </div>
   <a class="to-tr" href="#translation" lang="en">English version below<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204.24,148.24l-72,72a6,6,0,0,1-8.48,0l-72-72a6,6,0,0,1,8.48-8.48L122,201.51V40a6,6,0,0,1,12,0V201.51l61.76-61.75a6,6,0,0,1,8.48,8.48Z"/></svg></a>
-  <p class="note"><span class="t-es">Teléfono de contacto omitido por privacidad</span><span class="t-en" lang="en">Contact phone number omitted for privacy</span></p>
+  <p class="note"><span class="t-es">Teléfono de contacto omitido por privacidad</span><span class="t-en" lang="en">Contact phone number omitted for privacy</span><span class="t-ca" lang="ca">Telèfon de contacte omès per privadesa</span></p>
   <section class="translation only-en" id="translation" lang="en" aria-labelledby="tr-title">
     <h2 id="tr-title">English translation <span>· unofficial</span></h2>
     <p class="tr-note">Translated from the original Spanish letter above for convenience. The Spanish version is the one signed by the author.</p>
@@ -248,15 +250,16 @@
     </div>
   </section>
   <div class="actions">
-    <a class="btn btn-primary" href="/cv/recomendaciones/real-madrid-official-store/carta-recomendacion.pdf" download="Carta recomendación - Daniel Suárez Angosto.pdf"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222,144v64a14,14,0,0,1-14,14H48a14,14,0,0,1-14-14V144a6,6,0,0,1,12,0v64a2,2,0,0,0,2,2H208a2,2,0,0,0,2-2V144a6,6,0,0,1,12,0Zm-98.24,4.24a6,6,0,0,0,8.48,0l40-40a6,6,0,0,0-8.48-8.48L134,129.51V40a6,6,0,0,0-12,0v89.51L92.24,99.76a6,6,0,0,0-8.48,8.48Z"/></svg><span class="t-es">Descargar PDF</span><span class="t-en" lang="en">Download PDF</span></a>
-    <a class="btn btn-ghost" href="/cv/#experiencia"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222,128a6,6,0,0,1-6,6H54.49l61.75,61.76a6,6,0,1,1-8.48,8.48l-72-72a6,6,0,0,1,0-8.48l72-72a6,6,0,0,1,8.48,8.48L54.49,122H216A6,6,0,0,1,222,128Z"/></svg><span class="t-es">Volver al CV</span><span class="t-en" lang="en">Back to the CV</span></a>
+    <a class="btn btn-primary" href="/cv/recomendaciones/real-madrid-official-store/carta-recomendacion.pdf" download="Carta recomendación - Daniel Suárez Angosto.pdf"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222,144v64a14,14,0,0,1-14,14H48a14,14,0,0,1-14-14V144a6,6,0,0,1,12,0v64a2,2,0,0,0,2,2H208a2,2,0,0,0,2-2V144a6,6,0,0,1,12,0Zm-98.24,4.24a6,6,0,0,0,8.48,0l40-40a6,6,0,0,0-8.48-8.48L134,129.51V40a6,6,0,0,0-12,0v89.51L92.24,99.76a6,6,0,0,0-8.48,8.48Z"/></svg><span class="t-es">Descargar PDF</span><span class="t-en" lang="en">Download PDF</span><span class="t-ca" lang="ca">Descarregar PDF</span></a>
+    <a class="btn btn-ghost" href="/cv/#experiencia"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222,128a6,6,0,0,1-6,6H54.49l61.75,61.76a6,6,0,1,1-8.48,8.48l-72-72a6,6,0,0,1,0-8.48l72-72a6,6,0,0,1,8.48,8.48L54.49,122H216A6,6,0,0,1,222,128Z"/></svg><span class="t-es">Volver al CV</span><span class="t-en" lang="en">Back to the CV</span><span class="t-ca" lang="ca">Tornar al CV</span></a>
   </div>
 </main>
 <script>
   // Idioma: el mismo que el CV (elección guardada o, si no hay, el del navegador);
   // al cambiarlo aquí se guarda también para el CV
   (function () {
-    const TITLES = { es: 'Carta de recomendación — Daniel Suárez Angosto', en: 'Recommendation letter — Daniel Suárez Angosto' };
+    const TITLES = { es: 'Carta de recomendación — Daniel Suárez Angosto', en: 'Recommendation letter — Daniel Suárez Angosto',
+                     ca: 'Carta de recomanació — Daniel Suárez Angosto' };
     const buttons = document.querySelectorAll('.lang-switch button');
     function apply(lang, save) {
       document.documentElement.lang = lang;
@@ -267,8 +270,9 @@
     buttons.forEach(b => b.addEventListener('click', () => apply(b.dataset.lang, true)));
     let saved = null;
     try { saved = localStorage.getItem('cv-lang'); } catch (e) {}
-    const local = (navigator.languages || [navigator.language || '']).some(l => /^(es|ca)\b/i.test(l));
-    apply(saved === 'en' || (saved === null && !local) ? 'en' : 'es', false);
+    const pref = (navigator.languages || [navigator.language || '']).map(l => (/^(es|ca)\b/i.exec(l) || [])[1]).find(Boolean);
+    const lang = ['es', 'en', 'ca'].includes(saved) ? saved : (pref ? pref.toLowerCase() : 'en');
+    apply(lang, false);
   })();
 </script>
 </body>

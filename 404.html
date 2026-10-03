@@ -76,9 +76,9 @@
   .back:active{transform:scale(.97);}
   .back:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
   .back svg{width:18px;height:18px;flex-shrink:0;}
-  .t-en{display:none;}
-  html[lang="en"] .t-es{display:none;}
-  html[lang="en"] .t-en{display:inline;}
+  .t-en,.t-ca{display:none;}
+  html[lang="en"] .t-es,html[lang="ca"] .t-es{display:none;}
+  html[lang="en"] .t-en,html[lang="ca"] .t-ca{display:inline;}
   @media (hover:none){.back:hover{transform:none;background:var(--accent-deep);}}
   @media (max-width:480px){body{padding:40px 16px;}.logo-term{margin-bottom:32px;}.trace{padding:14px 16px;font-size:.78rem;}.tr-hops li{gap:10px;}}
   @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
@@ -93,14 +93,14 @@
     <ol class="tr-hops">
       <li><span class="n">1</span><span class="h">dasuarezang.github.io</span><span class="ms">0.42 ms</span></li>
       <li><span class="n">2</span><span class="h">/cv/</span><span class="ms">0.87 ms</span></li>
-      <li class="lost"><span class="n">3</span><span class="h">* * *</span><span class="ms"><span class="t-es">destino inalcanzable</span><span class="t-en" lang="en">destination unreachable</span></span></li>
+      <li class="lost"><span class="n">3</span><span class="h">* * *</span><span class="ms"><span class="t-es">destino inalcanzable</span><span class="t-en" lang="en">destination unreachable</span><span class="t-ca" lang="ca">destí inabastable</span></span></li>
     </ol>
     <p class="tr-line"><span class="prompt">$</span> <span class="cursor"></span></p>
   </div>
-  <p class="msg"><span class="t-es">Esta página no existe o se ha movido. El paquete se ha perdido por el camino, pero el CV sigue en línea.</span><span class="t-en" lang="en">This page doesn't exist or has moved. The packet got lost on the way, but the CV is still online.</span></p>
+  <p class="msg"><span class="t-es">Esta página no existe o se ha movido. El paquete se ha perdido por el camino, pero el CV sigue en línea.</span><span class="t-en" lang="en">This page doesn't exist or has moved. The packet got lost on the way, but the CV is still online.</span><span class="t-ca" lang="ca">Aquesta pàgina no existeix o s’ha mogut. El paquet s’ha perdut pel camí, però el CV continua en línia.</span></p>
   <a class="back" href="/cv/">
     <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222,128a6,6,0,0,1-6,6H54.49l61.75,61.76a6,6,0,1,1-8.48,8.48l-72-72a6,6,0,0,1,0-8.48l72-72a6,6,0,0,1,8.48,8.48L54.49,122H216A6,6,0,0,1,222,128Z"/></svg>
-    <span class="t-es">Volver al CV</span><span class="t-en" lang="en">Back to the CV</span>
+    <span class="t-es">Volver al CV</span><span class="t-en" lang="en">Back to the CV</span><span class="t-ca" lang="ca">Tornar al CV</span>
   </a>
 </main>
 <script>
@@ -116,10 +116,11 @@
   (function () {
     let saved = null;
     try { saved = localStorage.getItem('cv-lang'); } catch (e) {}
-    const local = (navigator.languages || [navigator.language || '']).some(l => /^(es|ca)\b/i.test(l));
-    if (saved === 'en' || (saved === null && !local)) {
-      document.documentElement.lang = 'en';
-      document.title = 'Page not found — Daniel Suárez Angosto';
+    const pref = (navigator.languages || [navigator.language || '']).map(l => (/^(es|ca)\b/i.exec(l) || [])[1]).find(Boolean);
+    const lang = ['es', 'en', 'ca'].includes(saved) ? saved : (pref ? pref.toLowerCase() : 'en');
+    if (lang !== 'es') {
+      document.documentElement.lang = lang;
+      document.title = (lang === 'en' ? 'Page not found' : 'Pàgina no trobada') + ' — Daniel Suárez Angosto';
     }
   })();
 </script>

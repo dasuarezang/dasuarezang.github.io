@@ -17,6 +17,7 @@
 <meta property="og:image:alt" content="Daniel Suárez Angosto — Futuro Network Engineer">
 <meta property="og:locale" content="es_ES">
 <meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="ca_ES">
 <meta property="profile:first_name" content="Daniel">
 <meta property="profile:last_name" content="Suárez Angosto">
 <meta name="twitter:card" content="summary_large_image">
@@ -158,7 +159,7 @@
   }
   .lang-switch span{position:relative;z-index:1;padding:8px 11px;min-width:36px;text-align:center;border-radius:999px;transition:color .6s var(--spring);}
   .lang-switch::before{
-    content:"";position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:999px;
+    content:"";position:absolute;top:3px;bottom:3px;left:3px;width:calc((100% - 6px) / 3);border-radius:999px;
     background:linear-gradient(135deg,var(--accent),var(--accent-deep));
     box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 6px 16px -6px rgba(37,99,235,.7);
     transition:transform .7s var(--spring);
@@ -603,19 +604,24 @@
   .state{position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none;}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
   /* Idioma */
-  .t-en{display:none;}
-  html[lang="en"] .t-es,body:has(#lang-en:checked) .t-es,#lang-en:checked ~ * .t-es{display:none;}
-  html[lang="en"] span.t-en,body:has(#lang-en:checked) span.t-en,#lang-en:checked ~ * span.t-en{display:inline;}
-  html[lang="en"] img.t-en,body:has(#lang-en:checked) img.t-en,#lang-en:checked ~ * img.t-en{display:block;}
-  .lang-hit{position:absolute;inset:0;z-index:2;border-radius:999px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
-  .to-es{display:none;}
-  #lang-en:checked ~ * .to-en{display:none;}
-  #lang-en:checked ~ * .to-es{display:block;}
+  .t-en,.t-ca{display:none;}
+  html[lang="en"] .t-es,body:has(#lang-en:checked) .t-es,#lang-en:checked ~ * .t-es,
+  html[lang="ca"] .t-es,body:has(#lang-ca:checked) .t-es,#lang-ca:checked ~ * .t-es{display:none;}
+  html[lang="en"] span.t-en,body:has(#lang-en:checked) span.t-en,#lang-en:checked ~ * span.t-en,
+  html[lang="ca"] span.t-ca,body:has(#lang-ca:checked) span.t-ca,#lang-ca:checked ~ * span.t-ca{display:inline;}
+  html[lang="en"] img.t-en,body:has(#lang-en:checked) img.t-en,#lang-en:checked ~ * img.t-en,
+  html[lang="ca"] img.t-ca,body:has(#lang-ca:checked) img.t-ca,#lang-ca:checked ~ * img.t-ca{display:block;}
+  /* Selector de tres idiomas: cada etiqueta cubre su tercio del interruptor */
+  .lang-hit{position:absolute;top:0;bottom:0;width:calc(100% / 3);z-index:2;border-radius:999px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+  .to-es{left:0;}
+  .to-en{left:calc(100% / 3);}
+  .to-ca{right:0;}
   .lang-switch .l-es{color:#fff;}
   #lang-en:checked ~ * .lang-switch::before{transform:translateX(100%);}
-  #lang-en:checked ~ * .lang-switch .l-es{color:inherit;}
-  #lang-en:checked ~ * .lang-switch .l-en{color:#fff;}
-  #lang-es:focus-visible ~ .nav-inner .lang-switch,#lang-en:focus-visible ~ .nav-inner .lang-switch,
+  #lang-ca:checked ~ * .lang-switch::before{transform:translateX(200%);}
+  #lang-en:checked ~ * .lang-switch .l-es,#lang-ca:checked ~ * .lang-switch .l-es{color:inherit;}
+  #lang-en:checked ~ * .lang-switch .l-en,#lang-ca:checked ~ * .lang-switch .l-ca{color:#fff;}
+  #lang-es:focus-visible ~ .nav-inner .lang-switch,#lang-en:focus-visible ~ .nav-inner .lang-switch,#lang-ca:focus-visible ~ .nav-inner .lang-switch,
   #nav-state:focus-visible ~ .nav-inner .nav-toggle{outline:2px solid var(--accent);outline-offset:3px;}
   /* Frase animada (castellano / inglés) */
   .typing{white-space:nowrap;font-size:min(clamp(1rem,2.6vw,1.3rem), calc((100vw - 64px) / 25));}
@@ -635,6 +641,13 @@
   @keyframes tw-en-2{0%{width:0;animation-timing-function:steps(1,end);}36.878%{width:0;animation-timing-function:steps(23,end);}46.470%{width:calc(23 * (1ch - .2px));animation-timing-function:steps(1,end);}57.194%{width:calc(23 * (1ch - .2px));animation-timing-function:steps(23,end);}61.990%{width:0;}100%{width:0;}}
   .tw-en .tw3{animation-name:tw-en-3;}
   @keyframes tw-en-3{0%{width:0;animation-timing-function:steps(1,end);}64.373%{width:0;animation-timing-function:steps(36,end);}79.386%{width:calc(36 * (1ch - .2px));animation-timing-function:steps(1,end);}90.110%{width:calc(36 * (1ch - .2px));animation-timing-function:steps(36,end);}97.617%{width:0;}100%{width:0;}}
+  .tw-ca > span{animation-duration:15.735s;}
+  .tw-ca .tw1{animation-name:tw-ca-1;}
+  @keyframes tw-ca-1{0.000%{width:0;animation-timing-function:steps(30,end);}13.346%{width:calc(30 * (1ch - .2px));animation-timing-function:steps(1,end);}24.786%{width:calc(30 * (1ch - .2px));animation-timing-function:steps(30,end);}31.459%{width:0;}100%{width:0;}}
+  .tw-ca .tw2{animation-name:tw-ca-2;}
+  @keyframes tw-ca-2{0%{width:0;animation-timing-function:steps(1,end);}34.001%{width:0;animation-timing-function:steps(22,end);}43.788%{width:calc(22 * (1ch - .2px));animation-timing-function:steps(1,end);}55.227%{width:calc(22 * (1ch - .2px));animation-timing-function:steps(22,end);}60.121%{width:0;}100%{width:0;}}
+  .tw-ca .tw3{animation-name:tw-ca-3;}
+  @keyframes tw-ca-3{0%{width:0;animation-timing-function:steps(1,end);}62.663%{width:0;animation-timing-function:steps(35,end);}78.233%{width:calc(35 * (1ch - .2px));animation-timing-function:steps(1,end);}89.673%{width:calc(35 * (1ch - .2px));animation-timing-function:steps(35,end);}97.458%{width:0;}100%{width:0;}}
 
   /* RESPONSIVE */
   @media (min-width:1001px) and (max-width:1180px){
@@ -1223,24 +1236,25 @@
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main"><span class="t-es">Saltar al contenido</span><span class="t-en" lang="en">Skip to content</span></a>
+<a class="skip-link" href="#main"><span class="t-es">Saltar al contenido</span><span class="t-en" lang="en">Skip to content</span><span class="t-ca" lang="ca">Saltar al contingut</span></a>
 
 <span class="nav-anchor" id="nav-closed" aria-hidden="true"></span>
 <header class="nav">
   <input class="state" type="radio" name="cv-lang" id="lang-es" aria-label="Castellano" checked>
   <input class="state" type="radio" name="cv-lang" id="lang-en" aria-label="English">
+  <input class="state" type="radio" name="cv-lang" id="lang-ca" aria-label="Català">
   <input class="state" type="checkbox" id="nav-state" aria-label="Menú / Menu" aria-controls="navLinks">
   <div class="nav-inner">
     <a href="#top" class="brand"><span class="logo-term" aria-hidden="true">&gt;_ DSA</span><span class="brand-name">Daniel <span>Suárez Angosto</span></span></a>
     <nav class="links" id="navLinks">
-      <a href="#sobre-mi" data-i18n="nav.about"><span class="t-es">Sobre mí</span><span class="t-en" lang="en">About me</span></a>
-      <a href="#educacion" data-i18n="nav.edu"><span class="t-es">Educación</span><span class="t-en" lang="en">Education</span></a>
-      <a href="#experiencia" data-i18n="nav.exp"><span class="t-es">Experiencia</span><span class="t-en" lang="en">Experience</span></a>
-      <a href="#proyectos" data-i18n="nav.proj"><span class="t-es">Proyectos</span><span class="t-en" lang="en">Projects</span></a>
-      <a href="#habilidades" data-i18n="nav.skills"><span class="t-es">Habilidades</span><span class="t-en" lang="en">Skills</span></a>
-      <a href="#certificados" data-i18n="nav.certs"><span class="t-es">Certificados</span><span class="t-en" lang="en">Certificates</span></a>
+      <a href="#sobre-mi" data-i18n="nav.about"><span class="t-es">Sobre mí</span><span class="t-en" lang="en">About me</span><span class="t-ca" lang="ca">Sobre mi</span></a>
+      <a href="#educacion" data-i18n="nav.edu"><span class="t-es">Educación</span><span class="t-en" lang="en">Education</span><span class="t-ca" lang="ca">Formació</span></a>
+      <a href="#experiencia" data-i18n="nav.exp"><span class="t-es">Experiencia</span><span class="t-en" lang="en">Experience</span><span class="t-ca" lang="ca">Experiència</span></a>
+      <a href="#proyectos" data-i18n="nav.proj"><span class="t-es">Proyectos</span><span class="t-en" lang="en">Projects</span><span class="t-ca" lang="ca">Projectes</span></a>
+      <a href="#habilidades" data-i18n="nav.skills"><span class="t-es">Habilidades</span><span class="t-en" lang="en">Skills</span><span class="t-ca" lang="ca">Habilitats</span></a>
+      <a href="#certificados" data-i18n="nav.certs"><span class="t-es">Certificados</span><span class="t-en" lang="en">Certificates</span><span class="t-ca" lang="ca">Certificats</span></a>
           <div class="nav-foot">
-        <span class="nav-foot-label"><span class="t-es">Contacto</span><span class="t-en" lang="en">Contact</span></span>
+        <span class="nav-foot-label"><span class="t-es">Contacto</span><span class="t-en" lang="en">Contact</span><span class="t-ca" lang="ca">Contacte</span></span>
         <span class="nav-foot-links">
           <a href="mailto:daniel.suarez.angosto@gmail.com" aria-label="Email"><i class="ic ic-envelope-simple" aria-hidden="true"></i></a>
           <a href="https://linkedin.com/in/daniel-suarez-angosto" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ic ic-linkedin-logo" aria-hidden="true"></i></a>
@@ -1249,12 +1263,13 @@
       </div>
     </nav>
     <div class="nav-actions">
-      <div class="lang-switch" title="Cambiar idioma / Switch language">
-        <span class="l-es">ES</span><span class="l-en">EN</span>
-        <label class="lang-hit to-en" for="lang-en"></label>
+      <div class="lang-switch" title="Cambiar idioma / Switch language / Canviar idioma">
+        <span class="l-es">ES</span><span class="l-en">EN</span><span class="l-ca">CA</span>
         <label class="lang-hit to-es" for="lang-es"></label>
+        <label class="lang-hit to-en" for="lang-en"></label>
+        <label class="lang-hit to-ca" for="lang-ca"></label>
       </div>
-      <label class="nav-toggle" id="navToggle" for="nav-state"><span class="burger" aria-hidden="true"><span></span><span></span></span></label><a class="nav-toggle nojs-toggle nojs-open" href="#navLinks"><span class="burger" aria-hidden="true"><span></span><span></span></span><span class="sr"><span class="t-es">Abrir menú</span><span class="t-en" lang="en">Open menu</span></span></a><a class="nav-toggle nojs-toggle nojs-close" href="#nav-closed"><span class="burger is-x" aria-hidden="true"><span></span><span></span></span><span class="sr"><span class="t-es">Cerrar menú</span><span class="t-en" lang="en">Close menu</span></span></a>
+      <label class="nav-toggle" id="navToggle" for="nav-state"><span class="burger" aria-hidden="true"><span></span><span></span></span></label><a class="nav-toggle nojs-toggle nojs-open" href="#navLinks"><span class="burger" aria-hidden="true"><span></span><span></span></span><span class="sr"><span class="t-es">Abrir menú</span><span class="t-en" lang="en">Open menu</span><span class="t-ca" lang="ca">Obrir menú</span></span></a><a class="nav-toggle nojs-toggle nojs-close" href="#nav-closed"><span class="burger is-x" aria-hidden="true"><span></span><span></span></span><span class="sr"><span class="t-es">Cerrar menú</span><span class="t-en" lang="en">Close menu</span><span class="t-ca" lang="ca">Tancar menú</span></span></a>
     </div>
     <span class="read-bar" id="readBar" aria-hidden="true"></span>
   </div>
@@ -1315,15 +1330,15 @@
     <span class="net-pk" style="animation-delay:-6s"></span>
   </div></div>
   <div class="hero-inner">
-    <div class="eyebrow"><i class="ic ic-network"></i><span data-i18n="hero.eyebrow"><span class="t-es">Ingeniería de Telecomunicación · Especialidad Telemática</span><span class="t-en" lang="en">Telecommunications Engineering · Telematics Specialization</span></span></div>
+    <div class="eyebrow"><i class="ic ic-network"></i><span data-i18n="hero.eyebrow"><span class="t-es">Ingeniería de Telecomunicación · Especialidad Telemática</span><span class="t-en" lang="en">Telecommunications Engineering · Telematics Specialization</span><span class="t-ca" lang="ca">Enginyeria de Telecomunicació · Especialitat Telemàtica</span></span></div>
     <h1>Daniel Suárez Angosto</h1>
-    <p class="typing"><span class="sr"><span class="t-es">Estudiante de Telecomunicaciones · Futuro Network Engineer · Entusiasta de la alta disponibilidad</span><span class="t-en" lang="en">Telecommunications Engineering student · Future Network Engineer · High-Availability Systems Enthusiast</span></span>
-      <span class="prompt" aria-hidden="true">&gt;_</span><span class="tw tw-es t-es" aria-hidden="true"><span class="tw1">Estudiante de Telecomunicaciones</span><span class="tw2">Futuro Network Engineer</span><span class="tw3">Entusiasta de la alta disponibilidad</span></span><span class="tw tw-en t-en" lang="en" aria-hidden="true"><span class="tw1">Telecommunications Engineering student</span><span class="tw2">Future Network Engineer</span><span class="tw3">High-Availability Systems Enthusiast</span></span><span class="cursor" aria-hidden="true"></span>
+    <p class="typing"><span class="sr"><span class="t-es">Estudiante de Telecomunicaciones · Futuro Network Engineer · Entusiasta de la alta disponibilidad</span><span class="t-en" lang="en">Telecommunications Engineering student · Future Network Engineer · High-Availability Systems Enthusiast</span><span class="t-ca" lang="ca">Estudiant de Telecomunicacions · Futur Network Engineer · Entusiasta de l’alta disponibilitat</span></span>
+      <span class="prompt" aria-hidden="true">&gt;_</span><span class="tw tw-es t-es" aria-hidden="true"><span class="tw1">Estudiante de Telecomunicaciones</span><span class="tw2">Futuro Network Engineer</span><span class="tw3">Entusiasta de la alta disponibilidad</span></span><span class="tw tw-en t-en" lang="en" aria-hidden="true"><span class="tw1">Telecommunications Engineering student</span><span class="tw2">Future Network Engineer</span><span class="tw3">High-Availability Systems Enthusiast</span></span><span class="tw tw-ca t-ca" lang="ca" aria-hidden="true"><span class="tw1">Estudiant de Telecomunicacions</span><span class="tw2">Futur Network Engineer</span><span class="tw3">Entusiasta de l’alta disponibilitat</span></span><span class="cursor" aria-hidden="true"></span>
     </p>
-    <p class="role" data-i18n="hero.role"><span class="t-es">Estudiante de cuarto año de Ingeniería de Telecomunicación (Telemática) en la ETSETB UPC, enfocado en el diseño, despliegue y seguridad de infraestructuras de red.</span><span class="t-en" lang="en">Fourth-year Telecommunications Engineering student (Telematics) at ETSETB UPC, focused on the design, deployment and security of network infrastructure.</span></p>
-    <div class="loc"><i class="ic ic-map-pin"></i><span data-i18n="hero.loc"><span class="t-es">Barcelona, España</span><span class="t-en" lang="en">Barcelona, Spain</span></span></div>
+    <p class="role" data-i18n="hero.role"><span class="t-es">Estudiante de cuarto año de Ingeniería de Telecomunicación (Telemática) en la ETSETB UPC, enfocado en el diseño, despliegue y seguridad de infraestructuras de red.</span><span class="t-en" lang="en">Fourth-year Telecommunications Engineering student (Telematics) at ETSETB UPC, focused on the design, deployment and security of network infrastructure.</span><span class="t-ca" lang="ca">Estudiant de quart curs d’Enginyeria de Telecomunicació (Telemàtica) a l’ETSETB UPC, centrat en el disseny, el desplegament i la seguretat d’infraestructures de xarxa.</span></p>
+    <div class="loc"><i class="ic ic-map-pin"></i><span data-i18n="hero.loc"><span class="t-es">Barcelona, España</span><span class="t-en" lang="en">Barcelona, Spain</span><span class="t-ca" lang="ca">Barcelona, Espanya</span></span></div>
     <div class="contact-row">
-      <a href="mailto:daniel.suarez.angosto@gmail.com" title="daniel.suarez.angosto@gmail.com"><i class="ic ic-envelope-simple"></i><span class="t-es">Correo</span><span class="t-en" lang="en">Email</span></a>
+      <a href="mailto:daniel.suarez.angosto@gmail.com" title="daniel.suarez.angosto@gmail.com"><i class="ic ic-envelope-simple"></i><span class="t-es">Correo</span><span class="t-en" lang="en">Email</span><span class="t-ca" lang="ca">Correu</span></a>
       <a class="badge-link" href="https://linkedin.com/in/daniel-suarez-angosto" target="_blank" rel="noopener" aria-label="LinkedIn">
         <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22111%22 height=%2228%22 role=%22img%22 aria-label=%22LINKEDIN%22%3E%3Ctitle%3ELINKEDIN%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%22111%22 height=%2228%22 fill=%22%230077b5%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2MtMS4xNDQgMC0yLjA2My0uOTI2LTIuMDYzLTIuMDY1IDAtMS4xMzguOTItMi4wNjMgMi4wNjMtMi4wNjMgMS4xNCAwIDIuMDY0LjkyNSAyLjA2NCAyLjA2MyAwIDEuMTM5LS45MjUgMi4wNjUtMi4wNjQgMi4wNjV6bTEuNzgyIDEzLjAxOUgzLjU1NVY5aDMuNTY0djExLjQ1MnpNMjIuMjI1IDBIMS43NzFDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzc0IDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPg==%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22655%22 y=%22175%22 textLength=%22670%22 font-weight=%22bold%22%3ELINKEDIN%3C/text%3E%3C/g%3E%3C/svg%3E" alt="LinkedIn">
       </a>
@@ -1335,12 +1350,12 @@
 
 <section id="sobre-mi" class="reveal">
   <div class="wrap">
-    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">sobre-mi</span><span class="t-en" lang="en">about</span></span><h2 data-i18n="about.title"><span class="t-es">Sobre mí</span><span class="t-en" lang="en">About me</span></h2></div>
+    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">sobre-mi</span><span class="t-en" lang="en">about</span><span class="t-ca" lang="ca">sobre-mi</span></span><h2 data-i18n="about.title"><span class="t-es">Sobre mí</span><span class="t-en" lang="en">About me</span><span class="t-ca" lang="ca">Sobre mi</span></h2></div>
     <div class="about">
       <div class="about-text">
-        <p data-i18n="about.p1"><span class="t-es">Mi objetivo es el diseño, despliegue y seguridad de infraestructuras de red. Tengo una base sólida en la capa física, el enrutamiento y los protocolos que sostienen las redes modernas, y me interesa especialmente cómo la automatización y el código pueden modernizar las arquitecturas de red.</span><span class="t-en" lang="en">My goal is the design, deployment and security of network infrastructure. I have a solid grounding in the physical layer, routing and the protocols behind modern networks, and I’m especially interested in how automation and code can modernize network architectures.</span></p>
-        <p data-i18n="about.p2"><span class="t-es">He complementado la carrera con certificaciones de Cisco (redes y ciberseguridad), IBM (IA) y Harvard (Python y SQL), y lo he llevado a la práctica en proyectos como VitalLink, un sistema IoT completo sobre LoRaWAN.</span><span class="t-en" lang="en">I’ve complemented my degree with certifications from Cisco (networking and cybersecurity), IBM (AI) and Harvard (Python and SQL), and put them into practice in projects such as VitalLink, an end-to-end IoT system over LoRaWAN.</span></p>
-        <p data-i18n="about.p3"><span class="t-es">Como vicepresidente del Fòrum Telecos UPC coordino al equipo que hace posibles eventos con más de 500 alumnos. Ahí he aprendido a coordinar personas, comunicar ideas complejas y mantener la cabeza fría bajo presión.</span><span class="t-en" lang="en">As Vice President of Fòrum Telecos UPC, I coordinate the team behind events with more than 500 students. There I’ve learned to coordinate people, communicate complex ideas and keep a cool head under pressure.</span></p>
+        <p data-i18n="about.p1"><span class="t-es">Mi objetivo es el diseño, despliegue y seguridad de infraestructuras de red. Tengo una base sólida en la capa física, el enrutamiento y los protocolos que sostienen las redes modernas, y me interesa especialmente cómo la automatización y el código pueden modernizar las arquitecturas de red.</span><span class="t-en" lang="en">My goal is the design, deployment and security of network infrastructure. I have a solid grounding in the physical layer, routing and the protocols behind modern networks, and I’m especially interested in how automation and code can modernize network architectures.</span><span class="t-ca" lang="ca">El meu objectiu és el disseny, el desplegament i la seguretat d’infraestructures de xarxa. Tinc una base sòlida en la capa física, l’encaminament i els protocols que sostenen les xarxes modernes, i m’interessa especialment com l’automatització i el codi poden modernitzar les arquitectures de xarxa.</span></p>
+        <p data-i18n="about.p2"><span class="t-es">He complementado la carrera con certificaciones de Cisco (redes y ciberseguridad), IBM (IA) y Harvard (Python y SQL), y lo he llevado a la práctica en proyectos como VitalLink, un sistema IoT completo sobre LoRaWAN.</span><span class="t-en" lang="en">I’ve complemented my degree with certifications from Cisco (networking and cybersecurity), IBM (AI) and Harvard (Python and SQL), and put them into practice in projects such as VitalLink, an end-to-end IoT system over LoRaWAN.</span><span class="t-ca" lang="ca">He complementat la carrera amb certificacions de Cisco (xarxes i ciberseguretat), IBM (IA) i Harvard (Python i SQL), i ho he portat a la pràctica en projectes com VitalLink, un sistema IoT complet sobre LoRaWAN.</span></p>
+        <p data-i18n="about.p3"><span class="t-es">Como vicepresidente del Fòrum Telecos UPC coordino al equipo que hace posibles eventos con más de 500 alumnos. Ahí he aprendido a coordinar personas, comunicar ideas complejas y mantener la cabeza fría bajo presión.</span><span class="t-en" lang="en">As Vice President of Fòrum Telecos UPC, I coordinate the team behind events with more than 500 students. There I’ve learned to coordinate people, communicate complex ideas and keep a cool head under pressure.</span><span class="t-ca" lang="ca">Com a vicepresident del Fòrum Telecos UPC coordino l’equip que fa possibles esdeveniments amb més de 500 alumnes. Allà he après a coordinar persones, comunicar idees complexes i mantenir el cap fred sota pressió.</span></p>
       </div>
     </div>
   </div>
@@ -1348,50 +1363,50 @@
 
 <section class="alt reveal" id="educacion">
   <div class="wrap">
-    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">educacion</span><span class="t-en" lang="en">education</span></span><h2 data-i18n="edu.title"><span class="t-es">Educación</span><span class="t-en" lang="en">Education</span></h2></div>
+    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">educacion</span><span class="t-en" lang="en">education</span><span class="t-ca" lang="ca">formacio</span></span><h2 data-i18n="edu.title"><span class="t-es">Educación</span><span class="t-en" lang="en">Education</span><span class="t-ca" lang="ca">Formació</span></h2></div>
     <div class="edu-card reveal">
       <div>
         <img class="edu-logo" src="assets/etsetb.webp" decoding="async" alt="UPC · ETSETB (telecos BCN)" width="128" height="48">
-        <h3 data-i18n="edu.degree"><span class="t-es">Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación</span><span class="t-en" lang="en">Bachelor's Degree in Telecommunications Technologies and Services Engineering</span></h3>
+        <h3 data-i18n="edu.degree"><span class="t-es">Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación</span><span class="t-en" lang="en">Bachelor's Degree in Telecommunications Technologies and Services Engineering</span><span class="t-ca" lang="ca">Grau en Enginyeria de Tecnologies i Serveis de Telecomunicació</span></h3>
         <div class="school">UPC · ETSETB</div>
-        <div class="mention" data-i18n="edu.mention"><span class="t-es">Mención: Especialización en Sistemas Telemáticos</span><span class="t-en" lang="en">Minor: Specialization in Telematic Systems</span></div>
+        <div class="mention" data-i18n="edu.mention"><span class="t-es">Mención: Especialización en Sistemas Telemáticos</span><span class="t-en" lang="en">Minor: Specialization in Telematic Systems</span><span class="t-ca" lang="ca">Menció: Especialització en Sistemes Telemàtics</span></div>
       </div>
-      <div class="period" data-i18n="edu.period"><span class="t-es">Septiembre 2023 — Junio 2027</span><span class="t-en" lang="en">September 2023 — June 2027</span></div>
+      <div class="period" data-i18n="edu.period"><span class="t-es">Septiembre 2023 — Junio 2027</span><span class="t-en" lang="en">September 2023 — June 2027</span><span class="t-ca" lang="ca">Setembre 2023 — Juny 2027</span></div>
     </div>
   </div>
 </section>
 
 <section id="experiencia" class="reveal">
   <div class="wrap">
-    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">experiencia</span><span class="t-en" lang="en">experience</span></span><h2 data-i18n="exp.title"><span class="t-es">Experiencia laboral</span><span class="t-en" lang="en">Work experience</span></h2></div>
+    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">experiencia</span><span class="t-en" lang="en">experience</span><span class="t-ca" lang="ca">experiencia</span></span><h2 data-i18n="exp.title"><span class="t-es">Experiencia laboral</span><span class="t-en" lang="en">Work experience</span><span class="t-ca" lang="ca">Experiència laboral</span></h2></div>
     <div class="timeline">
       <span class="tl-fill" aria-hidden="true"></span>
       <div class="tl-item reveal">
         <div class="tl-logo"><img src="data:image/webp;base64,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" alt="Fòrum Telecos UPC" width="36" height="36"></div>
         <span class="tl-hop" aria-hidden="true">hop 02</span>
-        <div class="tl-head"><h3 data-i18n="exp1.role"><span class="t-es">Vicepresidente de Comunicaciones Institucionales</span><span class="t-en" lang="en">Vice President of Institutional Communications</span></h3><span class="period" data-i18n="exp1.period"><span class="t-es">Septiembre 2025 — Actualidad</span><span class="t-en" lang="en">September 2025 — Present</span></span></div>
+        <div class="tl-head"><h3 data-i18n="exp1.role"><span class="t-es">Vicepresidente de Comunicaciones Institucionales</span><span class="t-en" lang="en">Vice President of Institutional Communications</span><span class="t-ca" lang="ca">Vicepresident de Comunicacions Institucionals</span></h3><span class="period" data-i18n="exp1.period"><span class="t-es">Septiembre 2025 — Actualidad</span><span class="t-en" lang="en">September 2025 — Present</span><span class="t-ca" lang="ca">Setembre 2025 — Actualitat</span></span></div>
         <div class="tl-role">Fòrum Telecos UPC</div>
         <ul>
-          <li data-i18n="exp1.l1"><span class="t-es">Organicé el Fòrum Telecos UPC y el Startup Day 2026 en la ETSETB, eventos que conectan el talento universitario con el mundo profesional, dirigiendo un equipo de veinte personas.</span><span class="t-en" lang="en">Organized the Fòrum Telecos UPC and Startup Day 2026 at ETSETB, events that connect university talent with the professional world, leading a team of twenty people.</span></li>
-          <li data-i18n="exp1.l2"><span class="t-es">Más de 500 alumnos reunidos en el Fòrum Telecos UPC y visibilidad para nuevas empresas en el Startup Day.</span><span class="t-en" lang="en">Brought together more than 500 students at the Fòrum Telecos UPC and gave visibility to new companies at the Startup Day.</span></li>
-          <li data-i18n="exp1.l3"><span class="t-es">Lidero el equipo de relaciones externas: contacto con empresas colaboradoras e instituciones, y seguimiento de los objetivos.</span><span class="t-en" lang="en">Lead the external relations team: liaison with partner companies and institutions, and tracking of objectives.</span></li>
-          <li data-i18n="exp1.l4"><span class="t-es">Dirijo la estrategia de comunicación corporativa de la entidad, incluidas las redes sociales de los eventos.</span><span class="t-en" lang="en">Direct the organization’s corporate communication strategy, including social media for the events.</span></li>
+          <li data-i18n="exp1.l1"><span class="t-es">Organicé el Fòrum Telecos UPC y el Startup Day 2026 en la ETSETB, eventos que conectan el talento universitario con el mundo profesional, dirigiendo un equipo de veinte personas.</span><span class="t-en" lang="en">Organized the Fòrum Telecos UPC and Startup Day 2026 at ETSETB, events that connect university talent with the professional world, leading a team of twenty people.</span><span class="t-ca" lang="ca">Vaig organitzar el Fòrum Telecos UPC i l’Startup Day 2026 a l’ETSETB, esdeveniments que connecten el talent universitari amb el món professional, al capdavant d’un equip de vint persones.</span></li>
+          <li data-i18n="exp1.l2"><span class="t-es">Más de 500 alumnos reunidos en el Fòrum Telecos UPC y visibilidad para nuevas empresas en el Startup Day.</span><span class="t-en" lang="en">Brought together more than 500 students at the Fòrum Telecos UPC and gave visibility to new companies at the Startup Day.</span><span class="t-ca" lang="ca">Més de 500 alumnes reunits al Fòrum Telecos UPC i visibilitat per a noves empreses a l’Startup Day.</span></li>
+          <li data-i18n="exp1.l3"><span class="t-es">Lidero el equipo de relaciones externas: contacto con empresas colaboradoras e instituciones, y seguimiento de los objetivos.</span><span class="t-en" lang="en">Lead the external relations team: liaison with partner companies and institutions, and tracking of objectives.</span><span class="t-ca" lang="ca">Lidero l’equip de relacions externes: contacte amb empreses col·laboradores i institucions, i seguiment dels objectius.</span></li>
+          <li data-i18n="exp1.l4"><span class="t-es">Dirijo la estrategia de comunicación corporativa de la entidad, incluidas las redes sociales de los eventos.</span><span class="t-en" lang="en">Direct the organization’s corporate communication strategy, including social media for the events.</span><span class="t-ca" lang="ca">Dirigeixo l’estratègia de comunicació corporativa de l’entitat, incloses les xarxes socials dels esdeveniments.</span></li>
         </ul>
       </div>
       <div class="tl-item reveal">
         <div class="tl-logo"><img src="data:image/webp;base64,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" alt="Real Madrid Official Store" width="36" height="36"></div>
         <span class="tl-hop" aria-hidden="true">hop 01</span>
-        <div class="tl-head"><h3 data-i18n="exp2.role"><span class="t-es">Asistente de ventas</span><span class="t-en" lang="en">Sales Assistant</span></h3><span class="period" data-i18n="exp2.period"><span class="t-es">Junio–Septiembre 2023, 2024 y 2025</span><span class="t-en" lang="en">June–September 2023, 2024 and 2025</span></span></div>
+        <div class="tl-head"><h3 data-i18n="exp2.role"><span class="t-es">Asistente de ventas</span><span class="t-en" lang="en">Sales Assistant</span><span class="t-ca" lang="ca">Assistent de vendes</span></h3><span class="period" data-i18n="exp2.period"><span class="t-es">Junio–Septiembre 2023, 2024 y 2025</span><span class="t-en" lang="en">June–September 2023, 2024 and 2025</span><span class="t-ca" lang="ca">Juny–Setembre 2023, 2024 i 2025</span></span></div>
         <div class="tl-role">Real Madrid Official Store</div>
         <ul>
-          <li data-i18n="exp2.l1"><span class="t-es">Venta y asesoramiento al cliente, mayoritariamente en inglés, en las tiendas oficiales del Real Madrid en Barcelona.</span><span class="t-en" lang="en">Sales and customer advice, mostly in English, at Real Madrid’s official stores in Barcelona.</span></li>
-          <li data-i18n="exp2.l2"><span class="t-es">Control y almacenaje del stock, manteniendo la calidad que exige una organización como el Real Madrid C.F.</span><span class="t-en" lang="en">Stock control and storage, upholding the quality standards expected by an organization such as Real Madrid C.F.</span></li>
-          <li data-i18n="exp2.l3"><span class="t-es">Preparación y personalización del producto deportivo durante las campañas de verano, con responsabilidad operativa en los picos de afluencia.</span><span class="t-en" lang="en">Preparation and personalization of sportswear during the summer campaigns, with operational responsibility at peak times.</span></li>
+          <li data-i18n="exp2.l1"><span class="t-es">Venta y asesoramiento al cliente, mayoritariamente en inglés, en las tiendas oficiales del Real Madrid en Barcelona.</span><span class="t-en" lang="en">Sales and customer advice, mostly in English, at Real Madrid’s official stores in Barcelona.</span><span class="t-ca" lang="ca">Venda i assessorament al client, majoritàriament en anglès, a les botigues oficials del Real Madrid a Barcelona.</span></li>
+          <li data-i18n="exp2.l2"><span class="t-es">Control y almacenaje del stock, manteniendo la calidad que exige una organización como el Real Madrid C.F.</span><span class="t-en" lang="en">Stock control and storage, upholding the quality standards expected by an organization such as Real Madrid C.F.</span><span class="t-ca" lang="ca">Control i emmagatzematge de l’estoc, mantenint la qualitat que exigeix una organització com el Real Madrid C.F.</span></li>
+          <li data-i18n="exp2.l3"><span class="t-es">Preparación y personalización del producto deportivo durante las campañas de verano, con responsabilidad operativa en los picos de afluencia.</span><span class="t-en" lang="en">Preparation and personalization of sportswear during the summer campaigns, with operational responsibility at peak times.</span><span class="t-ca" lang="ca">Preparació i personalització del producte esportiu durant les campanyes d’estiu, amb responsabilitat operativa en els pics d’afluència.</span></li>
         </ul>
         <figure class="tl-quote">
-          <blockquote data-i18n="exp2.quote"><p><span class="t-es">Daniel no se limita a cumplir con lo que se le asigna; busca mejorar procesos, aportar soluciones y generar un impacto positivo en el equipo y en la organización.</span><span class="t-en" lang="en">Daniel doesn't just do what he is assigned; he looks to improve processes, bring solutions and make a positive impact on the team and the organization.</span></p></blockquote>
+          <blockquote data-i18n="exp2.quote"><p><span class="t-es">Daniel no se limita a cumplir con lo que se le asigna; busca mejorar procesos, aportar soluciones y generar un impacto positivo en el equipo y en la organización.</span><span class="t-en" lang="en">Daniel doesn't just do what he is assigned; he looks to improve processes, bring solutions and make a positive impact on the team and the organization.</span><span class="t-ca" lang="ca">En Daniel no es limita a complir amb el que se li assigna; busca millorar processos, aportar solucions i generar un impacte positiu en l’equip i en l’organització.</span></p></blockquote>
           <figcaption><span class="q-name">Genys Bernabeu</span><span class="q-role">Area Manager · Real Madrid Official Store<span class="q-city">, Barcelona</span></span></figcaption>
-          <a class="q-link" href="recomendaciones/real-madrid-official-store/"><span class="t-es">Ver carta completa</span><span class="t-en" lang="en">Read the full letter</span><i class="ic ic-arrow-right" aria-hidden="true"></i></a>
+          <a class="q-link" href="recomendaciones/real-madrid-official-store/"><span class="t-es">Ver carta completa</span><span class="t-en" lang="en">Read the full letter</span><span class="t-ca" lang="ca">Veure la carta completa</span><i class="ic ic-arrow-right" aria-hidden="true"></i></a>
         </figure>
       </div>
     </div>
@@ -1400,77 +1415,77 @@
 
 <section class="alt reveal" id="proyectos">
   <div class="wrap">
-    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">proyectos</span><span class="t-en" lang="en">projects</span></span><h2 data-i18n="proj.title"><span class="t-es">Proyectos</span><span class="t-en" lang="en">Projects</span></h2></div>
+    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">proyectos</span><span class="t-en" lang="en">projects</span><span class="t-ca" lang="ca">projectes</span></span><h2 data-i18n="proj.title"><span class="t-es">Proyectos</span><span class="t-en" lang="en">Projects</span><span class="t-ca" lang="ca">Projectes</span></h2></div>
     <div class="carousel">
       <div class="car-track" id="projTrack" tabindex="0" role="region" aria-label="Proyectos / Projects">
       <details class="proj-card" id="proyecto-1">
         <summary>
           <img class="proj-bg" src="assets/proyecto-p2p.webp" loading="lazy" alt="Sistema de telecomunicaciones P2P para distribuir tareas pesadas" decoding="async">
           <span class="proj-shade" aria-hidden="true"></span>
-          <span class="date" data-i18n="p1.date"><span class="t-es">Abril 2026</span><span class="t-en" lang="en">April 2026</span></span>
-          <h3 data-i18n="p1.title"><span class="t-es">Sistema de telecomunicaciones P2P para distribuir tareas pesadas</span><span class="t-en" lang="en">P2P telecommunications system for distributing heavy workloads</span></h3>
+          <span class="date" data-i18n="p1.date"><span class="t-es">Abril 2026</span><span class="t-en" lang="en">April 2026</span><span class="t-ca" lang="ca">Abril 2026</span></span>
+          <h3 data-i18n="p1.title"><span class="t-es">Sistema de telecomunicaciones P2P para distribuir tareas pesadas</span><span class="t-en" lang="en">P2P telecommunications system for distributing heavy workloads</span><span class="t-ca" lang="ca">Sistema de telecomunicacions P2P per distribuir tasques pesades</span></h3>
           <span class="proj-tags"><span>JavaScript</span><span>HyperSwarm</span><span>SmolLM2</span><span>P2P</span><span>HTML</span></span>
           <span class="proj-toggle" aria-hidden="true"><i class="ic ic-plus"></i></span>
         </summary>
         <ul>
-          <li data-i18n="p1.l1"><span class="t-es">Lideré el desarrollo de un software orientado a la creación de redes P2P para la distribución de cargas de cómputo intensivas (LLMs) durante la HackUPC.</span><span class="t-en" lang="en">Led the development of software for building P2P networks to distribute compute-intensive workloads (LLMs) during HackUPC.</span></li>
-          <li data-i18n="p1.l2"><span class="t-es">Implementé la arquitectura de red utilizando JavaScript, HyperSwarm y SmolLM2 para la integración del modelo de lenguaje.</span><span class="t-en" lang="en">Implemented the network architecture using JavaScript, HyperSwarm and SmolLM2 for language model integration.</span></li>
-          <li data-i18n="p1.l3"><span class="t-es">Diseñé la interfaz de usuario mediante HTML para el control y gestión del reparto de tareas en la red.</span><span class="t-en" lang="en">Designed the HTML user interface to control and manage task distribution across the network.</span></li>
+          <li data-i18n="p1.l1"><span class="t-es">Lideré el desarrollo de un software orientado a la creación de redes P2P para la distribución de cargas de cómputo intensivas (LLMs) durante la HackUPC.</span><span class="t-en" lang="en">Led the development of software for building P2P networks to distribute compute-intensive workloads (LLMs) during HackUPC.</span><span class="t-ca" lang="ca">Vaig liderar el desenvolupament d’un programari orientat a la creació de xarxes P2P per a la distribució de càrregues de còmput intensives (LLMs) durant la HackUPC.</span></li>
+          <li data-i18n="p1.l2"><span class="t-es">Implementé la arquitectura de red utilizando JavaScript, HyperSwarm y SmolLM2 para la integración del modelo de lenguaje.</span><span class="t-en" lang="en">Implemented the network architecture using JavaScript, HyperSwarm and SmolLM2 for language model integration.</span><span class="t-ca" lang="ca">Vaig implementar l’arquitectura de xarxa amb JavaScript, HyperSwarm i SmolLM2 per a la integració del model de llenguatge.</span></li>
+          <li data-i18n="p1.l3"><span class="t-es">Diseñé la interfaz de usuario mediante HTML para el control y gestión del reparto de tareas en la red.</span><span class="t-en" lang="en">Designed the HTML user interface to control and manage task distribution across the network.</span><span class="t-ca" lang="ca">Vaig dissenyar la interfície d’usuari en HTML per al control i la gestió del repartiment de tasques a la xarxa.</span></li>
         </ul>
-        <a class="proj-link" href="https://github.com/dasuarezang/HACKUPC-P2P-2026" target="_blank" rel="noopener"><i class="ic ic-github-logo"></i><span class="t-es">Ver el código en GitHub</span><span class="t-en" lang="en">View the code on GitHub</span><i class="ic ic-arrow-up-right"></i></a>
+        <a class="proj-link" href="https://github.com/dasuarezang/HACKUPC-P2P-2026" target="_blank" rel="noopener"><i class="ic ic-github-logo"></i><span class="t-es">Ver el código en GitHub</span><span class="t-en" lang="en">View the code on GitHub</span><span class="t-ca" lang="ca">Veure el codi a GitHub</span><i class="ic ic-arrow-up-right"></i></a>
       </details>
       <details class="proj-card" id="proyecto-2">
         <summary>
           <img class="proj-bg" src="assets/proyecto-lora.webp" loading="lazy" alt="VitalLink: monitorización remota de salud con LoRaWAN" decoding="async">
           <span class="proj-shade" aria-hidden="true"></span>
           <img class="proj-logo" src="assets/vitallink-logo.webp" alt="Logo de VitalLink" width="80" height="80" loading="lazy" decoding="async">
-          <span class="date" data-i18n="p2.date"><span class="t-es">Septiembre 2025 — Diciembre 2025</span><span class="t-en" lang="en">September 2025 — December 2025</span></span>
-          <h3 data-i18n="p2.title"><span class="t-es">VitalLink: monitorización remota de salud con LoRaWAN</span><span class="t-en" lang="en">VitalLink: remote health monitoring over LoRaWAN</span></h3>
+          <span class="date" data-i18n="p2.date"><span class="t-es">Septiembre 2025 — Diciembre 2025</span><span class="t-en" lang="en">September 2025 — December 2025</span><span class="t-ca" lang="ca">Setembre 2025 — Desembre 2025</span></span>
+          <h3 data-i18n="p2.title"><span class="t-es">VitalLink: monitorización remota de salud con LoRaWAN</span><span class="t-en" lang="en">VitalLink: remote health monitoring over LoRaWAN</span><span class="t-ca" lang="ca">VitalLink: monitoratge remot de salut amb LoRaWAN</span></h3>
           <span class="proj-tags"><span>Python</span><span>Raspberry Pi</span><span>LoRaWAN</span><span>TTN</span><span>Node-RED</span><span>PostgreSQL</span><span>Next.js</span></span>
           <span class="proj-toggle" aria-hidden="true"><i class="ic ic-plus"></i></span>
         </summary>
         <ul>
-          <li data-i18n="p2.l1"><span class="t-es">Integré un sistema end-to-end de monitorización remota de salud, capturando constantes vitales mediante sensores analógicos BITalino vía Bluetooth y procesando la señal localmente en una Raspberry Pi 4 utilizando Python (numpy, biosppy.signals).</span><span class="t-en" lang="en">Integrated an end-to-end remote health monitoring system, capturing vital signs with BITalino analog sensors over Bluetooth and processing the signal locally on a Raspberry Pi 4 using Python (numpy, biosppy.signals).</span></li>
-          <li data-i18n="p2.l2"><span class="t-es">Configuré integralmente el enlace de comunicación LPWA interconectando la Raspberry Pi por UART con un Arduino MKR 1310, empleando un gateway LoRaWAN para la transmisión de datos JSON a larga distancia hacia The Things Network (TTN).</span><span class="t-en" lang="en">Fully configured the LPWA communication link by connecting the Raspberry Pi over UART to an Arduino MKR 1310, using a LoRaWAN gateway to transmit JSON data over long range to The Things Network (TTN).</span></li>
-          <li data-i18n="p2.l3"><span class="t-es">Desarrollé el flujo completo de recepción, almacenamiento y procesamiento de datos mediante Node-RED, MQTT y PostgreSQL (Supabase), incluyendo la programación de un frontend clínico interactivo en Next.js y Recharts para la visualización de la información.</span><span class="t-en" lang="en">Developed the complete data reception, storage and processing pipeline with Node-RED, MQTT and PostgreSQL (Supabase), including an interactive clinical frontend built with Next.js and Recharts for data visualization.</span></li>
+          <li data-i18n="p2.l1"><span class="t-es">Integré un sistema end-to-end de monitorización remota de salud, capturando constantes vitales mediante sensores analógicos BITalino vía Bluetooth y procesando la señal localmente en una Raspberry Pi 4 utilizando Python (numpy, biosppy.signals).</span><span class="t-en" lang="en">Integrated an end-to-end remote health monitoring system, capturing vital signs with BITalino analog sensors over Bluetooth and processing the signal locally on a Raspberry Pi 4 using Python (numpy, biosppy.signals).</span><span class="t-ca" lang="ca">Vaig integrar un sistema end-to-end de monitoratge remot de salut, capturant constants vitals amb sensors analògics BITalino via Bluetooth i processant el senyal localment en una Raspberry Pi 4 amb Python (numpy, biosppy.signals).</span></li>
+          <li data-i18n="p2.l2"><span class="t-es">Configuré integralmente el enlace de comunicación LPWA interconectando la Raspberry Pi por UART con un Arduino MKR 1310, empleando un gateway LoRaWAN para la transmisión de datos JSON a larga distancia hacia The Things Network (TTN).</span><span class="t-en" lang="en">Fully configured the LPWA communication link by connecting the Raspberry Pi over UART to an Arduino MKR 1310, using a LoRaWAN gateway to transmit JSON data over long range to The Things Network (TTN).</span><span class="t-ca" lang="ca">Vaig configurar íntegrament l’enllaç de comunicació LPWA interconnectant la Raspberry Pi per UART amb un Arduino MKR 1310, amb un gateway LoRaWAN per a la transmissió de dades JSON a llarga distància cap a The Things Network (TTN).</span></li>
+          <li data-i18n="p2.l3"><span class="t-es">Desarrollé el flujo completo de recepción, almacenamiento y procesamiento de datos mediante Node-RED, MQTT y PostgreSQL (Supabase), incluyendo la programación de un frontend clínico interactivo en Next.js y Recharts para la visualización de la información.</span><span class="t-en" lang="en">Developed the complete data reception, storage and processing pipeline with Node-RED, MQTT and PostgreSQL (Supabase), including an interactive clinical frontend built with Next.js and Recharts for data visualization.</span><span class="t-ca" lang="ca">Vaig desenvolupar el flux complet de recepció, emmagatzematge i processament de dades amb Node-RED, MQTT i PostgreSQL (Supabase), incloent-hi la programació d’un frontend clínic interactiu en Next.js i Recharts per a la visualització de la informació.</span></li>
         </ul>
-        <a class="proj-link" href="https://github.com/dasuarezang/VitalLinkIoTProject" target="_blank" rel="noopener"><i class="ic ic-github-logo"></i><span class="t-es">Ver el código en GitHub</span><span class="t-en" lang="en">View the code on GitHub</span><i class="ic ic-arrow-up-right"></i></a>
+        <a class="proj-link" href="https://github.com/dasuarezang/VitalLinkIoTProject" target="_blank" rel="noopener"><i class="ic ic-github-logo"></i><span class="t-es">Ver el código en GitHub</span><span class="t-en" lang="en">View the code on GitHub</span><span class="t-ca" lang="ca">Veure el codi a GitHub</span><i class="ic ic-arrow-up-right"></i></a>
       </details>
       <details class="proj-card" id="proyecto-3">
         <summary>
           <img class="proj-bg" src="assets/proyecto-ultrasonidos.webp" loading="lazy" alt="Sistema de medición de distancia por ultrasonidos" decoding="async">
           <span class="proj-shade" aria-hidden="true"></span>
-          <span class="date" data-i18n="p3.date"><span class="t-es">Enero 2025 — Junio 2025</span><span class="t-en" lang="en">January 2025 — June 2025</span></span>
-          <h3 data-i18n="p3.title"><span class="t-es">Sistema de medición de distancia por ultrasonidos</span><span class="t-en" lang="en">Ultrasonic distance measurement system</span></h3>
-          <span class="proj-tags"><span><span class="t-es">Electrónica analógica</span><span class="t-en" lang="en">Analog electronics</span></span><span>555</span><span>TL082</span><span><span class="t-es">Filtros activos</span><span class="t-en" lang="en">Active filters</span></span><span>ToF</span></span>
+          <span class="date" data-i18n="p3.date"><span class="t-es">Enero 2025 — Junio 2025</span><span class="t-en" lang="en">January 2025 — June 2025</span><span class="t-ca" lang="ca">Gener 2025 — Juny 2025</span></span>
+          <h3 data-i18n="p3.title"><span class="t-es">Sistema de medición de distancia por ultrasonidos</span><span class="t-en" lang="en">Ultrasonic distance measurement system</span><span class="t-ca" lang="ca">Sistema de mesura de distància per ultrasons</span></h3>
+          <span class="proj-tags"><span><span class="t-es">Electrónica analógica</span><span class="t-en" lang="en">Analog electronics</span><span class="t-ca" lang="ca">Electrònica analògica</span></span><span>555</span><span>TL082</span><span><span class="t-es">Filtros activos</span><span class="t-en" lang="en">Active filters</span><span class="t-ca" lang="ca">Filtres actius</span></span><span>ToF</span></span>
           <span class="proj-toggle" aria-hidden="true"><i class="ic ic-plus"></i></span>
         </summary>
         <ul>
-          <li data-i18n="p3.l1"><span class="t-es">Diseñé y desarrollé el hardware analógico para un sistema de medición basado en el principio de Tiempo de Vuelo (ToF).</span><span class="t-en" lang="en">Designed and built the analog hardware for a Time-of-Flight (ToF) based measurement system.</span></li>
-          <li data-i18n="p3.l2"><span class="t-es">Implementé la etapa de transmisión de 40 kHz mediante temporizadores 555 y diseñé un front-end de recepción con múltiples etapas de amplificación (serie TL082).</span><span class="t-en" lang="en">Implemented the 40 kHz transmission stage using 555 timers and designed a receiver front-end with multiple amplification stages (TL082 series).</span></li>
-          <li data-i18n="p3.l3"><span class="t-es">Optimicé el acondicionamiento de señal mediante filtros paso banda activos y disparadores Schmitt, logrando precisiones de hasta 3 metros.</span><span class="t-en" lang="en">Optimized signal conditioning with active band-pass filters and Schmitt triggers, achieving accuracy at up to 3 meters.</span></li>
+          <li data-i18n="p3.l1"><span class="t-es">Diseñé y desarrollé el hardware analógico para un sistema de medición basado en el principio de Tiempo de Vuelo (ToF).</span><span class="t-en" lang="en">Designed and built the analog hardware for a Time-of-Flight (ToF) based measurement system.</span><span class="t-ca" lang="ca">Vaig dissenyar i desenvolupar el maquinari analògic d’un sistema de mesura basat en el principi de Temps de Vol (ToF).</span></li>
+          <li data-i18n="p3.l2"><span class="t-es">Implementé la etapa de transmisión de 40 kHz mediante temporizadores 555 y diseñé un front-end de recepción con múltiples etapas de amplificación (serie TL082).</span><span class="t-en" lang="en">Implemented the 40 kHz transmission stage using 555 timers and designed a receiver front-end with multiple amplification stages (TL082 series).</span><span class="t-ca" lang="ca">Vaig implementar l’etapa de transmissió de 40 kHz amb temporitzadors 555 i vaig dissenyar un front-end de recepció amb múltiples etapes d’amplificació (sèrie TL082).</span></li>
+          <li data-i18n="p3.l3"><span class="t-es">Optimicé el acondicionamiento de señal mediante filtros paso banda activos y disparadores Schmitt, logrando precisiones de hasta 3 metros.</span><span class="t-en" lang="en">Optimized signal conditioning with active band-pass filters and Schmitt triggers, achieving accuracy at up to 3 meters.</span><span class="t-ca" lang="ca">Vaig optimitzar el condicionament del senyal amb filtres passabanda actius i disparadors Schmitt, i vaig aconseguir precisions de fins a 3 metres.</span></li>
         </ul>
       </details>
       <details class="proj-card" id="proyecto-4">
         <summary>
           <img class="proj-bg" src="assets/proyecto-rouv.webp" loading="lazy" alt="ROUV: Remotely Operated Underwater Vehicle" decoding="async">
           <span class="proj-shade" aria-hidden="true"></span>
-          <span class="date" data-i18n="p4.date"><span class="t-es">Septiembre 2024 — Diciembre 2024</span><span class="t-en" lang="en">September 2024 — December 2024</span></span>
+          <span class="date" data-i18n="p4.date"><span class="t-es">Septiembre 2024 — Diciembre 2024</span><span class="t-en" lang="en">September 2024 — December 2024</span><span class="t-ca" lang="ca">Setembre 2024 — Desembre 2024</span></span>
           <h3>ROUV: Remotely Operated Underwater Vehicle</h3>
-          <span class="proj-tags"><span><span class="t-es">Sensores</span><span class="t-en" lang="en">Sensors</span></span><span><span class="t-es">Telemetría</span><span class="t-en" lang="en">Telemetry</span></span><span><span class="t-es">Control de motores</span><span class="t-en" lang="en">Motor control</span></span><span><span class="t-es">Diseño de chasis</span><span class="t-en" lang="en">Chassis design</span></span></span>
+          <span class="proj-tags"><span><span class="t-es">Sensores</span><span class="t-en" lang="en">Sensors</span><span class="t-ca" lang="ca">Sensors</span></span><span><span class="t-es">Telemetría</span><span class="t-en" lang="en">Telemetry</span><span class="t-ca" lang="ca">Telemetria</span></span><span><span class="t-es">Control de motores</span><span class="t-en" lang="en">Motor control</span><span class="t-ca" lang="ca">Control de motors</span></span><span><span class="t-es">Diseño de chasis</span><span class="t-en" lang="en">Chassis design</span><span class="t-ca" lang="ca">Disseny de xassís</span></span></span>
           <span class="proj-toggle" aria-hidden="true"><i class="ic ic-plus"></i></span>
         </summary>
         <ul>
-          <li data-i18n="p4.l1"><span class="t-es">Desarrollé un vehículo subacuático operado remotamente capaz de transmitir datos ambientales críticos en tiempo real.</span><span class="t-en" lang="en">Developed a remotely operated underwater vehicle capable of transmitting critical environmental data in real time.</span></li>
-          <li data-i18n="p4.l2"><span class="t-es">Diseñé el chasis y los sistemas de control, motores, comunicaciones y software de conectividad del vehículo.</span><span class="t-en" lang="en">Designed the vehicle's chassis and its control, motor, communication and connectivity software systems.</span></li>
-          <li data-i18n="p4.l3"><span class="t-es">Implementé sensores para el registro remoto de profundidad, temperatura e iluminación con transmisión a dispositivos de superficie.</span><span class="t-en" lang="en">Implemented sensors for remote logging of depth, temperature and light, transmitting to surface devices.</span></li>
+          <li data-i18n="p4.l1"><span class="t-es">Desarrollé un vehículo subacuático operado remotamente capaz de transmitir datos ambientales críticos en tiempo real.</span><span class="t-en" lang="en">Developed a remotely operated underwater vehicle capable of transmitting critical environmental data in real time.</span><span class="t-ca" lang="ca">Vaig desenvolupar un vehicle subaquàtic operat remotament capaç de transmetre dades ambientals crítiques en temps real.</span></li>
+          <li data-i18n="p4.l2"><span class="t-es">Diseñé el chasis y los sistemas de control, motores, comunicaciones y software de conectividad del vehículo.</span><span class="t-en" lang="en">Designed the vehicle's chassis and its control, motor, communication and connectivity software systems.</span><span class="t-ca" lang="ca">Vaig dissenyar el xassís i els sistemes de control, motors, comunicacions i programari de connectivitat del vehicle.</span></li>
+          <li data-i18n="p4.l3"><span class="t-es">Implementé sensores para el registro remoto de profundidad, temperatura e iluminación con transmisión a dispositivos de superficie.</span><span class="t-en" lang="en">Implemented sensors for remote logging of depth, temperature and light, transmitting to surface devices.</span><span class="t-ca" lang="ca">Vaig implementar sensors per al registre remot de profunditat, temperatura i il·luminació amb transmissió a dispositius de superfície.</span></li>
         </ul>
       </details>
       </div>
       <div class="car-nav">
-        <button class="car-btn" type="button" data-dir="-1"><i class="ic ic-caret-left"></i><span class="sr"><span class="t-es">Proyecto anterior</span><span class="t-en" lang="en">Previous project</span></span></button>
+        <button class="car-btn" type="button" data-dir="-1"><i class="ic ic-caret-left"></i><span class="sr"><span class="t-es">Proyecto anterior</span><span class="t-en" lang="en">Previous project</span><span class="t-ca" lang="ca">Projecte anterior</span></span></button>
         <div class="car-dots"><button class="car-dot" type="button" data-i="0"><span class="sr">1</span></button><button class="car-dot" type="button" data-i="1"><span class="sr">2</span></button><button class="car-dot" type="button" data-i="2"><span class="sr">3</span></button><button class="car-dot" type="button" data-i="3"><span class="sr">4</span></button></div>
-        <button class="car-btn" type="button" data-dir="1"><i class="ic ic-caret-right"></i><span class="sr"><span class="t-es">Proyecto siguiente</span><span class="t-en" lang="en">Next project</span></span></button>
+        <button class="car-btn" type="button" data-dir="1"><i class="ic ic-caret-right"></i><span class="sr"><span class="t-es">Proyecto siguiente</span><span class="t-en" lang="en">Next project</span><span class="t-ca" lang="ca">Projecte següent</span></span></button>
       </div>
     </div>
   </div>
@@ -1478,10 +1493,10 @@
 
 <section id="habilidades" class="reveal">
   <div class="wrap">
-    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">habilidades</span><span class="t-en" lang="en">skills</span></span><h2 data-i18n="skills.title"><span class="t-es">Habilidades</span><span class="t-en" lang="en">Skills</span></h2></div>
+    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">habilidades</span><span class="t-en" lang="en">skills</span><span class="t-ca" lang="ca">habilitats</span></span><h2 data-i18n="skills.title"><span class="t-es">Habilidades</span><span class="t-en" lang="en">Skills</span><span class="t-ca" lang="ca">Habilitats</span></h2></div>
     <div class="stack-grid">
       <div class="skill-group net reveal">
-        <h3><i class="ic ic-network"></i><span data-i18n="skills.net"><span class="t-es">Redes</span><span class="t-en" lang="en">Networking</span></span></h3>
+        <h3><i class="ic ic-network"></i><span data-i18n="skills.net"><span class="t-es">Redes</span><span class="t-en" lang="en">Networking</span><span class="t-ca" lang="ca">Xarxes</span></span></h3>
         <div class="badges">
           <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2292.25%22 height=%2228%22 role=%22img%22 aria-label=%22TCP/IP%22%3E%3Ctitle%3ETCP/IP%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2292.25%22 height=%2228%22 fill=%22%231e40af%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg+xml;base64,PHN2ZyBmaWxsPSJ3aGl0ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIzMiwxMDhIMTQwVjkyaDRhMjAsMjAsMCwwLDAsMjAtMjBWNDBhMjAsMjAsMCwwLDAtMjAtMjBIMTEyQTIwLDIwLDAsMCwwLDkyLDQwVjcyYTIwLDIwLDAsMCwwLDIwLDIwaDR2MTZIMjRhMTIsMTIsMCwwLDAsMCwyNEg1MnYyNEg0OGEyMCwyMCwwLDAsMC0yMCwyMHYzMmEyMCwyMCwwLDAsMCwyMCwyMEg4MGEyMCwyMCwwLDAsMCwyMC0yMFYxNzZhMjAsMjAsMCwwLDAtMjAtMjBINzZWMTMySDE4MHYyNGgtNGEyMCwyMCwwLDAsMC0yMCwyMHYzMmEyMCwyMCwwLDAsMCwyMCwyMGgzMmEyMCwyMCwwLDAsMCwyMC0yMFYxNzZhMjAsMjAsMCwwLDAtMjAtMjBoLTRWMTMyaDI4YTEyLDEyLDAsMCwwLDAtMjRaTTExNiw0NGgyNFY2OEgxMTZaTTc2LDIwNEg1MlYxODBINzZabTEyOCwwSDE4MFYxODBoMjRaIi8+PC9zdmc+%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22561.25%22 y=%22175%22 textLength=%22482.5%22 font-weight=%22bold%22%3ETCP/IP%3C/text%3E%3C/g%3E%3C/svg%3E" alt="TCP/IP">
           <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22204%22 height=%2228%22 role=%22img%22 aria-label=%22ROUTING %26amp; SWITCHING%22%3E%3Ctitle%3EROUTING %26amp; SWITCHING%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%22204%22 height=%2228%22 fill=%22%230e7490%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg+xml;base64,PHN2ZyBmaWxsPSJ3aGl0ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PHBhdGggZD0iTTIzMi40OSwxOTIuNDlsLTMyLDMyYTEyLDEyLDAsMCwxLTE3LDBsLTMyLTMyYTEyLDEyLDAsMCwxLDE3LTE3TDE4MCwxODdWMTQxTDEyOCw4OSw3NiwxNDFWMTg3bDExLjUxLTExLjUyYTEyLDEyLDAsMCwxLDE3LDE3bC0zMiwzMmExMiwxMiwwLDAsMS0xNywwbC0zMi0zMmExMiwxMiwwLDEsMSwxNy0xN0w1MiwxODdWMTM2YTEyLDEyLDAsMCwxLDMuNTEtOC40OUwxMTYsNjdWMjRhMTIsMTIsMCwwLDEsMjQsMFY2N2w2MC40OSw2MC40OEExMiwxMiwwLDAsMSwyMDQsMTM2djUxbDExLjUxLTExLjUyYTEyLDEyLDAsMCwxLDE3LDE3WiIvPjwvc3ZnPg==%22/%3E%3Ctext transform=%22scale(.1)%22 x=%221120%22 y=%22175%22 textLength=%221600%22 font-weight=%22bold%22%3EROUTING %26amp; SWITCHING%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Routing &amp; Switching">
@@ -1495,7 +1510,7 @@
         </div>
       </div>
       <div class="skill-group code reveal">
-        <h3><i class="ic ic-code"></i><span data-i18n="skills.code"><span class="t-es">Lenguajes, Web y Bases de Datos</span><span class="t-en" lang="en">Languages, Web &amp; Databases</span></span></h3>
+        <h3><i class="ic ic-code"></i><span data-i18n="skills.code"><span class="t-es">Lenguajes, Web y Bases de Datos</span><span class="t-en" lang="en">Languages, Web &amp; Databases</span><span class="t-ca" lang="ca">Llenguatges, Web i Bases de Dades</span></span></h3>
         <div class="badges">
           <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2252.25%22 height=%2228%22 role=%22img%22 aria-label=%22C%22%3E%3Ctitle%3EC%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2252.25%22 height=%2228%22 fill=%22%2300599c%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyBmaWxsPSJ3aGl0ZSIgcm9sZT0iaW1nIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BPHRpdGxlPkM8L3RpdGxlPjxwYXRoIGQ9Ik0xNi41OTIxIDkuMTk2MnMtLjM1NC0zLjI5OC0zLjYyNy0zLjM5Yy0zLjI3NDEtLjA5LTQuOTU1MiAyLjQ3NC00Ljk1NTIgNi4xNCAwIDMuNjY1MSAxLjg1OCA2LjU5NzIgNS4wNDUxIDYuNTk3MiAzLjE4NCAwIDMuNTM4MS0zLjY2NSAzLjUzODEtMy42NjVsNi4xMDQxLjM2NXMuMzYgMy4zMS0yLjE5NiA1LjgzNmMtMi41NTIgMi41MjQxLTUuNjkwMSAyLjkzNzEtNy44NzYyIDIuOTIwMS0yLjE5LS4wMTctNS4yMjYxLjAzNC04LjE2MDItMi45Ny0yLjkzOC0zLjAxMDEtMy40MzYtNS45MzAyLTMuNDM2LTguODAwMiAwLTIuODcwMS41NTYtNi42NzAyIDQuMDQ3LTkuNTUwMkM3LjQ0NC43MiA5Ljg0OSAwIDEyLjI1NCAwYzEwLjA0MjIgMCAxMC43MTcyIDkuMjYwMiAxMC43MTcyIDkuMjYwMnoiLz48L3N2Zz4=%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22361.25%22 y=%22175%22 textLength=%2282.5%22 font-weight=%22bold%22%3EC%3C/text%3E%3C/g%3E%3C/svg%3E" alt="C">
           <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2277%22 height=%2228%22 role=%22img%22 aria-label=%22JAVA%22%3E%3Ctitle%3EJAVA%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2277%22 height=%2228%22 fill=%22%23ed8b00%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyBmaWxsPSJ3aGl0ZSIgcm9sZT0iaW1nIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BPHRpdGxlPk9wZW5KREs8L3RpdGxlPjxwYXRoIGQ9Ik0xMS45MTUgMCAxMS43LjIxNUM5LjUxNSAyLjQgNy40NyA2LjM5IDYuMDQ2IDEwLjQ4M2MtMS4wNjQgMS4wMjQtMy42MzMgMi44MS0zLjcxMSAzLjU1MS0uMDkzLjg3IDEuNzQ2IDIuNjExIDEuNTUgMy4yMzUtLjE5OC42MjUtMS4zMDQgMS40MDgtMS4wMTQgMS45MzkuMS4xODguODIzLjAxMSAxLjI3Ny0uNDkxYTEzLjM4OSAxMy4zODkgMCAwIDAtLjAxNyAyLjE0Yy4wNzYuOTA2LjI3IDEuNjY4LjY0MyAyLjIzMi4zNzIuNTYzLjk1Ni45MTEgMS42NjcuOTExLjM5NyAwIC43MjctLjExNCAxLjAyNC0uMjY0LjI5OC0uMTQ5LjU3MS0uMzMuOTEtLjUuNjgtLjM0IDEuNjM0LS42NjYgMy41My0uNjA0IDEuOTAzLjA2MiAyLjg3Mi4zOSAzLjU1OS43MDQuNjg3LjMxNCAxLjE1LjY2NCAxLjkyNS42NjQuNzY3IDAgMS4zOTUtLjMzNiAxLjgwNy0uOS40MTItLjU2My42MzEtMS4zMy43Mi0yLjI0LjA2LS42MjMuMDU1LTEuMzIgMC0yLjA2Ni40NTQuNDUgMS4xMTcuNjA0IDEuMjEzLjQyNC4yOS0uNTMtLjgxNi0xLjMxNC0xLjAxMy0xLjkzNy0uMTk4LS42MjQgMS42NDItMi4zNjYgMS41NDktMy4yMzYtLjA4LS43NDgtMi43MDctMi41NjgtMy43NDgtMy41ODZDMTYuNDI4IDYuMzc0IDE0LjMwOCAyLjM5NCAxMi4xMy4yMTV6bS4xNzUgNi4wMzhhMi45NSAyLjk1IDAgMCAxIDIuOTQzIDIuOTQyIDIuOTUgMi45NSAwIDAgMS0yLjk0MyAyLjk0M0EyLjk1IDIuOTUgMCAwIDEgOS4xNDggOC45OGEyLjk1IDIuOTUgMCAwIDEgMi45NDItMi45NDJ6TTguNjg1IDcuOTgzYTMuNTE1IDMuNTE1IDAgMCAwLS4xNDUuOTk3YzAgMS45NTEgMS42IDMuNTUgMy41NSAzLjU1IDEuOTUgMCAzLjU1LTEuNTk4IDMuNTUtMy41NSAwLS4zMjktLjA0Ni0uNjQ4LS4xMzItLjk1MS4zMzQuMDk1LjY0LjIwOC45MTUuMzM2YTQyLjY5OSA0Mi42OTkgMCAwIDEgMi4wNDIgNS44MjljLjY3OCAyLjU0NSAxLjAxIDQuOTIuODQ2IDYuNjA3LS4wODIuODQ0LS4yOSAxLjUxLS42MDYgMS45NC0uMzE1LjQzMS0uNzEzLjY1MS0xLjMxNS42NTEtLjU5MyAwLS45MzItLjI3LTEuNjczLS42MS0uNzQxLS4zMzgtMS44MjUtLjY5NC0zLjc5Mi0uNzU4LTEuOTc0LS4wNjQtMy4wNzMuMjkzLTMuODIxLjY2OS0uMzc1LjE4OC0uNjU5LjM3My0uOTExLjVzLS40NjYuMi0uNzUyLjJjLS41MyAwLS44NzYtLjIwOS0xLjE2LS42NC0uMjg1LS40My0uNDc0LTEuMTAxLS41NDUtMS45NDgtLjE0MS0xLjY5My4xNzYtNC4wNjkuODIzLTYuNjE0YTQzLjE1NSA0My4xNTUgMCAwIDEgMS45MzQtNS43ODNjLjM0OC0uMTY3Ljc0OS0uMzEgMS4xOTItLjQyNXptLTMuMzgyIDQuMzYyYS4yMTYuMjE2IDAgMCAxIC4xMy4wMzFjLS4xNjYuNTYtLjMyMyAxLjExNi0uNDYzIDEuNjY1YTMzLjg0OSAzMy44NDkgMCAwIDAtLjU0NyAyLjU1NSAzLjkgMy45IDAgMCAwLS4yLS4zOWMtLjU4LTEuMDEyLS45MTQtMS42NDItMS4xNi0yLjA4LjMxNS0uMjQgMS42NzktMS43NTUgMi4yNC0xLjc4MXptMTMuMzk0LjAxYy41NjIuMDI3IDEuOTI2IDEuNTQzIDIuMjQgMS43ODMtLjI0Ni40MzgtLjU4IDEuMDY4LTEuMTYgMi4wOGE0LjQyOCA0LjQyOCAwIDAgMC0uMTYzLjMwOSAzMi4zNTQgMzIuMzU0IDAgMCAwLS41NjItMi40OSA0MC41NzkgNDAuNTc5IDAgMCAwLS40ODItMS42NTIuMjE2LjIxNiAwIDAgMSAuMTI3LS4wM3oiLz48L3N2Zz4=%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22485%22 y=%22175%22 textLength=%22330%22 font-weight=%22bold%22%3EJAVA%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Java">
@@ -1508,7 +1523,7 @@
         </div>
       </div>
       <div class="skill-group reveal">
-        <h3><i class="ic ic-hard-drives"></i><span data-i18n="skills.infra"><span class="t-es">Infraestructura y Sistemas Operativos</span><span class="t-en" lang="en">Infrastructure &amp; Operating Systems</span></span></h3>
+        <h3><i class="ic ic-hard-drives"></i><span data-i18n="skills.infra"><span class="t-es">Infraestructura y Sistemas Operativos</span><span class="t-en" lang="en">Infrastructure &amp; Operating Systems</span><span class="t-ca" lang="ca">Infraestructura i Sistemes Operatius</span></span></h3>
         <div class="badges">
           <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2297.5%22 height=%2228%22 role=%22img%22 aria-label=%22DOCKER%22%3E%3Ctitle%3EDOCKER%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2297.5%22 height=%2228%22 fill=%22%232496ed%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyBmaWxsPSJ3aGl0ZSIgcm9sZT0iaW1nIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BPHRpdGxlPkRvY2tlcjwvdGl0bGU%2BPHBhdGggZD0iTTEzLjk4MyAxMS4wNzhoMi4xMTlhLjE4Ni4xODYgMCAwMC4xODYtLjE4NVY5LjAwNmEuMTg2LjE4NiAwIDAwLS4xODYtLjE4NmgtMi4xMTlhLjE4NS4xODUgMCAwMC0uMTg1LjE4NXYxLjg4OGMwIC4xMDIuMDgzLjE4NS4xODUuMTg1bS0yLjk1NC01LjQzaDIuMTE4YS4xODYuMTg2IDAgMDAuMTg2LS4xODZWMy41NzRhLjE4Ni4xODYgMCAwMC0uMTg2LS4xODVoLTIuMTE4YS4xODUuMTg1IDAgMDAtLjE4NS4xODV2MS44ODhjMCAuMTAyLjA4Mi4xODUuMTg1LjE4NW0wIDIuNzE2aDIuMTE4YS4xODcuMTg3IDAgMDAuMTg2LS4xODZWNi4yOWEuMTg2LjE4NiAwIDAwLS4xODYtLjE4NWgtMi4xMThhLjE4NS4xODUgMCAwMC0uMTg1LjE4NXYxLjg4N2MwIC4xMDIuMDgyLjE4NS4xODUuMTg2bS0yLjkzIDBoMi4xMmEuMTg2LjE4NiAwIDAwLjE4NC0uMTg2VjYuMjlhLjE4NS4xODUgMCAwMC0uMTg1LS4xODVIOC4xYS4xODUuMTg1IDAgMDAtLjE4NS4xODV2MS44ODdjMCAuMTAyLjA4My4xODUuMTg1LjE4Nm0tMi45NjQgMGgyLjExOWEuMTg2LjE4NiAwIDAwLjE4NS0uMTg2VjYuMjlhLjE4NS4xODUgMCAwMC0uMTg1LS4xODVINS4xMzZhLjE4Ni4xODYgMCAwMC0uMTg2LjE4NXYxLjg4N2MwIC4xMDIuMDg0LjE4NS4xODYuMTg2bTUuODkzIDIuNzE1aDIuMTE4YS4xODYuMTg2IDAgMDAuMTg2LS4xODVWOS4wMDZhLjE4Ni4xODYgMCAwMC0uMTg2LS4xODZoLTIuMTE4YS4xODUuMTg1IDAgMDAtLjE4NS4xODV2MS44ODhjMCAuMTAyLjA4Mi4xODUuMTg1LjE4NW0tMi45MyAwaDIuMTJhLjE4NS4xODUgMCAwMC4xODQtLjE4NVY5LjAwNmEuMTg1LjE4NSAwIDAwLS4xODQtLjE4NmgtMi4xMmEuMTg1LjE4NSAwIDAwLS4xODQuMTg1djEuODg4YzAgLjEwMi4wODMuMTg1LjE4NS4xODVtLTIuOTY0IDBoMi4xMTlhLjE4NS4xODUgMCAwMC4xODUtLjE4NVY5LjAwNmEuMTg1LjE4NSAwIDAwLS4xODQtLjE4NmgtMi4xMmEuMTg2LjE4NiAwIDAwLS4xODYuMTg2djEuODg3YzAgLjEwMi4wODQuMTg1LjE4Ni4xODVtLTIuOTIgMGgyLjEyYS4xODUuMTg1IDAgMDAuMTg0LS4xODVWOS4wMDZhLjE4NS4xODUgMCAwMC0uMTg0LS4xODZoLTIuMTJhLjE4NS4xODUgMCAwMC0uMTg0LjE4NXYxLjg4OGMwIC4xMDIuMDgyLjE4NS4xODUuMTg1TTIzLjc2MyA5Ljg5Yy0uMDY1LS4wNTEtLjY3Mi0uNTEtMS45NTQtLjUxLS4zMzguMDAxLS42NzYuMDMtMS4wMS4wODctLjI0OC0xLjctMS42NTMtMi41My0xLjcxNi0yLjU2NmwtLjM0NC0uMTk5LS4yMjYuMzI3Yy0uMjg0LjQzOC0uNDkuOTIyLS42MTIgMS40My0uMjMuOTctLjA5IDEuODgyLjQwMyAyLjY2MS0uNTk1LjMzMi0xLjU1LjQxMy0xLjc0NC40MkguNzUxYS43NTEuNzUxIDAgMDAtLjc1Ljc0OCAxMS4zNzYgMTEuMzc2IDAgMDAuNjkyIDQuMDYyYy41NDUgMS40MjggMS4zNTUgMi40OCAyLjQxIDMuMTI0IDEuMTguNzIzIDMuMSAxLjEzNyA1LjI3NSAxLjEzNy45ODMuMDAzIDEuOTYzLS4wODYgMi45My0uMjY2YTEyLjI0OCAxMi4yNDggMCAwMDMuODIzLTEuMzg5Yy45OC0uNTY3IDEuODYtMS4yODggMi42MS0yLjEzNiAxLjI1Mi0xLjQxOCAxLjk5OC0yLjk5NyAyLjU1My00LjRoLjIyMWMxLjM3MiAwIDIuMjE1LS41NDkgMi42OC0xLjAwOS4zMDktLjI5My41NS0uNjUuNzA3LTEuMDQ2bC4wOTgtLjI4OFoiLz48L3N2Zz4=%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22587.5%22 y=%22175%22 textLength=%22535%22 font-weight=%22bold%22%3EDOCKER%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Docker">
           <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22130.5%22 height=%2228%22 role=%22img%22 aria-label=%22KUBERNETES%22%3E%3Ctitle%3EKUBERNETES%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%22130.5%22 height=%2228%22 fill=%22%23326ce5%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyBmaWxsPSJ3aGl0ZSIgcm9sZT0iaW1nIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BPHRpdGxlPkt1YmVybmV0ZXM8L3RpdGxlPjxwYXRoIGQ9Ik0xMC4yMDQgMTQuMzVsLjAwNy4wMS0uOTk5IDIuNDEzYTUuMTcxIDUuMTcxIDAgMCAxLTIuMDc1LTIuNTk3bDIuNTc4LS40MzcuMDA0LjAwNWEuNDQuNDQgMCAwIDEgLjQ4NC42MDZ6bS0uODMzLTIuMTI5YS40NC40NCAwIDAgMCAuMTczLS43NTZsLjAwMi0uMDExTDcuNTg1IDkuN2E1LjE0MyA1LjE0MyAwIDAgMC0uNzMgMy4yNTVsMi41MTQtLjcyNS4wMDItLjAwOXptMS4xNDUtMS45OGEuNDQuNDQgMCAwIDAgLjY5OS0uMzM3bC4wMS0uMDA1LjE1LTIuNjJhNS4xNDQgNS4xNDQgMCAwIDAtMy4wMSAxLjQ0MmwyLjE0NyAxLjUyMy4wMDQtLjAwMnptLjc2IDIuNzVsLjcyMy4zNDkuNzIyLS4zNDcuMTgtLjc4LS41LS42MjNoLS44MDRsLS41LjYyMy4xNzkuNzc5em0xLjUtMy4wOTVhLjQ0LjQ0IDAgMCAwIC43LjMzNmwuMDA4LjAwMyAyLjEzNC0xLjUxM2E1LjE4OCA1LjE4OCAwIDAgMC0yLjk5Mi0xLjQ0MmwuMTQ4IDIuNjE1LjAwMi4wMDF6bTEwLjg3NiA1Ljk3bC01Ljc3MyA3LjE4MWExLjYgMS42IDAgMCAxLTEuMjQ4LjU5NGwtOS4yNjEuMDAzYTEuNiAxLjYgMCAwIDEtMS4yNDctLjU5NmwtNS43NzYtNy4xOGExLjU4MyAxLjU4MyAwIDAgMS0uMzA3LTEuMzRMMi4xIDUuNTczYy4xMDgtLjQ3LjQyNS0uODY0Ljg2My0xLjA3M0wxMS4zMDUuNTEzYTEuNjA2IDEuNjA2IDAgMCAxIDEuMzg1IDBsOC4zNDUgMy45ODVjLjQzOC4yMDkuNzU1LjYwNC44NjMgMS4wNzNsMi4wNjIgOC45NTVjLjEwOC40Ny0uMDA1Ljk2My0uMzA4IDEuMzR6bS0zLjI4OS0yLjA1N2MtLjA0Mi0uMDEtLjEwMy0uMDI2LS4xNDUtLjAzNC0uMTc0LS4wMzMtLjMxNS0uMDI1LS40NzktLjAzOC0uMzUtLjAzNy0uNjM4LS4wNjctLjg5NS0uMTQ4LS4xMDUtLjA0LS4xOC0uMTY1LS4yMTYtLjIxNmwtLjIwMS0uMDU5YTYuNDUgNi40NSAwIDAgMC0uMTA1LTIuMzMyIDYuNDY1IDYuNDY1IDAgMCAwLS45MzYtMi4xNjNjLjA1Mi0uMDQ3LjE1LS4xMzMuMTc3LS4xNTkuMDA4LS4wOS4wMDEtLjE4My4wOTQtLjI4Mi4xOTctLjE4NS40NDQtLjMzOC43NDMtLjUyMi4xNDItLjA4NC4yNzMtLjEzNy40MTUtLjI0Mi4wMzItLjAyNC4wNzYtLjA2Mi4xMS0uMDg5LjI0LS4xOTEuMjk1LS41Mi4xMjMtLjczNi0uMTcyLS4yMTYtLjUwNi0uMjM2LS43NDUtLjA0NS0uMDM0LjAyNy0uMDguMDYyLS4xMTEuMDg4LS4xMzQuMTE2LS4yMTcuMjMtLjMzLjM1LS4yNDYuMjUtLjQ1LjQ1OC0uNjczLjYwOS0uMDk3LjA1Ni0uMjM5LjAzNy0uMzAzLjAzM2wtLjE5LjEzNWE2LjU0NSA2LjU0NSAwIDAgMC00LjE0Ni0yLjAwM2wtLjAxMi0uMjIzYy0uMDY1LS4wNjItLjE0My0uMTE1LS4xNjMtLjI1LS4wMjItLjI2OC4wMTUtLjU1Ny4wNTctLjkwNS4wMjMtLjE2My4wNjEtLjI5OC4wNjgtLjQ3NS4wMDEtLjA0LS4wMDEtLjA5OS0uMDAxLS4xNDIgMC0uMzA2LS4yMjQtLjU1NS0uNS0uNTU1LS4yNzUgMC0uNDk5LjI0OS0uNDk5LjU1NWwuMDAxLjAxNGMwIC4wNDEtLjAwMi4wOTIgMCAuMTI4LjAwNi4xNzcuMDQ0LjMxMi4wNjcuNDc1LjA0Mi4zNDguMDc4LjYzNy4wNTYuOTA2YS41NDUuNTQ1IDAgMCAxLS4xNjIuMjU4bC0uMDEyLjIxMWE2LjQyNCA2LjQyNCAwIDAgMC00LjE2NiAyLjAwMyA4LjM3MyA4LjM3MyAwIDAgMS0uMTgtLjEyOGMtLjA5LjAxMi0uMTguMDQtLjI5Ny0uMDI5LS4yMjMtLjE1LS40MjctLjM1OC0uNjczLS42MDgtLjExMy0uMTItLjE5NS0uMjM0LS4zMjktLjM0OS0uMDMtLjAyNi0uMDc3LS4wNjItLjExMS0uMDg4YS41OTQuNTk0IDAgMCAwLS4zNDgtLjEzMi40ODEuNDgxIDAgMCAwLS4zOTguMTc2Yy0uMTcyLjIxNi0uMTE3LjU0Ni4xMjMuNzM3bC4wMDcuMDA1LjEwNC4wODNjLjE0Mi4xMDUuMjcyLjE1OS40MTQuMjQyLjI5OS4xODUuNTQ2LjMzOC43NDMuNTIyLjA3Ni4wODIuMDkuMjI2LjEuMjg4bC4xNi4xNDNhNi40NjIgNi40NjIgMCAwIDAtMS4wMiA0LjUwNmwtLjIwOC4wNmMtLjA1NS4wNzItLjEzMy4xODQtLjIxNS4yMTctLjI1Ny4wODEtLjU0Ni4xMS0uODk1LjE0Ny0uMTY0LjAxNC0uMzA1LjAwNi0uNDguMDM5LS4wMzcuMDA3LS4wOS4wMi0uMTMzLjAzbC0uMDA0LjAwMi0uMDA3LjAwMmMtLjI5NS4wNzEtLjQ4NC4zNDItLjQyMy42MDguMDYxLjI2Ny4zNDkuNDI5LjY0NS4zNjVsLjAwNy0uMDAxLjAxLS4wMDMuMTI5LS4wMjljLjE3LS4wNDYuMjk0LS4xMTMuNDQ4LS4xNzIuMzMtLjExOC42MDQtLjIxNy44Ny0uMjU2LjExMi0uMDA5LjIzLjA2OS4yODguMTAxbC4yMTctLjAzN2E2LjUgNi41IDAgMCAwIDIuODggMy41OTZsLS4wOS4yMThjLjAzMy4wODQuMDY5LjE5OS4wNDQuMjgyLS4wOTcuMjUyLS4yNjMuNTE3LS40NTIuODEzLS4wOTEuMTM2LS4xODUuMjQyLS4yNjguMzk5LS4wMi4wMzctLjA0NS4wOTUtLjA2NC4xMzQtLjEyOC4yNzUtLjAzNC41OTEuMjEzLjcxLjI0OC4xMi41NTYtLjAwNy42OS0uMjgydi0uMDAyYy4wMi0uMDM5LjA0Ni0uMDkuMDYyLS4xMjcuMDctLjE2Mi4wOTQtLjMwMS4xNDQtLjQ1OC4xMzItLjMzMi4yMDUtLjY4LjM4Ny0uODk3LjA1LS4wNi4xMy0uMDgyLjIxNS0uMTA1bC4xMTMtLjIwNWE2LjQ1MyA2LjQ1MyAwIDAgMCA0LjYwOS4wMTJsLjEwNi4xOTJjLjA4Ni4wMjguMTguMDQyLjI1Ni4xNTUuMTM2LjIzMi4yMjkuNTA3LjM0Mi44NC4wNS4xNTYuMDc0LjI5NS4xNDUuNDU3LjAxNi4wMzcuMDQzLjA5LjA2Mi4xMjkuMTMzLjI3Ni40NDIuNDAyLjY5LjI4Mi4yNDctLjExOC4zNDEtLjQzNS4yMTMtLjcxLS4wMi0uMDM5LS4wNDUtLjA5Ni0uMDY1LS4xMzQtLjA4My0uMTU2LS4xNzctLjI2MS0uMjY4LS4zOTgtLjE5LS4yOTYtLjM0Ni0uNTQxLS40NDMtLjc5My0uMDQtLjEzLjAwNy0uMjEuMDM4LS4yOTQtLjAxOC0uMDIyLS4wNTktLjE0NC0uMDgzLS4yMDJhNi40OTkgNi40OTkgMCAwIDAgMi44OC0zLjYyMmMuMDY0LjAxLjE3Ni4wMy4yMTMuMDM4LjA3NS0uMDUuMTQ0LS4xMTQuMjgtLjEwNC4yNjYuMDM5LjU0LjEzOC44Ny4yNTYuMTU0LjA2LjI3Ny4xMjguNDQ4LjE3My4wMzYuMDEuMDg4LjAxOS4xMy4wMjhsLjAwOS4wMDMuMDA3LjAwMWMuMjk3LjA2NC41ODQtLjA5OC42NDUtLjM2NS4wNi0uMjY2LS4xMjgtLjUzNy0uNDIzLS42MDh6TTE2LjQgOS43MDFsLTEuOTUgMS43NDZ2LjAwNWEuNDQuNDQgMCAwIDAgLjE3My43NTdsLjAwMy4wMSAyLjUyNi43MjhhNS4xOTkgNS4xOTkgMCAwIDAtLjEwOC0xLjY3NEE1LjIwOCA1LjIwOCAwIDAgMCAxNi40IDkuN3ptLTQuMDEzIDUuMzI1YS40MzcuNDM3IDAgMCAwLS40MDQtLjIzMi40NC40NCAwIDAgMC0uMzcyLjIzM2gtLjAwMmwtMS4yNjggMi4yOTJhNS4xNjQgNS4xNjQgMCAwIDAgMy4zMjYuMDAzbC0xLjI3LTIuMjk2aC0uMDF6bTEuODg4LTEuMjkzYS40NC40NCAwIDAgMC0uMjcuMDM2LjQ0LjQ0IDAgMCAwLS4yMTQuNTcybC0uMDAzLjAwNCAxLjAxIDIuNDM4YTUuMTUgNS4xNSAwIDAgMCAyLjA4MS0yLjYxNWwtMi42LS40NC0uMDA0LjAwNXoiLz48L3N2Zz4=%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22752.5%22 y=%22175%22 textLength=%22865%22 font-weight=%22bold%22%3EKUBERNETES%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Kubernetes">
@@ -1517,11 +1532,11 @@
         </div>
       </div>
       <div class="skill-group full reveal">
-        <h3><i class="ic ic-translate"></i><span data-i18n="skills.langs"><span class="t-es">Idiomas</span><span class="t-en" lang="en">Languages</span></span></h3>
+        <h3><i class="ic ic-translate"></i><span data-i18n="skills.langs"><span class="t-es">Idiomas</span><span class="t-en" lang="en">Languages</span><span class="t-ca" lang="ca">Idiomes</span></span></h3>
         <div class="badges">
-          <img class="t-es" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22195%22 height=%2228%22 role=%22img%22 aria-label=%22CASTELLANO: NATIVO%22%3E%3Ctitle%3ECASTELLANO: NATIVO%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%22119.5%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%22119.5%22 width=%2275.5%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3NTAgNTAwIj48cmVjdCB3aWR0aD0iNzUwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2M2MGIxZSIvPjxyZWN0IHdpZHRoPSI3NTAiIGhlaWdodD0iMjUwIiB5PSIxMjUiIGZpbGw9IiNmZmM0MDAiLz48L3N2Zz4=%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22682.5%22 y=%22175%22 textLength=%22785%22%3ECASTELLANO%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221572.5%22 y=%22175%22 textLength=%22515%22 font-weight=%22bold%22%3ENATIVO%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Castellano: Nativo"><img class="t-en" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22168.25%22 height=%2228%22 role=%22img%22 aria-label=%22SPANISH: NATIVE%22%3E%3Ctitle%3ESPANISH: NATIVE%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2294.75%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%2294.75%22 width=%2273.5%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3NTAgNTAwIj48cmVjdCB3aWR0aD0iNzUwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2M2MGIxZSIvPjxyZWN0IHdpZHRoPSI3NTAiIGhlaWdodD0iMjUwIiB5PSIxMjUiIGZpbGw9IiNmZmM0MDAiLz48L3N2Zz4=%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22558.75%22 y=%22175%22 textLength=%22537.5%22%3ESPANISH%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221315%22 y=%22175%22 textLength=%22495%22 font-weight=%22bold%22%3ENATIVE%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Spanish: Native">
-          <img class="t-es" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22171.25%22 height=%2228%22 role=%22img%22 aria-label=%22CATAL%C3%81N: NATIVO%22%3E%3Ctitle%3ECATAL%C3%81N: NATIVO%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2295.75%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%2295.75%22 width=%2275.5%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MTAgNTQwIj48cmVjdCB3aWR0aD0iODEwIiBoZWlnaHQ9IjU0MCIgZmlsbD0iI0ZDREQwOSIvPjxwYXRoIHN0cm9rZT0iI0RBMTIxQSIgc3Ryb2tlLXdpZHRoPSI2MCIgZD0iTTAgOTBoODEwTTAgMjEwaDgxME0wIDMzMGg4MTBNMCA0NTBoODEwIi8%2BPC9zdmc%2B%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22563.75%22 y=%22175%22 textLength=%22547.5%22%3ECATAL%C3%81N%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221335%22 y=%22175%22 textLength=%22515%22 font-weight=%22bold%22%3ENATIVO%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Catalán: Nativo"><img class="t-en" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22169.25%22 height=%2228%22 role=%22img%22 aria-label=%22CATALAN: NATIVE%22%3E%3Ctitle%3ECATALAN: NATIVE%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2295.75%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%2295.75%22 width=%2273.5%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MTAgNTQwIj48cmVjdCB3aWR0aD0iODEwIiBoZWlnaHQ9IjU0MCIgZmlsbD0iI0ZDREQwOSIvPjxwYXRoIHN0cm9rZT0iI0RBMTIxQSIgc3Ryb2tlLXdpZHRoPSI2MCIgZD0iTTAgOTBoODEwTTAgMjEwaDgxME0wIDMzMGg4MTBNMCA0NTBoODEwIi8%2BPC9zdmc%2B%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22563.75%22 y=%22175%22 textLength=%22547.5%22%3ECATALAN%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221325%22 y=%22175%22 textLength=%22495%22 font-weight=%22bold%22%3ENATIVE%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Catalan: Native">
-          <img class="t-es" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22127%22 height=%2228%22 role=%22img%22 aria-label=%22INGL%C3%89S: B2%22%3E%3Ctitle%3EINGL%C3%89S: B2%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2286.5%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%2286.5%22 width=%2240.5%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MCAzMCI%2BPGNsaXBQYXRoIGlkPSJzIj48cGF0aCBkPSJNMCwwIHYzMCBoNjAgdi0zMCB6Ii8%2BPC9jbGlwUGF0aD48Y2xpcFBhdGggaWQ9InQiPjxwYXRoIGQ9Ik0zMCwxNSBoMzAgdjE1IHogdjE1IGgtMzAgeiBoLTMwIHYtMTUgeiB2LTE1IGgzMCB6Ii8%2BPC9jbGlwUGF0aD48ZyBjbGlwLXBhdGg9InVybCgjcykiPjxwYXRoIGQ9Ik0wLDAgdjMwIGg2MCB2LTMwIHoiIGZpbGw9IiMwMTIxNjkiLz48cGF0aCBkPSJNMCwwIEw2MCwzMCBNNjAsMCBMMCwzMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjYiLz48cGF0aCBkPSJNMCwwIEw2MCwzMCBNNjAsMCBMMCwzMCIgY2xpcC1wYXRoPSJ1cmwoI3QpIiBzdHJva2U9IiNDODEwMkUiIHN0cm9rZS13aWR0aD0iNCIvPjxwYXRoIGQ9Ik0zMCwwIHYzMCBNMCwxNSBoNjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik0zMCwwIHYzMCBNMCwxNSBoNjAiIHN0cm9rZT0iI0M4MTAyRSIgc3Ryb2tlLXdpZHRoPSI2Ii8%2BPC9nPjwvc3ZnPg==%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22517.5%22 y=%22175%22 textLength=%22455%22%3EINGL%C3%89S%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221067.5%22 y=%22175%22 textLength=%22165%22 font-weight=%22bold%22%3EB2%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Inglés: B2"><img class="t-en" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22135.25%22 height=%2228%22 role=%22img%22 aria-label=%22ENGLISH: B2%22%3E%3Ctitle%3EENGLISH: B2%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2294.75%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%2294.75%22 width=%2240.5%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MCAzMCI%2BPGNsaXBQYXRoIGlkPSJzIj48cGF0aCBkPSJNMCwwIHYzMCBoNjAgdi0zMCB6Ii8%2BPC9jbGlwUGF0aD48Y2xpcFBhdGggaWQ9InQiPjxwYXRoIGQ9Ik0zMCwxNSBoMzAgdjE1IHogdjE1IGgtMzAgeiBoLTMwIHYtMTUgeiB2LTE1IGgzMCB6Ii8%2BPC9jbGlwUGF0aD48ZyBjbGlwLXBhdGg9InVybCgjcykiPjxwYXRoIGQ9Ik0wLDAgdjMwIGg2MCB2LTMwIHoiIGZpbGw9IiMwMTIxNjkiLz48cGF0aCBkPSJNMCwwIEw2MCwzMCBNNjAsMCBMMCwzMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjYiLz48cGF0aCBkPSJNMCwwIEw2MCwzMCBNNjAsMCBMMCwzMCIgY2xpcC1wYXRoPSJ1cmwoI3QpIiBzdHJva2U9IiNDODEwMkUiIHN0cm9rZS13aWR0aD0iNCIvPjxwYXRoIGQ9Ik0zMCwwIHYzMCBNMCwxNSBoNjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik0zMCwwIHYzMCBNMCwxNSBoNjAiIHN0cm9rZT0iI0M4MTAyRSIgc3Ryb2tlLXdpZHRoPSI2Ii8%2BPC9nPjwvc3ZnPg==%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22558.75%22 y=%22175%22 textLength=%22537.5%22%3EENGLISH%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221150%22 y=%22175%22 textLength=%22165%22 font-weight=%22bold%22%3EB2%3C/text%3E%3C/g%3E%3C/svg%3E" alt="English: B2">
+          <img class="t-es" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22195%22 height=%2228%22 role=%22img%22 aria-label=%22CASTELLANO: NATIVO%22%3E%3Ctitle%3ECASTELLANO: NATIVO%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%22119.5%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%22119.5%22 width=%2275.5%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3NTAgNTAwIj48cmVjdCB3aWR0aD0iNzUwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2M2MGIxZSIvPjxyZWN0IHdpZHRoPSI3NTAiIGhlaWdodD0iMjUwIiB5PSIxMjUiIGZpbGw9IiNmZmM0MDAiLz48L3N2Zz4=%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22682.5%22 y=%22175%22 textLength=%22785%22%3ECASTELLANO%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221572.5%22 y=%22175%22 textLength=%22515%22 font-weight=%22bold%22%3ENATIVO%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Castellano: Nativo"><img class="t-en" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22168.25%22 height=%2228%22 role=%22img%22 aria-label=%22SPANISH: NATIVE%22%3E%3Ctitle%3ESPANISH: NATIVE%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2294.75%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%2294.75%22 width=%2273.5%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3NTAgNTAwIj48cmVjdCB3aWR0aD0iNzUwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2M2MGIxZSIvPjxyZWN0IHdpZHRoPSI3NTAiIGhlaWdodD0iMjUwIiB5PSIxMjUiIGZpbGw9IiNmZmM0MDAiLz48L3N2Zz4=%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22558.75%22 y=%22175%22 textLength=%22537.5%22%3ESPANISH%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221315%22 y=%22175%22 textLength=%22495%22 font-weight=%22bold%22%3ENATIVE%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Spanish: Native"><img class="t-ca" lang="ca" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22167.5%22 height=%2228%22 role=%22img%22 aria-label=%22CASTELL%C3%80: NATIU%22%3E%3Ctitle%3ECASTELL%C3%80: NATIU%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%22101.25%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%22101.25%22 width=%2266.25%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3NTAgNTAwIj48cmVjdCB3aWR0aD0iNzUwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2M2MGIxZSIvPjxyZWN0IHdpZHRoPSI3NTAiIGhlaWdodD0iMjUwIiB5PSIxMjUiIGZpbGw9IiNmZmM0MDAiLz48L3N2Zz4=%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22591.25%22 y=%22175%22 textLength=%22602.5%22%3ECASTELL%C3%80%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221343.75%22 y=%22175%22 textLength=%22422.5%22 font-weight=%22bold%22%3ENATIU%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Castellà: Natiu">
+          <img class="t-es" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22171.25%22 height=%2228%22 role=%22img%22 aria-label=%22CATAL%C3%81N: NATIVO%22%3E%3Ctitle%3ECATAL%C3%81N: NATIVO%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2295.75%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%2295.75%22 width=%2275.5%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MTAgNTQwIj48cmVjdCB3aWR0aD0iODEwIiBoZWlnaHQ9IjU0MCIgZmlsbD0iI0ZDREQwOSIvPjxwYXRoIHN0cm9rZT0iI0RBMTIxQSIgc3Ryb2tlLXdpZHRoPSI2MCIgZD0iTTAgOTBoODEwTTAgMjEwaDgxME0wIDMzMGg4MTBNMCA0NTBoODEwIi8%2BPC9zdmc%2B%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22563.75%22 y=%22175%22 textLength=%22547.5%22%3ECATAL%C3%81N%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221335%22 y=%22175%22 textLength=%22515%22 font-weight=%22bold%22%3ENATIVO%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Catalán: Nativo"><img class="t-en" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22169.25%22 height=%2228%22 role=%22img%22 aria-label=%22CATALAN: NATIVE%22%3E%3Ctitle%3ECATALAN: NATIVE%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2295.75%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%2295.75%22 width=%2273.5%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MTAgNTQwIj48cmVjdCB3aWR0aD0iODEwIiBoZWlnaHQ9IjU0MCIgZmlsbD0iI0ZDREQwOSIvPjxwYXRoIHN0cm9rZT0iI0RBMTIxQSIgc3Ryb2tlLXdpZHRoPSI2MCIgZD0iTTAgOTBoODEwTTAgMjEwaDgxME0wIDMzMGg4MTBNMCA0NTBoODEwIi8%2BPC9zdmc%2B%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22563.75%22 y=%22175%22 textLength=%22547.5%22%3ECATALAN%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221325%22 y=%22175%22 textLength=%22495%22 font-weight=%22bold%22%3ENATIVE%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Catalan: Native"><img class="t-ca" lang="ca" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22153.25%22 height=%2228%22 role=%22img%22 aria-label=%22CATAL%C3%80: NATIU%22%3E%3Ctitle%3ECATAL%C3%80: NATIU%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2287%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%2287%22 width=%2266.25%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MTAgNTQwIj48cmVjdCB3aWR0aD0iODEwIiBoZWlnaHQ9IjU0MCIgZmlsbD0iI0ZDREQwOSIvPjxwYXRoIHN0cm9rZT0iI0RBMTIxQSIgc3Ryb2tlLXdpZHRoPSI2MCIgZD0iTTAgOTBoODEwTTAgMjEwaDgxME0wIDMzMGg4MTBNMCA0NTBoODEwIi8%2BPC9zdmc%2B%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22520%22 y=%22175%22 textLength=%22460%22%3ECATAL%C3%80%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221201.25%22 y=%22175%22 textLength=%22422.5%22 font-weight=%22bold%22%3ENATIU%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Català: Natiu">
+          <img class="t-es" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22127%22 height=%2228%22 role=%22img%22 aria-label=%22INGL%C3%89S: B2%22%3E%3Ctitle%3EINGL%C3%89S: B2%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2286.5%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%2286.5%22 width=%2240.5%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MCAzMCI%2BPGNsaXBQYXRoIGlkPSJzIj48cGF0aCBkPSJNMCwwIHYzMCBoNjAgdi0zMCB6Ii8%2BPC9jbGlwUGF0aD48Y2xpcFBhdGggaWQ9InQiPjxwYXRoIGQ9Ik0zMCwxNSBoMzAgdjE1IHogdjE1IGgtMzAgeiBoLTMwIHYtMTUgeiB2LTE1IGgzMCB6Ii8%2BPC9jbGlwUGF0aD48ZyBjbGlwLXBhdGg9InVybCgjcykiPjxwYXRoIGQ9Ik0wLDAgdjMwIGg2MCB2LTMwIHoiIGZpbGw9IiMwMTIxNjkiLz48cGF0aCBkPSJNMCwwIEw2MCwzMCBNNjAsMCBMMCwzMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjYiLz48cGF0aCBkPSJNMCwwIEw2MCwzMCBNNjAsMCBMMCwzMCIgY2xpcC1wYXRoPSJ1cmwoI3QpIiBzdHJva2U9IiNDODEwMkUiIHN0cm9rZS13aWR0aD0iNCIvPjxwYXRoIGQ9Ik0zMCwwIHYzMCBNMCwxNSBoNjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik0zMCwwIHYzMCBNMCwxNSBoNjAiIHN0cm9rZT0iI0M4MTAyRSIgc3Ryb2tlLXdpZHRoPSI2Ii8%2BPC9nPjwvc3ZnPg==%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22517.5%22 y=%22175%22 textLength=%22455%22%3EINGL%C3%89S%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221067.5%22 y=%22175%22 textLength=%22165%22 font-weight=%22bold%22%3EB2%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Inglés: B2"><img class="t-en" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22135.25%22 height=%2228%22 role=%22img%22 aria-label=%22ENGLISH: B2%22%3E%3Ctitle%3EENGLISH: B2%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2294.75%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%2294.75%22 width=%2240.5%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MCAzMCI%2BPGNsaXBQYXRoIGlkPSJzIj48cGF0aCBkPSJNMCwwIHYzMCBoNjAgdi0zMCB6Ii8%2BPC9jbGlwUGF0aD48Y2xpcFBhdGggaWQ9InQiPjxwYXRoIGQ9Ik0zMCwxNSBoMzAgdjE1IHogdjE1IGgtMzAgeiBoLTMwIHYtMTUgeiB2LTE1IGgzMCB6Ii8%2BPC9jbGlwUGF0aD48ZyBjbGlwLXBhdGg9InVybCgjcykiPjxwYXRoIGQ9Ik0wLDAgdjMwIGg2MCB2LTMwIHoiIGZpbGw9IiMwMTIxNjkiLz48cGF0aCBkPSJNMCwwIEw2MCwzMCBNNjAsMCBMMCwzMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjYiLz48cGF0aCBkPSJNMCwwIEw2MCwzMCBNNjAsMCBMMCwzMCIgY2xpcC1wYXRoPSJ1cmwoI3QpIiBzdHJva2U9IiNDODEwMkUiIHN0cm9rZS13aWR0aD0iNCIvPjxwYXRoIGQ9Ik0zMCwwIHYzMCBNMCwxNSBoNjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik0zMCwwIHYzMCBNMCwxNSBoNjAiIHN0cm9rZT0iI0M4MTAyRSIgc3Ryb2tlLXdpZHRoPSI2Ii8%2BPC9nPjwvc3ZnPg==%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22558.75%22 y=%22175%22 textLength=%22537.5%22%3EENGLISH%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221150%22 y=%22175%22 textLength=%22165%22 font-weight=%22bold%22%3EB2%3C/text%3E%3C/g%3E%3C/svg%3E" alt="English: B2"><img class="t-ca" lang="ca" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22129.25%22 height=%2228%22 role=%22img%22 aria-label=%22ANGL%C3%88S: B2%22%3E%3Ctitle%3EANGL%C3%88S: B2%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%2288.75%22 height=%2228%22 fill=%22%231e293b%22/%3E%3Crect x=%2288.75%22 width=%2240.5%22 height=%2228%22 fill=%22%2360a5fa%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MCAzMCI%2BPGNsaXBQYXRoIGlkPSJzIj48cGF0aCBkPSJNMCwwIHYzMCBoNjAgdi0zMCB6Ii8%2BPC9jbGlwUGF0aD48Y2xpcFBhdGggaWQ9InQiPjxwYXRoIGQ9Ik0zMCwxNSBoMzAgdjE1IHogdjE1IGgtMzAgeiBoLTMwIHYtMTUgeiB2LTE1IGgzMCB6Ii8%2BPC9jbGlwUGF0aD48ZyBjbGlwLXBhdGg9InVybCgjcykiPjxwYXRoIGQ9Ik0wLDAgdjMwIGg2MCB2LTMwIHoiIGZpbGw9IiMwMTIxNjkiLz48cGF0aCBkPSJNMCwwIEw2MCwzMCBNNjAsMCBMMCwzMCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjYiLz48cGF0aCBkPSJNMCwwIEw2MCwzMCBNNjAsMCBMMCwzMCIgY2xpcC1wYXRoPSJ1cmwoI3QpIiBzdHJva2U9IiNDODEwMkUiIHN0cm9rZS13aWR0aD0iNCIvPjxwYXRoIGQ9Ik0zMCwwIHYzMCBNMCwxNSBoNjAiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik0zMCwwIHYzMCBNMCwxNSBoNjAiIHN0cm9rZT0iI0M4MTAyRSIgc3Ryb2tlLXdpZHRoPSI2Ii8%2BPC9nPjwvc3ZnPg==%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22528.75%22 y=%22175%22 textLength=%22477.5%22%3EANGL%C3%88S%3C/text%3E%3Ctext transform=%22scale(.1)%22 x=%221090%22 y=%22175%22 textLength=%22165%22 font-weight=%22bold%22%3EB2%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Anglès: B2">
         </div>
       </div>
     </div>
@@ -1531,48 +1546,48 @@
 
 <section class="alt reveal" id="certificados">
   <div class="wrap">
-    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">certificados</span><span class="t-en" lang="en">certificates</span></span><h2 data-i18n="certs.title"><span class="t-es">Certificados</span><span class="t-en" lang="en">Certificates</span></h2></div>
+    <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">certificados</span><span class="t-en" lang="en">certificates</span><span class="t-ca" lang="ca">certificats</span></span><h2 data-i18n="certs.title"><span class="t-es">Certificados</span><span class="t-en" lang="en">Certificates</span><span class="t-ca" lang="ca">Certificats</span></h2></div>
     <div class="cert-list">
       <a class="cert-item" href="https://certificates.cs50.io/64a2128b-6865-4b69-8611-eed262fa5261.pdf?size=letter" target="_blank" rel="noopener">
         <div class="cert-logo logo-harvard" role="img" aria-label="Harvard University"></div>
         <div class="cert-info"><div class="name">CS50's Introduction to Databases with SQL</div><div class="issuer">Harvard University</div></div>
-        <div class="date" data-i18n="d.aug26"><span class="t-es">Agosto 2026</span><span class="t-en" lang="en">August 2026</span></div>
+        <div class="date" data-i18n="d.aug26"><span class="t-es">Agosto 2026</span><span class="t-en" lang="en">August 2026</span><span class="t-ca" lang="ca">Agost 2026</span></div>
         <span class="cert-go" aria-hidden="true"><i class="ic ic-arrow-up-right"></i></span>
       </a>
       <a class="cert-item" href="https://certificates.cs50.io/cecfb49b-3e8c-481c-b594-dce58a4ff15c.pdf?size=letter" target="_blank" rel="noopener">
         <div class="cert-logo logo-harvard" role="img" aria-label="Harvard University"></div>
         <div class="cert-info"><div class="name">CS50's Introduction to Programming with Python</div><div class="issuer">Harvard University</div></div>
-        <div class="date" data-i18n="d.aug26"><span class="t-es">Agosto 2026</span><span class="t-en" lang="en">August 2026</span></div>
+        <div class="date" data-i18n="d.aug26"><span class="t-es">Agosto 2026</span><span class="t-en" lang="en">August 2026</span><span class="t-ca" lang="ca">Agost 2026</span></div>
         <span class="cert-go" aria-hidden="true"><i class="ic ic-arrow-up-right"></i></span>
       </a>
       <a class="cert-item" href="https://www.credly.com/badges/a4c47f2b-6893-4578-a250-7402a80361a0/linked_in_profile" target="_blank" rel="noopener">
         <div class="cert-logo logo-ibm" role="img" aria-label="IBM"></div>
         <div class="cert-info"><div class="name">AI Fundamentals: Language and Vision in AI</div><div class="issuer">IBM Skills</div></div>
-        <div class="date" data-i18n="d.jul26"><span class="t-es">Julio 2026</span><span class="t-en" lang="en">July 2026</span></div>
+        <div class="date" data-i18n="d.jul26"><span class="t-es">Julio 2026</span><span class="t-en" lang="en">July 2026</span><span class="t-ca" lang="ca">Juliol 2026</span></div>
         <span class="cert-go" aria-hidden="true"><i class="ic ic-arrow-up-right"></i></span>
       </a>
       <a class="cert-item" href="https://www.credly.com/badges/341167a4-3487-4b36-9940-a4e28f1ff77d/linked_in_profile" target="_blank" rel="noopener">
         <div class="cert-logo logo-ibm" role="img" aria-label="IBM"></div>
         <div class="cert-info"><div class="name">AI Fundamentals: Foundations for Understanding AI</div><div class="issuer">IBM Skills</div></div>
-        <div class="date" data-i18n="d.jul26"><span class="t-es">Julio 2026</span><span class="t-en" lang="en">July 2026</span></div>
+        <div class="date" data-i18n="d.jul26"><span class="t-es">Julio 2026</span><span class="t-en" lang="en">July 2026</span><span class="t-ca" lang="ca">Juliol 2026</span></div>
         <span class="cert-go" aria-hidden="true"><i class="ic ic-arrow-up-right"></i></span>
       </a>
       <a class="cert-item" href="https://www.credly.com/badges/1476ab85-0fe6-4bcd-84dd-35269c6ad5f7/linked_in_profile" target="_blank" rel="noopener">
         <div class="cert-logo logo-cisco" role="img" aria-label="Cisco"></div>
         <div class="cert-info"><div class="name">Introduction to Cybersecurity</div><div class="issuer">Cisco Networking Academy</div></div>
-        <div class="date" data-i18n="d.jul26"><span class="t-es">Julio 2026</span><span class="t-en" lang="en">July 2026</span></div>
+        <div class="date" data-i18n="d.jul26"><span class="t-es">Julio 2026</span><span class="t-en" lang="en">July 2026</span><span class="t-ca" lang="ca">Juliol 2026</span></div>
         <span class="cert-go" aria-hidden="true"><i class="ic ic-arrow-up-right"></i></span>
       </a>
       <a class="cert-item" href="https://www.credly.com/badges/317d11f6-1db6-4be0-95b2-0c6efd8ab4e7/linked_in_profile" target="_blank" rel="noopener">
         <div class="cert-logo logo-cisco" role="img" aria-label="Cisco"></div>
         <div class="cert-info"><div class="name">Networking Devices and Initial Configuration</div><div class="issuer">Cisco Networking Academy</div></div>
-        <div class="date" data-i18n="d.jul26"><span class="t-es">Julio 2026</span><span class="t-en" lang="en">July 2026</span></div>
+        <div class="date" data-i18n="d.jul26"><span class="t-es">Julio 2026</span><span class="t-en" lang="en">July 2026</span><span class="t-ca" lang="ca">Juliol 2026</span></div>
         <span class="cert-go" aria-hidden="true"><i class="ic ic-arrow-up-right"></i></span>
       </a>
       <a class="cert-item" href="https://www.credly.com/badges/3eae1ba5-b29b-430c-8b2e-b17aedb681a2/linked_in_profile" target="_blank" rel="noopener">
         <div class="cert-logo logo-cisco" role="img" aria-label="Cisco"></div>
         <div class="cert-info"><div class="name">Networking Basics</div><div class="issuer">Cisco Networking Academy</div></div>
-        <div class="date" data-i18n="d.jul26"><span class="t-es">Julio 2026</span><span class="t-en" lang="en">July 2026</span></div>
+        <div class="date" data-i18n="d.jul26"><span class="t-es">Julio 2026</span><span class="t-en" lang="en">July 2026</span><span class="t-ca" lang="ca">Juliol 2026</span></div>
         <span class="cert-go" aria-hidden="true"><i class="ic ic-arrow-up-right"></i></span>
       </a>
     </div>
@@ -1580,22 +1595,22 @@
 </section>
 </main>
 <footer>
-  <a class="to-top" id="toTop" href="#top"><i class="ic ic-arrow-up" aria-hidden="true"></i><span class="sr"><span class="t-es">Volver arriba</span><span class="t-en" lang="en">Back to top</span></span></a>
+  <a class="to-top" id="toTop" href="#top"><i class="ic ic-arrow-up" aria-hidden="true"></i><span class="sr"><span class="t-es">Volver arriba</span><span class="t-en" lang="en">Back to top</span><span class="t-ca" lang="ca">Tornar a dalt</span></span></a>
   <div class="footer-inner">
     <div>
       <div class="fname"><span class="logo-term" aria-hidden="true">&gt;_ DSA</span>Daniel Suárez Angosto</div>
-      <div class="copyright">&copy; <span id="year">2026</span> — <span data-i18n="footer.rights"><span class="t-es">Todos los derechos reservados</span><span class="t-en" lang="en">All rights reserved</span></span></div>
+      <div class="copyright">&copy; <span id="year">2026</span> — <span data-i18n="footer.rights"><span class="t-es">Todos los derechos reservados</span><span class="t-en" lang="en">All rights reserved</span><span class="t-ca" lang="ca">Tots els drets reservats</span></span></div>
     </div>
     <div class="footer-links">
       <button class="term-open" type="button" id="termOpen" aria-haspopup="dialog"><span class="term-open-ic" aria-hidden="true">&gt;_</span>Terminal</button>
-      <button class="dl-cv" type="button" id="dlCv"><i class="ic ic-download-simple" aria-hidden="true"></i><span class="t-es">Descargar CV</span><span class="t-en" lang="en">Download CV</span></button>
+      <button class="dl-cv" type="button" id="dlCv"><i class="ic ic-download-simple" aria-hidden="true"></i><span class="t-es">Descargar CV</span><span class="t-en" lang="en">Download CV</span><span class="t-ca" lang="ca">Descarregar CV</span></button>
       <a href="mailto:daniel.suarez.angosto@gmail.com" aria-label="Email"><i class="ic ic-envelope-simple"></i></a>
       <a href="https://github.com/dasuarezang" target="_blank" rel="noopener" aria-label="GitHub"><i class="ic ic-github-logo"></i></a>
       <a class="badge-link" href="https://linkedin.com/in/daniel-suarez-angosto" target="_blank" rel="noopener" aria-label="LinkedIn">
         <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22111%22 height=%2228%22 role=%22img%22 aria-label=%22LINKEDIN%22%3E%3Ctitle%3ELINKEDIN%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%22111%22 height=%2228%22 fill=%22%230077b5%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2MtMS4xNDQgMC0yLjA2My0uOTI2LTIuMDYzLTIuMDY1IDAtMS4xMzguOTItMi4wNjMgMi4wNjMtMi4wNjMgMS4xNCAwIDIuMDY0LjkyNSAyLjA2NCAyLjA2MyAwIDEuMTM5LS45MjUgMi4wNjUtMi4wNjQgMi4wNjV6bTEuNzgyIDEzLjAxOUgzLjU1NVY5aDMuNTY0djExLjQ1MnpNMjIuMjI1IDBIMS43NzFDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzc0IDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPg==%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22655%22 y=%22175%22 textLength=%22670%22 font-weight=%22bold%22%3ELINKEDIN%3C/text%3E%3C/g%3E%3C/svg%3E" alt="LinkedIn">
       </a>
     </div>
-    <button class="term-hint" type="button" id="termHint"><span class="t-es">psst… pulsa <kbd>º</kbd> en cualquier momento para abrir la terminal</span><span class="t-en" lang="en">psst… press <kbd>`</kbd> anytime to open the terminal</span></button>
+    <button class="term-hint" type="button" id="termHint"><span class="t-es">psst… pulsa <kbd>º</kbd> en cualquier momento para abrir la terminal</span><span class="t-en" lang="en">psst… press <kbd>`</kbd> anytime to open the terminal</span><span class="t-ca" lang="ca">psst… prem <kbd>º</kbd> en qualsevol moment per obrir el terminal</span></button>
   </div>
 </footer>
 
@@ -1616,29 +1631,28 @@
 
   // Idioma: recuerda la elección y actualiza título, descripción y lang del documento
   (function () {
-    const radioEs = document.getElementById('lang-es');
-    const radioEn = document.getElementById('lang-en');
+    const radios = { es: document.getElementById('lang-es'), en: document.getElementById('lang-en'), ca: document.getElementById('lang-ca') };
     const descMeta = document.querySelector('meta[name="description"]');
     const META = {
-      es: { title: document.title, desc: descMeta.content, switchLabel: 'Switch to English' },
+      es: { title: document.title, desc: descMeta.content },
       en: { title: 'Daniel Suárez Angosto — Future Network Engineer',
-            desc: 'CV of Daniel Suárez Angosto, Telecommunications Engineering student (Telematics) and future Network Engineer.',
-            switchLabel: 'Cambiar a castellano' }
+            desc: 'CV of Daniel Suárez Angosto, Telecommunications Engineering student (Telematics) and future Network Engineer.' },
+      ca: { title: 'Daniel Suárez Angosto — Futur Network Engineer',
+            desc: 'CV de Daniel Suárez Angosto, estudiant d’Enginyeria de Telecomunicació (Telemàtica) i futur Network Engineer.' }
     };
     function apply(save) {
-      const lang = radioEn.checked ? 'en' : 'es';
+      const lang = Object.keys(radios).find(l => radios[l].checked) || 'es';
       document.documentElement.lang = lang;
       document.title = META[lang].title;
       descMeta.content = META[lang].desc;
       if (save) { try { localStorage.setItem('cv-lang', lang); } catch (e) {} }
     }
-    radioEs.addEventListener('change', () => apply(true));
-    radioEn.addEventListener('change', () => apply(true));
+    Object.values(radios).forEach(r => r.addEventListener('change', () => apply(true)));
     let saved = null;
     try { saved = localStorage.getItem('cv-lang'); } catch (e) {}
-    // Sin preferencia guardada: inglés si el navegador no está en castellano ni catalán
-    const local = (navigator.languages || [navigator.language || '']).some(l => /^(es|ca)\b/i.test(l));
-    if (saved === 'en' || (saved === null && !local)) radioEn.checked = true;
+    // Sin preferencia guardada: el primer idioma del navegador que sea castellano o catalán; si no hay ninguno, inglés
+    const pref = (navigator.languages || [navigator.language || '']).map(l => (/^(es|ca)\b/i.exec(l) || [])[1]).find(Boolean);
+    radios[radios[saved] ? saved : (pref ? pref.toLowerCase() : 'en')].checked = true;
     apply(false);
   })();
 
@@ -1688,7 +1702,7 @@
     const btn = document.getElementById('dlCv');
     btn.addEventListener('click', () => {
       const prev = document.title;
-      document.title = 'CV - Daniel Suárez Angosto' + (document.documentElement.lang === 'en' ? ' (EN)' : '');
+      document.title = 'CV - Daniel Suárez Angosto' + ({ en: ' (EN)', ca: ' (CA)' }[document.documentElement.lang] || '');
       const restore = () => { document.title = prev; window.removeEventListener('afterprint', restore); };
       window.addEventListener('afterprint', restore);
       window.print();
@@ -1725,8 +1739,8 @@
     let timer, pending = false;
     const hide = () => toast.classList.remove('show');
     const show = () => {
-      title.textContent = document.documentElement.lang === 'en'
-        ? 'Email copied to clipboard' : 'Correo copiado al portapapeles';
+      title.textContent = { en: 'Email copied to clipboard', ca: 'Correu copiat al porta-retalls' }[document.documentElement.lang]
+        || 'Correo copiado al portapapeles';
       addr.textContent = EMAIL;
       // Reinicia la entrada si ya estaba visible (varios clics seguidos)
       toast.classList.remove('show'); void toast.offsetWidth; toast.classList.add('show');
@@ -1924,7 +1938,7 @@
     const EMAIL = 'daniel.suarez.angosto@gmail.com';
     const LINKEDIN = 'https://linkedin.com/in/daniel-suarez-angosto';
     const GITHUB = 'https://github.com/dasuarezang';
-    const lang = () => (document.documentElement.lang === 'en' ? 'en' : 'es');
+    const lang = () => ({ en: 'en', ca: 'ca' }[document.documentElement.lang] || 'es');
     const S = {
       es: {
         title: 'daniel@cv: ~', close: 'Cerrar terminal', input: 'Comando',
@@ -1934,12 +1948,12 @@
         help: [['whoami', 'quién soy'], ['about', 'sobre mí'], ['education', 'formación'], ['experience', 'experiencia'],
                ['traceroute', 'mi trayectoria, salto a salto'], ['projects', 'proyectos'], ['skills', 'habilidades'],
                ['certs', 'certificados'], ['contact', 'cómo contactarme'], ['email', 'copia mi correo'], ['cv', 'descarga el CV en PDF'],
-               ['ping', 'comprueba que sigo en línea'], ['hire', 'ya sabes qué hace ;)'], ['lang es|en', 'cambia el idioma'],
+               ['ping', 'comprueba que sigo en línea'], ['hire', 'ya sabes qué hace ;)'], ['lang es|en|ca', 'cambia el idioma'],
                ['clear', 'limpia la pantalla'], ['exit', 'cierra la terminal']],
         helpHead: 'Comandos disponibles:', helpFoot: '↑ ↓ para el historial · Tab para autocompletar · Esc para salir', helpFootTouch: 'Toca un comando de abajo para ejecutarlo.',
         copied: 'Correo copiado al portapapeles.', copyFail: 'No he podido copiarlo; aquí lo tienes:',
         cv: 'Abriendo el diálogo para guardar el CV en PDF…', opening: 'Abriendo',
-        langOk: 'Idioma cambiado a castellano.', langUse: 'Uso: lang es | lang en',
+        langOk: 'Idioma cambiado a castellano.', langUse: 'Uso: lang es | lang en | lang ca', from: 'desde',
         trHead: 'traceroute a daniel (cv), 30 saltos máx.', trNext: 'siguiente salto: tu empresa',
         ping: h => `PING ${h}: 56 bytes de datos`, pingSum: (h, n) => `--- estadísticas de ping a ${h} ---\n${n} paquetes enviados, ${n} recibidos, 0% perdidos`,
         hire: ['[sudo] contraseña para recruiter: ********', 'Acceso concedido. Abriendo tu correo con un mensaje para mí…'],
@@ -1955,18 +1969,39 @@
         help: [['whoami', 'who I am'], ['about', 'about me'], ['education', 'education'], ['experience', 'experience'],
                ['traceroute', 'my path, hop by hop'], ['projects', 'projects'], ['skills', 'skills'],
                ['certs', 'certificates'], ['contact', 'how to reach me'], ['email', 'copy my email'], ['cv', 'download the CV as PDF'],
-               ['ping', 'check I’m still online'], ['hire', 'you know what it does ;)'], ['lang es|en', 'switch language'],
+               ['ping', 'check I’m still online'], ['hire', 'you know what it does ;)'], ['lang es|en|ca', 'switch language'],
                ['clear', 'clear the screen'], ['exit', 'close the terminal']],
         helpHead: 'Available commands:', helpFoot: '↑ ↓ for history · Tab to autocomplete · Esc to quit', helpFootTouch: 'Tap a command below to run it.',
         copied: 'Email copied to clipboard.', copyFail: 'Couldn’t copy it; here it is:',
         cv: 'Opening the dialog to save the CV as PDF…', opening: 'Opening',
-        langOk: 'Language switched to English.', langUse: 'Usage: lang es | lang en',
+        langOk: 'Language switched to English.', langUse: 'Usage: lang es | lang en | lang ca', from: 'from',
         trHead: 'traceroute to daniel (cv), 30 hops max', trNext: 'next hop: your company',
         ping: h => `PING ${h}: 56 data bytes`, pingSum: (h, n) => `--- ${h} ping statistics ---\n${n} packets transmitted, ${n} received, 0% packet loss`,
         hire: ['[sudo] password for recruiter: ********', 'Access granted. Opening your email with a message for me…'],
         hireSubject: 'Opportunity for Daniel Suárez Angosto',
         chips: ['help', 'whoami', 'traceroute', 'projects', 'contact', 'cv'],
         role: 'Telecommunications student', where: 'Location', links: 'Links'
+      },
+      ca: {
+        title: 'daniel@cv: ~', close: 'Tancar el terminal', input: 'Ordre',
+        welcome: ['Terminal de Daniel Suárez Angosto.', "Escriu 'help' per veure les ordres, o prem-ne una de sota."],
+        welcomeTouch: ['Terminal de Daniel Suárez Angosto.', 'Toca qualsevol ordre de sota per executar-la.'],
+        notFound: c => `${c}: ordre no trobada. Escriu 'help'.`,
+        help: [['whoami', 'qui soc'], ['about', 'sobre mi'], ['education', 'formació'], ['experience', 'experiència'],
+               ['traceroute', 'la meva trajectòria, salt a salt'], ['projects', 'projectes'], ['skills', 'habilitats'],
+               ['certs', 'certificats'], ['contact', 'com contactar-me'], ['email', 'copia el meu correu'], ['cv', 'descarrega el CV en PDF'],
+               ['ping', 'comprova que segueixo en línia'], ['hire', 'ja saps què fa ;)'], ['lang es|en|ca', 'canvia l’idioma'],
+               ['clear', 'neteja la pantalla'], ['exit', 'tanca el terminal']],
+        helpHead: 'Ordres disponibles:', helpFoot: '↑ ↓ per a l’historial · Tab per autocompletar · Esc per sortir', helpFootTouch: 'Toca una ordre de sota per executar-la.',
+        copied: 'Correu copiat al porta-retalls.', copyFail: 'No l’he pogut copiar; aquí el tens:',
+        cv: 'Obrint el diàleg per desar el CV en PDF…', opening: 'Obrint',
+        langOk: 'Idioma canviat a català.', langUse: 'Ús: lang es | lang en | lang ca', from: 'des de',
+        trHead: 'traceroute a daniel (cv), 30 salts màx.', trNext: 'següent salt: la teva empresa',
+        ping: h => `PING ${h}: 56 bytes de dades`, pingSum: (h, n) => `--- estadístiques de ping a ${h} ---\n${n} paquets enviats, ${n} rebuts, 0% perduts`,
+        hire: ['[sudo] contrasenya per a recruiter: ********', 'Accés concedit. Obrint el teu correu amb un missatge per a mi…'],
+        hireSubject: 'Oportunitat per a Daniel Suárez Angosto',
+        chips: ['help', 'whoami', 'traceroute', 'projects', 'contact', 'cv'],
+        role: 'Estudiant de Telecomunicacions', where: 'Ubicació', links: 'Enllaços'
       }
     };
     const t = () => S[lang()];
@@ -1974,18 +2009,18 @@
     const touchMQ = window.matchMedia('(hover: none) and (pointer: coarse)');
     const isTouch = () => touchMQ.matches;
     const allChips = () => ['help', 'whoami', 'about', 'education', 'experience', 'traceroute', 'projects', 'skills', 'certs',
-                            'contact', 'email', 'cv', 'ping', 'hire', lang() === 'en' ? 'lang es' : 'lang en', 'clear', 'exit'];
+                            'contact', 'email', 'cv', 'ping', 'hire', ...['es', 'en', 'ca'].filter(l => l !== lang()).map(l => 'lang ' + l), 'clear', 'exit'];
 
     // Texto de un elemento en el idioma activo (sin las mayúsculas que pone el CSS)
     function txt(el) {
       if (!el) return '';
       const c = el.cloneNode(true);
-      c.querySelectorAll(lang() === 'en' ? '.t-es' : '.t-en').forEach(n => n.remove());
+      c.querySelectorAll('.t-es,.t-en,.t-ca').forEach(n => { if (!n.classList.contains('t-' + lang())) n.remove(); });
       return c.textContent.replace(/\s+/g, ' ').trim();
     }
     const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
-    const visibleImg = img => !img.classList.contains(lang() === 'en' ? 't-es' : 't-en');
-    // Fechas y títulos en minúscula tras la inicial solo en castellano (en inglés los meses van con mayúscula)
+    const visibleImg = img => !/\bt-(es|en|ca)\b/.test(img.className) || img.classList.contains('t-' + lang());
+    // Fechas y títulos en minúscula tras la inicial en castellano y catalán (en inglés los meses van con mayúscula)
     const lower = s => (lang() === 'en' ? s : s.charAt(0) + s.slice(1).toLowerCase());
 
     // Interfaz (se crea solo si hay JavaScript)
@@ -2129,7 +2164,7 @@
         let i = 0;
         const tick = () => {
           i++;
-          line(`64 bytes ${lang() === 'en' ? 'from' : 'desde'} ${host}: icmp_seq=${i} ttl=64 time=${(0.2 + Math.random() * 0.6).toFixed(3)} ms`);
+          line(`64 bytes ${t().from} ${host}: icmp_seq=${i} ttl=64 time=${(0.2 + Math.random() * 0.6).toFixed(3)} ms`);
           if (i < 4) setTimeout(tick, 420); else line(t().pingSum(host, 4), 't-ok');
         };
         setTimeout(tick, 300);
@@ -2140,8 +2175,8 @@
       },
       lang(args) {
         const l = (args[0] || '').toLowerCase();
-        if (l !== 'es' && l !== 'en') { line(t().langUse, 't-err'); return; }
-        const radio = document.getElementById(l === 'en' ? 'lang-en' : 'lang-es');
+        if (!S[l]) { line(t().langUse, 't-err'); return; }
+        const radio = document.getElementById('lang-' + l);
         if (radio && !radio.checked) radio.click();
         labels();
         line(t().langOk, 't-ok');
@@ -2150,7 +2185,8 @@
       exit() { close(); }
     };
     const ALIAS = { exp: 'experience', edu: 'education', proj: 'projects', cert: 'certs', certificates: 'certs', skill: 'skills',
-                    '?': 'help', ayuda: 'help', quit: 'exit', salir: 'exit', cls: 'clear', sudo: 'hire', contacto: 'contact', correo: 'email', idioma: 'lang' };
+                    '?': 'help', ayuda: 'help', quit: 'exit', salir: 'exit', cls: 'clear', sudo: 'hire', contacto: 'contact', correo: 'email', idioma: 'lang',
+                    ajuda: 'help', sortir: 'exit', contacte: 'contact', correu: 'email' };
     const names = Object.keys(CMDS);
 
     const history = [];
@@ -2220,7 +2256,7 @@
     if (openBtn) openBtn.addEventListener('click', open);
     const hint = document.getElementById('termHint');
     if (hint) hint.addEventListener('click', open);
-    document.querySelectorAll('#lang-es,#lang-en').forEach(r => r.addEventListener('change', () => { if (!term.hidden) labels(); }));
+    document.querySelectorAll('#lang-es,#lang-en,#lang-ca').forEach(r => r.addEventListener('change', () => { if (!term.hidden) labels(); }));
   })();
 
   // Scroll reveal: fade + slide up elements as they enter the viewport
