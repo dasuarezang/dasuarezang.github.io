@@ -96,9 +96,9 @@
   /* Carta como texto: oculta a la vista en escritorio (la lee el lector de pantalla), visible en móvil */
   .letter{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
   .redacted{display:inline-block;width:5.4em;height:1.25em;vertical-align:-.25em;background:#000;}
-  /* Traducción (solo con la web en inglés) */
-  .only-en{display:none;}
-  html[lang="en"] .only-en{display:block;}
+  /* Traducción (solo con la web en inglés o en catalán) */
+  .only-en,.only-ca{display:none;}
+  html[lang="en"] .only-en,html[lang="ca"] .only-ca{display:block;}
   .translation{
     width:100%;max-width:720px;margin-top:36px;padding:28px 30px;border-radius:22px;text-align:left;
     background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);
@@ -160,7 +160,7 @@
     box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 18px 40px -16px rgba(0,0,0,.7);
     transition:background-color .4s var(--spring);
   }
-  html[lang="en"] .to-tr{display:flex;}
+  html[lang="en"] .to-tr-en,html[lang="ca"] .to-tr-ca{display:flex;}
   .to-tr svg{width:18px;height:18px;flex-shrink:0;color:var(--accent);animation:nudge 2.4s var(--spring) infinite;}
   .to-tr:hover{background:rgba(37,99,235,.55);}
   .to-tr:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
@@ -212,7 +212,7 @@
   <p class="from"><b>Genys Bernabeu</b> · Area Manager, Real Madrid Official Store Barcelona</p>
   <div class="frame">
     <!-- La carta original como imagen (enlaza al PDF) -->
-    <a class="paper paper-img" href="/cv/recomendaciones/real-madrid-official-store/carta-recomendacion.pdf" target="_blank" rel="noopener" aria-label="Abrir la carta original en PDF / Open the original letter as PDF">
+    <a class="paper paper-img" href="/cv/recomendaciones/real-madrid-official-store/carta-recomendacion.pdf" target="_blank" rel="noopener" aria-label="Abrir la carta original en PDF / Open the original letter as PDF / Obrir la carta original en PDF">
       <img src="/cv/recomendaciones/real-madrid-official-store/carta-820.webp" srcset="/cv/recomendaciones/real-madrid-official-store/carta-820.webp 820w, /cv/recomendaciones/real-madrid-official-store/carta-1240.webp 1240w, /cv/recomendaciones/real-madrid-official-store/carta-1640.webp 1640w" sizes="(max-width: 776px) calc(100vw - 32px), 720px" width="1640" height="2097" fetchpriority="high" alt="">
     </a>
     <!-- El texto de la carta, para lectores de pantalla -->
@@ -231,7 +231,8 @@
       <p><span class="redacted" role="img" aria-label="Teléfono omitido por privacidad"></span></p>
     </article>
   </div>
-  <a class="to-tr" href="#translation" lang="en">English version below<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204.24,148.24l-72,72a6,6,0,0,1-8.48,0l-72-72a6,6,0,0,1,8.48-8.48L122,201.51V40a6,6,0,0,1,12,0V201.51l61.76-61.75a6,6,0,0,1,8.48,8.48Z"/></svg></a>
+  <a class="to-tr to-tr-en" href="#translation" lang="en">English version below<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204.24,148.24l-72,72a6,6,0,0,1-8.48,0l-72-72a6,6,0,0,1,8.48-8.48L122,201.51V40a6,6,0,0,1,12,0V201.51l61.76-61.75a6,6,0,0,1,8.48,8.48Z"/></svg></a>
+  <a class="to-tr to-tr-ca" href="#translation-ca" lang="ca">Versió en català a sota<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M204.24,148.24l-72,72a6,6,0,0,1-8.48,0l-72-72a6,6,0,0,1,8.48-8.48L122,201.51V40a6,6,0,0,1,12,0V201.51l61.76-61.75a6,6,0,0,1,8.48,8.48Z"/></svg></a>
   <p class="note"><span class="t-es">Teléfono de contacto omitido por privacidad</span><span class="t-en" lang="en">Contact phone number omitted for privacy</span><span class="t-ca" lang="ca">Telèfon de contacte omès per privadesa</span></p>
   <section class="translation only-en" id="translation" lang="en" aria-labelledby="tr-title">
     <h2 id="tr-title">English translation <span>· unofficial</span></h2>
@@ -245,6 +246,22 @@
       <p>I am convinced that Daniel will be a valuable asset to any company that has the opportunity to bring him onto its team, and I recommend his application without reservation.</p>
       <p>I remain at your disposal for any further information you may require.</p>
       <p class="sign">Yours faithfully,</p>
+      <p>Genys Bernabeu</p>
+      <p class="role"><em>Area Manager – Real Madrid Official Store, Barcelona</em></p>
+    </div>
+  </section>
+  <section class="translation only-ca" id="translation-ca" lang="ca" aria-labelledby="tr-title-ca">
+    <h2 id="tr-title-ca">Traducció al català <span>· no oficial</span></h2>
+    <p class="tr-note">Traduïda de la carta original en castellà de dalt, per comoditat. La versió en castellà és la que signa l’autor.</p>
+    <div class="tr-body">
+      <p>A qui correspongui:</p>
+      <p>Per mitjà de la present, em plau recomanar àmpliament en Daniel Suárez, que ha format part del nostre equip demostrant en tot moment un nivell de professionalitat, compromís i capacitat molt per sobre de l’habitual.</p>
+      <p>Durant el temps que va treballar amb nosaltres, en Daniel va destacar no només pel seu excel·lent acompliment en les seves responsabilitats, sinó també per la seva actitud exemplar, la seva ètica de treball intachable i la seva constant disposició a assumir nous reptes. És una persona organitzada, resolutiva i altament eficient, capaç de desenvolupar-se amb seguretat fins i tot en situacions de pressió.</p>
+      <p>La seva capacitat analítica, la seva rapidesa d’aprenentatge i la seva habilitat per adaptar-se a entorns diferents el converteixen en un perfil versàtil i preparat per afrontar amb èxit qualsevol tipus de lloc, fins i tot en àmbits diferents del comercial. En Daniel no es limita a complir amb el que se li assigna; busca millorar processos, aportar solucions i generar un impacte positiu en l’equip i en l’organització.</p>
+      <p>A més, té excel·lents habilitats interpersonals, sap treballar en equip, comunica amb claredat i genera confiança tant en companys com en responsables. La seva responsabilitat, puntualitat i constància fan d’ell una persona en qui es pot confiar plenament.</p>
+      <p>Estic convençut que en Daniel serà un actiu valuós per a qualsevol empresa que tingui l’oportunitat d’incorporar-lo al seu equip, i recomano la seva candidatura sense cap mena de reserva.</p>
+      <p>Quedo a la seva disposició per ampliar qualsevol informació que considerin necessària.</p>
+      <p class="sign">Atentament,</p>
       <p>Genys Bernabeu</p>
       <p class="role"><em>Area Manager – Real Madrid Official Store, Barcelona</em></p>
     </div>
