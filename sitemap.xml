@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Solo las páginas que deben aparecer en buscadores. La carta de recomendación, la redirección
-     antigua (/cv/recomendacion/) y el 404 llevan noindex y quedan fuera a propósito. -->
+     antigua (/recomendacion/) y el 404 llevan noindex y quedan fuera a propósito. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://dasuarezang.github.io/cv/</loc>
+    <loc>https://dasuarezang.github.io/</loc>
     <lastmod>2026-10-03</lastmod>
   </url>
 </urlset>

@@ -1,4 +1,4 @@
-"""Servidor local de la web para los scripts: sirve el repositorio tanto en / como en /cv/ (como GitHub Pages)."""
+"""Servidor local de la web para los scripts: sirve el repositorio en la raíz (como GitHub Pages)."""
 import functools
 import http.server
 import pathlib
@@ -9,11 +9,6 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 
 class _Handler(http.server.SimpleHTTPRequestHandler):
-    def translate_path(self, path):
-        if path == '/cv' or path.startswith('/cv/'):
-            path = path[3:] or '/'
-        return super().translate_path(path)
-
     def log_message(self, *args):
         pass
 

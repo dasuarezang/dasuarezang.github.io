@@ -2,7 +2,9 @@
 
 CV web personal: estudiante de último año de **Ingeniería de Tecnologías y Servicios de Telecomunicación** (especialidad Telemática) en la ETSETB UPC y futuro **Network Engineer**.
 
-Ver online: https://dasuarezang.github.io/cv/
+Ver online: https://dasuarezang.github.io/
+
+(La dirección antigua, https://dasuarezang.github.io/cv/, redirige a la nueva; el repositorio `cv` solo contiene esas redirecciones.)
 
 ---
 
@@ -54,6 +56,7 @@ Ver online: https://dasuarezang.github.io/cv/
 | `cv-daniel-suarez-es.pdf`, `-en.pdf`, `-ca.pdf` | PDF del CV en cada idioma, generados con `scripts/build_pdfs.py` |
 | `og-image.jpg` | Imagen de vista previa al compartir el enlace (1200 × 630) |
 | `favicon.ico`, `icon.svg`, `icon-*.png` | Icono del sitio como archivos reales (Google no lee los iconos incrustados en el HTML) |
+| `robots.txt` | Permite el rastreo y apunta al sitemap |
 | `scripts/` | `build_pdfs.py` genera los PDF y `check.py` comprueba la web antes de subir cambios |
 | `apple-touch-icon.png` | Icono al guardar la web en la pantalla de inicio del móvil |
 | `google27aa19f9bf52eea7.html` | Verificación de Google Search Console (no borrar) |

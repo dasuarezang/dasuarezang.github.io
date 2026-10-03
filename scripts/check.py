@@ -78,7 +78,7 @@ def terminal_keys(page, html):
 def check_texts(page, base):
     bad = False
     for path in PAGES:
-        page.goto('%s/cv/%s' % (base, path.replace('index.html', '')))
+        page.goto('%s/%s' % (base, path.replace('index.html', '')))
         missing = page.evaluate(I18N_JS)
         if missing:
             bad = True
@@ -116,18 +116,14 @@ def check_files(offline):
         for r in refs(html):
             if not r or r.startswith(('data:', 'mailto:', 'tel:', '#', '%23', 'javascript:')):
                 continue
-            r = r.replace('https://dasuarezang.github.io/cv/', '/cv/')
+            r = r.replace('https://dasuarezang.github.io/', '/')
             if r.startswith(('http://', 'https://')):
-                if r.startswith('https://dasuarezang.github.io'):
-                    continue
                 external.add(r)
                 continue
             r = r.split('#')[0].split('?')[0]
-            if not r or r in ('/cv/', '/cv'):
+            if not r or r == '/':
                 continue
-            target = (ROOT / r[len('/cv/'):]) if r.startswith('/cv/') else (base / r)
-            if r.startswith('/') and not r.startswith('/cv/'):
-                continue
+            target = (ROOT / r.lstrip('/')) if r.startswith('/') else (base / r)
             if not target.exists():
                 missing.append('%s -> %s' % (path, r))
     for m in sorted(set(missing)):
@@ -167,7 +163,7 @@ def check_axe(browser, base):
         ctx = browser.new_context(locale=loc, color_scheme=scheme, viewport={'width': vp[0], 'height': vp[1]}, reduced_motion='reduce')
         page = ctx.new_page()
         for path in PAGES:
-            page.goto('%s/cv/%s' % (base, path.replace('index.html', '')))
+            page.goto('%s/%s' % (base, path.replace('index.html', '')))
             page.wait_for_timeout(500)
             if path == 'index.html':
                 page.evaluate("document.querySelectorAll('.reveal').forEach(e => e.classList.add('in-view'))")
@@ -244,7 +240,7 @@ def check_pdfs():
 def check_carousel(browser, base):
     ctx = browser.new_context(locale='ca-ES', viewport={'width': 1280, 'height': 900})
     page = ctx.new_page()
-    page.goto(base + '/cv/')
+    page.goto(base + '/')
     page.wait_for_timeout(500)
     page.evaluate("document.getElementById('proyectos').scrollIntoView()")
     page.wait_for_timeout(900)
