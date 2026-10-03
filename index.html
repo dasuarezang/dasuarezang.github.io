@@ -28,8 +28,9 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#05070c">
 <meta name="google-site-verification" content="btH2EK4iJft47ei1uoWD_jcv5JpMtV139bztLzMs15Q">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' rx='3.5' fill='%2305070c'/%3E%3Cpath d='M3 4h1v1h-1zM4 4h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM13 10h1v1h-1zM9 11h1v1h-1zM10 11h1v1h-1zM11 11h1v1h-1zM12 11h1v1h-1zM13 11h1v1h-1z' fill='%2360a5fa'/%3E%3C/svg%3E">
-<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAm0lEQVR42mNkwAJY2Xn+M9AA/P75hRFdjJEeFuNzCBO9LUe3i4nelqM7golhgAHjQPgeGQx4CAy4A1hwSUTPe4fCX5okNDxDgGAipHVIDJ1sSKuQGHoFEbVDYvCWAyMmDbAMlM+HX12Arh4XQDdn8IYArWq/oV8SjjbJqO4AbN0leoHfP78wDo4oGIhQgNnJhK/nSo/OKeNAd88BZ2FAoTDlsVQAAAAASUVORK5CYII=">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="icon.svg" type="image/svg+xml" sizes="any">
+<link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/geist.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/geist-mono.woff2" as="font" type="font/woff2" crossorigin>
@@ -416,6 +417,7 @@
     position:relative;flex:0 0 46%;min-width:0;scroll-snap-align:center;
     overflow:hidden;isolation:isolate;background:var(--deep);color:#fff;
   }
+  .car-track.loop .proj-card{scroll-snap-stop:always;}
   .proj-card summary{
     position:static;list-style:none;cursor:pointer;min-height:400px;padding:28px;
     display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;
@@ -601,17 +603,16 @@
   .footer-links a:not(.badge-link):hover,.footer-links a:not(.badge-link):focus-visible{background:var(--accent-deep);transform:translateY(-3px);}
   .footer-links a:not(.badge-link):active{transform:scale(.96);}
   .footer-links a.badge-link img{height:32px;}
-  .dl-cv{
-    display:none;align-items:center;gap:8px;height:32px;padding:0 12px 0 10px;border:0;border-radius:7px;cursor:pointer;
-    font:700 .64rem/1 Verdana,Geneva,'DejaVu Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;
+  .footer-links a.dl-cv{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;width:auto;height:32px;padding:0 12px 0 10px;border-radius:7px;
+    font:700 .64rem/1 Verdana,Geneva,'DejaVu Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;
     color:#fff;background:var(--accent-deep);
     box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 10px 24px -12px rgba(37,99,235,.8);
     transition:transform .6s var(--spring),background-color .5s var(--spring);
   }
-  .js .dl-cv{display:inline-flex;}
   .dl-cv .ic{font-size:1.35em;}
-  .dl-cv:hover,.dl-cv:focus-visible{background:#1d4ed8;transform:translateY(-2px);}
-  .dl-cv:active{transform:scale(.98);}
+  .footer-links a.dl-cv:hover,.footer-links a.dl-cv:focus-visible{background:#1d4ed8;transform:translateY(-2px);}
+  .footer-links a.dl-cv:active{transform:scale(.98);}
   .copyright{font-size:.85rem;color:rgba(255,255,255,.66);margin-top:6px;}
 
   /* ===== Funciona sin JavaScript (visores de archivos del móvil) ===== */
@@ -821,7 +822,7 @@
     .proj-link:hover .ic-arrow-up-right{transform:none;}
     .tl-item:hover,.tl-item:hover .tl-logo,
     .about:hover,.edu-card:hover,.skill-group:hover,.badges img:hover,
-    a.badge-link:hover,.footer-links a:not(.badge-link):hover,.dl-cv:hover,
+    a.badge-link:hover,.footer-links a:not(.badge-link):hover,.footer-links a.dl-cv:hover,
     .contact-row a:not(.badge-link):hover,.cert-item:hover .cert-go{transform:none;}
     .cert-item:hover .cert-go{background:rgba(11,16,32,.05);color:var(--ink);}
     .q-link:hover .ic{transform:none;}
@@ -1628,7 +1629,7 @@
     </div>
     <div class="footer-links">
       <button class="term-open" type="button" id="termOpen" aria-haspopup="dialog"><span class="term-open-ic" aria-hidden="true">&gt;_</span>Terminal</button>
-      <button class="dl-cv" type="button" id="dlCv"><i class="ic ic-download-simple" aria-hidden="true"></i><span class="t-es">Descargar CV</span><span class="t-en" lang="en">Download CV</span><span class="t-ca" lang="ca">Descarregar CV</span></button>
+      <span class="t-es"><a class="dl-cv" href="cv-daniel-suarez-es.pdf" download="CV - Daniel Suárez Angosto (ES).pdf" type="application/pdf"><i class="ic ic-download-simple" aria-hidden="true"></i>Descargar CV</a></span><span class="t-en" lang="en"><a class="dl-cv" href="cv-daniel-suarez-en.pdf" download="CV - Daniel Suárez Angosto (EN).pdf" type="application/pdf"><i class="ic ic-download-simple" aria-hidden="true"></i>Download CV</a></span><span class="t-ca" lang="ca"><a class="dl-cv" href="cv-daniel-suarez-ca.pdf" download="CV - Daniel Suárez Angosto (CA).pdf" type="application/pdf"><i class="ic ic-download-simple" aria-hidden="true"></i>Descarregar CV</a></span>
       <a href="mailto:daniel.suarez.angosto@gmail.com" aria-label="Email"><i class="ic ic-envelope-simple"></i></a>
       <a href="https://github.com/dasuarezang" target="_blank" rel="noopener" aria-label="GitHub"><i class="ic ic-github-logo"></i></a>
       <a class="badge-link" href="https://linkedin.com/in/daniel-suarez-angosto" target="_blank" rel="noopener" aria-label="LinkedIn">
@@ -1681,13 +1682,16 @@
     apply(false);
   })();
 
-  // Carrusel de proyectos infinito: al activarse se añade una copia de las tarjetas a cada lado y, cuando el
-  // deslizamiento se detiene dentro de una copia, se salta (sin que se note) a la tarjeta real equivalente.
+  // Carrusel de proyectos infinito: al activarse se añaden dos copias de las tarjetas a cada lado. Cada vez que
+  // el carrusel vuelve a tener "calma" (se suelta el dedo y se detiene, se toca de nuevo o se pulsa una flecha)
+  // se salta, sin que se note, a la tarjeta equivalente de la serie central. Así siempre queda margen por delante
+  // y por detrás, aunque se deslice muy rápido y muchas veces seguidas.
   // Sin JavaScript sigue siendo un carrusel normal con scroll-snap, de la primera a la última.
   (function () {
     const track = document.getElementById('projTrack');
     const real = [...track.querySelectorAll('.proj-card')];
     const n = real.length;
+    const SETS = 2;
     const dots = [...document.querySelectorAll('.car-dot')];
     const [prev, next] = document.querySelectorAll('.car-btn');
     let cards = real, ready = false, touching = false, timer = 0, shown = 0;
@@ -1711,15 +1715,14 @@
       shown = ((index() % n) + n) % n;
       dots.forEach((d, k) => d.setAttribute('aria-current', String(k === shown)));
     }
-    // Al detenerse el deslizamiento: si se ha entrado en una copia, volver a la tarjeta real equivalente
-    function settle() {
-      timer = 0;
-      if (!ready || touching) return;
+
+    // Vuelve a la serie central. La tarjeta a la que se salta debe verse exactamente igual que la que se deja:
+    // se le traspasa el valor de las transiciones a medias (zoom de la foto, botón +) y el estado hover
+    function wrap() {
+      if (!ready) return;
       const i = index();
-      const d = i < n ? n : i >= 2 * n ? -n : 0;
+      const d = (SETS - Math.floor(i / n)) * n;
       if (!d) return;
-      // La tarjeta a la que se salta debe verse exactamente igual que la que se deja: se le traspasa el valor
-      // que tienen ahora las transiciones a medias (zoom de la foto, botón +) y el estado hover
       const held = [];
       for (let j = Math.max(0, i - 3); j <= Math.min(cards.length - 1, i + 3); j++) {
         const t = j + d;
@@ -1745,6 +1748,7 @@
         requestAnimationFrame(() => held.forEach(([el, props]) => { el.style.transition = ''; props.forEach(p => { el.style[p] = ''; }); }));
       }
     }
+    function settle() { timer = 0; if (!touching) wrap(); }
     const later = () => { clearTimeout(timer); timer = setTimeout(settle, 140); };
 
     function init() {
@@ -1760,10 +1764,12 @@
         k.querySelectorAll('a,summary,button').forEach(e => e.setAttribute('tabindex', '-1'));
         return k;
       };
-      track.prepend(...real.map(copy));
-      track.append(...real.map(copy));
+      const set = () => real.map(copy);
+      track.prepend(...Array.from({ length: SETS }, set).flat());
+      track.append(...Array.from({ length: SETS }, set).flat());
       cards = [...track.querySelectorAll('.proj-card')];
-      jump(centered(n));
+      track.classList.add('loop');
+      jump(centered(SETS * n));
       update();
     }
 
@@ -1775,10 +1781,10 @@
       cards.forEach((d, j) => { if (j % n === k && d !== c && d.open !== c.open) d.open = c.open; });
     }, true);
 
-    prev.addEventListener('click', () => { init(); go(index() - 1); });
-    next.addEventListener('click', () => { init(); go(index() + 1); });
+    prev.addEventListener('click', () => { init(); wrap(); go(index() - 1); });
+    next.addEventListener('click', () => { init(); wrap(); go(index() + 1); });
     dots.forEach((d, i) => d.addEventListener('click', () => {
-      init();
+      init(); wrap();
       const cur = index();
       let best = i;
       for (let c = i; c < cards.length; c += n) if (Math.abs(c - cur) < Math.abs(best - cur)) best = c;
@@ -1786,10 +1792,11 @@
     }));
     track.addEventListener('scroll', () => { requestAnimationFrame(update); later(); }, { passive: true });
     if ('onscrollend' in window) track.addEventListener('scrollend', settle);
-    // Con el dedo apoyado no se salta: se espera a soltarlo
-    track.addEventListener('touchstart', () => { touching = true; }, { passive: true });
+    // Al tocar de nuevo (también para frenar un deslizamiento que aún corre) se vuelve a la serie central;
+    // con el dedo apoyado no se vuelve a saltar hasta soltarlo
+    track.addEventListener('touchstart', () => { touching = true; wrap(); }, { passive: true });
     ['touchend', 'touchcancel'].forEach(t => track.addEventListener(t, () => { touching = false; later(); }, { passive: true }));
-    window.addEventListener('resize', () => requestAnimationFrame(() => { if (ready) jump(centered(shown + n)); }));
+    window.addEventListener('resize', () => requestAnimationFrame(() => { if (ready) jump(centered(shown + SETS * n)); }));
 
     // Las copias se crean al acercarse el carrusel a la pantalla (así no se mide el layout durante la carga)
     if ('IntersectionObserver' in window) {
@@ -1806,18 +1813,6 @@
       closed.forEach(d => { d.open = true; });
     });
     window.addEventListener('afterprint', () => { closed.forEach(d => { d.open = false; }); closed = []; });
-  })();
-
-  // Descargar CV: abre el diálogo de impresión (Guardar como PDF) con un nombre de archivo claro
-  (function () {
-    const btn = document.getElementById('dlCv');
-    btn.addEventListener('click', () => {
-      const prev = document.title;
-      document.title = 'CV - Daniel Suárez Angosto' + ({ en: ' (EN)', ca: ' (CA)' }[document.documentElement.lang] || '');
-      const restore = () => { document.title = prev; window.removeEventListener('afterprint', restore); };
-      window.addEventListener('afterprint', restore);
-      window.print();
-    });
   })();
 
   // Navegación: resalta el apartado que se está viendo
@@ -2063,7 +2058,7 @@
                ['clear', 'limpia la pantalla'], ['exit', 'cierra la terminal']],
         helpHead: 'Comandos disponibles:', helpFoot: '↑ ↓ para el historial · Tab para autocompletar · Esc para salir', helpFootTouch: 'Toca un comando de abajo para ejecutarlo.',
         copied: 'Correo copiado al portapapeles.', copyFail: 'No he podido copiarlo; aquí lo tienes:',
-        cv: 'Abriendo el diálogo para guardar el CV en PDF…', opening: 'Abriendo',
+        cv: 'Descargando el CV en PDF…', opening: 'Abriendo',
         langOk: 'Idioma cambiado a castellano.', langUse: 'Uso: lang es | lang en | lang ca', from: 'desde',
         trHead: 'traceroute a daniel (cv), 30 saltos máx.', trNext: 'siguiente salto: tu empresa',
         ping: h => `PING ${h}: 56 bytes de datos`, pingSum: (h, n) => `--- estadísticas de ping a ${h} ---\n${n} paquetes enviados, ${n} recibidos, 0% perdidos`,
@@ -2084,7 +2079,7 @@
                ['clear', 'clear the screen'], ['exit', 'close the terminal']],
         helpHead: 'Available commands:', helpFoot: '↑ ↓ for history · Tab to autocomplete · Esc to quit', helpFootTouch: 'Tap a command below to run it.',
         copied: 'Email copied to clipboard.', copyFail: 'Couldn’t copy it; here it is:',
-        cv: 'Opening the dialog to save the CV as PDF…', opening: 'Opening',
+        cv: 'Downloading the CV as PDF…', opening: 'Opening',
         langOk: 'Language switched to English.', langUse: 'Usage: lang es | lang en | lang ca', from: 'from',
         trHead: 'traceroute to daniel (cv), 30 hops max', trNext: 'next hop: your company',
         ping: h => `PING ${h}: 56 data bytes`, pingSum: (h, n) => `--- ${h} ping statistics ---\n${n} packets transmitted, ${n} received, 0% packet loss`,
@@ -2105,7 +2100,7 @@
                ['clear', 'neteja la pantalla'], ['exit', 'tanca el terminal']],
         helpHead: 'Ordres disponibles:', helpFoot: '↑ ↓ per a l’historial · Tab per autocompletar · Esc per sortir', helpFootTouch: 'Toca una ordre de sota per executar-la.',
         copied: 'Correu copiat al porta-retalls.', copyFail: 'No l’he pogut copiar; aquí el tens:',
-        cv: 'Obrint el diàleg per desar el CV en PDF…', opening: 'Obrint',
+        cv: 'Descarregant el CV en PDF…', opening: 'Obrint',
         langOk: 'Idioma canviat a català.', langUse: 'Ús: lang es | lang en | lang ca', from: 'des de',
         trHead: 'traceroute a daniel (cv), 30 salts màx.', trNext: 'següent salt: la teva empresa',
         ping: h => `PING ${h}: 56 bytes de dades`, pingSum: (h, n) => `--- estadístiques de ping a ${h} ---\n${n} paquets enviats, ${n} rebuts, 0% perduts`,
@@ -2265,7 +2260,7 @@
       email() { copyEmail(); },
       cv() {
         line(t().cv, 't-ok');
-        setTimeout(() => { close(); const b = document.getElementById('dlCv'); if (b) b.click(); }, 450);
+        setTimeout(() => { close(); const a = [...document.querySelectorAll('.dl-cv')].find(x => x.offsetParent); if (a) a.click(); }, 450);
       },
       linkedin() { line(t().opening + ' ' + LINKEDIN.replace('https://', '') + '…', 't-ok'); window.open(LINKEDIN, '_blank', 'noopener'); },
       github() { line(t().opening + ' ' + GITHUB.replace('https://', '') + '…', 't-ok'); window.open(GITHUB, '_blank', 'noopener'); },

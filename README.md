@@ -17,7 +17,7 @@ Ver online: https://dasuarezang.github.io/cv/
 - **Terminal escondida.** Se abre con la tecla `º` (o `` ` ``) o con el botón del pie. Responde con el propio contenido del CV: `whoami`, `about`, `education`, `experience`, `traceroute`, `projects`, `skills`, `certs`, `contact`, `email`, `cv`, `ping`, `lang es|en|ca`, entre otros. En pantallas táctiles se usa con botones, sin abrir el teclado.
 - **Diseño adaptable.** Probado de 280 px (móvil plegable) a 4K, en vertical y en horizontal, con los motores de Chrome, Safari y Firefox y sin scroll horizontal. Con el móvil en horizontal, el menú se reparte en dos columnas.
 - **Modo oscuro automático** según el ajuste del sistema.
-- **Listo para imprimir.** El botón *Descargar CV* (o *Imprimir → Guardar como PDF*) genera un CV limpio en blanco de 2 páginas A4 en el idioma activo, con todas las secciones y los proyectos desplegados.
+- **PDF descargable.** El botón *Descargar CV* baja un PDF ya generado en el idioma activo (`cv-daniel-suarez-es.pdf`, `-en.pdf` y `-ca.pdf`): un CV limpio en blanco de 2 páginas A4 con todas las secciones y los proyectos desplegados. También se puede usar *Imprimir → Guardar como PDF*.
 - **Accesible.** Enlace "Saltar al contenido", navegación por teclado, textos alternativos, zonas táctiles de tamaño adecuado y respeto a *reducir movimiento*. Sin errores de accesibilidad según axe en los tres idiomas, en claro y oscuro, en escritorio y móvil.
 - **Ligero y rápido.** `index.html` pesa unos 285 KB (88 KB comprimido). Las imágenes van en WebP y las fotos de los proyectos se cargan solo al llegar a ellas. Las fuentes están reducidas a los caracteres y pesos que se usan y se precargan. Medido en Chromium sin limitar la red: LCP de 1,7 a 1,9 s, CLS por debajo de 0,01 y sin errores en la consola.
 - **Listo para compartir.** Metadatos Open Graph con imagen de vista previa para LinkedIn, WhatsApp o X, datos estructurados de schema.org, sitemap, favicon propio e icono para la pantalla de inicio del móvil.
@@ -51,10 +51,26 @@ Ver online: https://dasuarezang.github.io/cv/
 | `recomendacion/` | Redirección de la dirección antigua de la carta |
 | `404.html` | Página de error con un traceroute que se pierde en el tercer salto |
 | `sitemap.xml` | Solo la página principal; la carta, la redirección y la 404 llevan `noindex` |
+| `cv-daniel-suarez-es.pdf`, `-en.pdf`, `-ca.pdf` | PDF del CV en cada idioma, generados con `scripts/build_pdfs.py` |
 | `og-image.jpg` | Imagen de vista previa al compartir el enlace (1200 × 630) |
+| `favicon.ico`, `icon.svg`, `icon-*.png` | Icono del sitio como archivos reales (Google no lee los iconos incrustados en el HTML) |
+| `scripts/` | `build_pdfs.py` genera los PDF y `check.py` comprueba la web antes de subir cambios |
 | `apple-touch-icon.png` | Icono al guardar la web en la pantalla de inicio del móvil |
 | `google27aa19f9bf52eea7.html` | Verificación de Google Search Console (no borrar) |
 | `assets/` | Foto de perfil, logo de la ETSETB, fotos de los 4 proyectos, logo de VitalLink y fuentes Geist y Geist Mono |
+
+## Mantenimiento
+
+Cada vez que cambie el contenido del CV hay que regenerar los PDF y pasar las comprobaciones. Hace falta [uv](https://docs.astral.sh/uv/) (la primera vez, `uv run --with playwright python -m playwright install chromium`).
+
+```
+uv run --with playwright --with pypdfium2 python scripts/build_pdfs.py
+uv run --with playwright --with pypdfium2 --with axe-playwright-python --with pillow python scripts/check.py
+```
+
+`check.py` comprueba, sobre la web servida en local: que todo texto está en castellano, inglés y catalán (también en la terminal); que todos los archivos enlazados existen; que los enlaces externos responden (solo avisa); accesibilidad con axe en los tres idiomas, en claro y oscuro, en escritorio y móvil; que los iconos son archivos reales; que los tres PDF existen, caben en 2 páginas y no están desactualizados; y que el carrusel de proyectos da la vuelta. Sale con error si algo falla. Con `--offline` salta los enlaces externos.
+
+Todo texto nuevo del CV se escribe en las tres versiones (`t-es`, `t-en`, `t-ca`).
 
 ## Tecnologías
 
