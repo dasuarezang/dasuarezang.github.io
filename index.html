@@ -188,9 +188,9 @@
   /* HERO: Editorial Split sobre negro OLED con orbes de luz */
   .hero{
     position:relative;overflow:hidden;isolation:isolate;color:#fff;background:var(--deep);
-    min-height:min(100dvh,940px);
+    min-height:min(100dvh,860px);
     display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:end;column-gap:48px;
-    padding:136px max(28px,calc((100% - var(--maxw)) / 2 + 28px)) 0;
+    padding:112px max(28px,calc((100% - var(--maxw)) / 2 + 28px)) 0;
   }
   /* Degradado con grano fino encima: da textura y suaviza las bandas del degradado */
   .hero::before{
@@ -210,7 +210,7 @@
   .hero-inner{
     position:relative;z-index:1;align-self:center;
     display:flex;flex-direction:column;align-items:flex-start;text-align:left;
-    padding:0 0 112px;min-width:0;
+    padding:0 0 150px;min-width:0;
   }
   .eyebrow{
     display:inline-flex;align-items:center;gap:10px;max-width:100%;line-height:1.4;
@@ -293,7 +293,7 @@
   .js .reveal.in-view{opacity:1;transform:none;filter:none;}
 
   /* SECTIONS */
-  section{padding:clamp(96px,11vw,152px) 0;}
+  section{padding:clamp(64px,6.5vw,92px) 0;}
   section.alt{background:var(--paper-alt);}
   /* Transición suave: cada sección arranca con el color de la anterior y se funde con el suyo */
   .hero + section{--prev:var(--paper);}
@@ -302,7 +302,7 @@
   section:not(.hero) + section:not(.hero){
     background-image:linear-gradient(180deg,var(--prev) 0,color-mix(in srgb,var(--prev) 72%,transparent) 60px,color-mix(in srgb,var(--prev) 38%,transparent) 130px,color-mix(in srgb,var(--prev) 12%,transparent) 195px,transparent 240px);
   }
-  .section-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;margin:0 0 clamp(44px,6vw,72px);}
+  .section-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;margin:0 0 clamp(36px,4vw,52px);}
   .sec-tag{
     display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;
     font:500 .66rem/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
