@@ -1,0 +1,25 @@
+name: Comprobaciones
+
+# Pasa scripts/check.py en cada subida a main, en cada pull request y una vez a la semana
+# (la ejecución semanal detecta enlaces externos que dejan de responder).
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '0 6 * * 1'
+
+jobs:
+  comprobar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Instalar dependencias
+        run: |
+          pip install playwright pypdfium2 axe-playwright-python pillow
+          python -m playwright install --with-deps chromium
+      - name: Comprobar la web
+        run: python scripts/check.py
