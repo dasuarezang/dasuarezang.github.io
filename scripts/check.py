@@ -12,10 +12,11 @@ Qué comprueba:
   3. Enlaces externos (aviso, no error: algunas webs bloquean a los robots).
   4. Accesibilidad (axe) en los tres idiomas, en claro y oscuro, en escritorio y móvil.
   5. Iconos: archivos reales (Google no admite data URIs) y declarados en todas las páginas.
-  6. PDF: existen, no pasan de 2 páginas y no están desactualizados respecto a la web.
+  6. PDF: existen, no pasan de 2 páginas y (solo en local) no están desactualizados respecto a la web.
   7. Carrusel infinito: dar la vuelta con la flecha vuelve al primer proyecto.
 Sale con código 1 si hay algún error.
 """
+import os
 import pathlib
 import re
 import sys
@@ -207,25 +208,34 @@ def check_icons():
 # ---------- 6. PDF ----------
 def check_pdfs():
     bad = False
+    for lang in LANGS:
+        path = ROOT / ('cv-daniel-suarez-%s.pdf' % lang)
+        if not path.exists():
+            bad = True
+            err('falta %s (ejecuta scripts/build_pdfs.py)' % path.name)
+            continue
+        n, _ = pages_and_text(path)
+        if n > MAX_PAGES:
+            bad = True
+            err('%s tiene %d páginas (máximo %d)' % (path.name, n, MAX_PAGES))
+    if os.environ.get('CI'):
+        # El diseño de impresión depende de las fuentes del sistema (p. ej. Verdana), así que en GitHub
+        # (Linux) saldría distinto que en tu ordenador: la comparación con la web solo se hace en local
+        warn('PDF actualizados y páginas al imprimir: solo se comprueban en local (en GitHub el sistema tiene otras fuentes)')
+        if not bad:
+            ok('los 3 PDF existen y caben en %d páginas' % MAX_PAGES)
+        return
     with tempfile.TemporaryDirectory() as tmp:
         fresh = build(tmp)
         for lang in LANGS:
-            path = ROOT / ('cv-daniel-suarez-%s.pdf' % lang)
-            if not path.exists():
-                bad = True
-                err('falta %s (ejecuta scripts/build_pdfs.py)' % path.name)
-                continue
-            n, text = pages_and_text(path)
             n2, fresh_text = pages_and_text(fresh[lang])
-            if n > MAX_PAGES:
-                bad = True
-                err('%s tiene %d páginas (máximo %d)' % (path.name, n, MAX_PAGES))
+            _, text = pages_and_text(ROOT / ('cv-daniel-suarez-%s.pdf' % lang))
             if n2 > MAX_PAGES:
                 bad = True
                 err('la web pasa de %d páginas al imprimir en %s' % (MAX_PAGES, lang))
             if text != fresh_text:
                 bad = True
-                err('%s está desactualizado: ejecuta scripts/build_pdfs.py y súbelo' % path.name)
+                err('cv-daniel-suarez-%s.pdf está desactualizado: ejecuta scripts/build_pdfs.py y súbelo' % lang)
     if not bad:
         ok('los 3 PDF existen, caben en %d páginas y están al día con la web' % MAX_PAGES)
 

@@ -68,7 +68,7 @@ uv run --with playwright --with pypdfium2 python scripts/build_pdfs.py
 uv run --with playwright --with pypdfium2 --with axe-playwright-python --with pillow python scripts/check.py
 ```
 
-`check.py` comprueba, sobre la web servida en local: que todo texto está en castellano, inglés y catalán (también en la terminal); que todos los archivos enlazados existen; que los enlaces externos responden (solo avisa); accesibilidad con axe en los tres idiomas, en claro y oscuro, en escritorio y móvil; que los iconos son archivos reales; que los tres PDF existen, caben en 2 páginas y no están desactualizados; y que el carrusel de proyectos da la vuelta. Sale con error si algo falla. Con `--offline` salta los enlaces externos.
+`check.py` comprueba, sobre la web servida en local: que todo texto está en castellano, inglés y catalán (también en la terminal); que todos los archivos enlazados existen; que los enlaces externos responden (solo avisa); accesibilidad con axe en los tres idiomas, en claro y oscuro, en escritorio y móvil; que los iconos son archivos reales; que los tres PDF existen, caben en 2 páginas y no están desactualizados; y que el carrusel de proyectos da la vuelta. Sale con error si algo falla. Con `--offline` salta los enlaces externos. Se ejecuta también solo en GitHub (en cada subida, en cada pull request y una vez a la semana); allí no compara los PDF con la web porque el diseño de impresión depende de las fuentes del sistema, así que esa comprobación hay que pasarla en local.
 
 Todo texto nuevo del CV se escribe en las tres versiones (`t-es`, `t-en`, `t-ca`).
 
