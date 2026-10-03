@@ -408,6 +408,7 @@
     position:relative;display:flex;align-items:flex-start;gap:28px;
     overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-behavior:smooth;
     padding:12px 10px 36px;margin:0 -10px;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    overflow-anchor:none;
   }
   .car-track::-webkit-scrollbar{display:none;}
   .car-track:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:var(--r-xl);}
@@ -423,8 +424,8 @@
   .proj-card summary::-webkit-details-marker{display:none;}
   .proj-card summary:focus-visible{outline:2px solid var(--accent);outline-offset:-4px;border-radius:var(--r-core);}
   .proj-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s var(--spring);}
-  .proj-card:hover .proj-bg{transform:scale(1.05);}
-  #proyecto-4 .proj-bg{object-position:55% 60%;}
+  .proj-card:hover .proj-bg,.proj-card.hov .proj-bg{transform:scale(1.05);}
+  #proyecto-4 .proj-bg,.proj-card[data-copy="proyecto-4"] .proj-bg{object-position:55% 60%;}
   .proj-shade{position:absolute;inset:0;z-index:-1;pointer-events:none;
     background:linear-gradient(to top,rgba(5,7,12,.96) 0%,rgba(5,7,12,.72) 45%,rgba(5,7,12,.25) 100%);}
   .proj-shade::after{content:"";position:absolute;inset:0;background:rgba(5,7,12,.5);opacity:0;transition:opacity .7s var(--spring);}
@@ -452,7 +453,7 @@
     background:rgba(5,7,12,.5);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);
     transition:transform .7s var(--spring),background-color .5s var(--spring);
   }
-  .proj-card:hover .proj-toggle{background:var(--accent-deep);}
+  .proj-card:hover .proj-toggle,.proj-card.hov .proj-toggle{background:var(--accent-deep);}
   .proj-card[open] .proj-toggle{transform:rotate(45deg);background:var(--accent-deep);}
   .proj-card ul{
     margin:0 8px 8px;padding:18px 20px 12px 36px;border-radius:calc(var(--r-core) - 8px);
@@ -1184,6 +1185,7 @@
     .proj-tags{margin:6px 0 2px;gap:4px;}
     .proj-tags > span{color:#1e293b;background:#f1f5f9;border:1px solid #e2e8f0;padding:2px 7px;font-size:.66rem;}
     .proj-card ul{background:none;color:#475569;margin:0;padding:4px 14px 10px 30px;font-size:.88rem;}
+    .proj-card.is-clone{display:none !important;}
     .proj-card::details-content,.cert-more::details-content{block-size:auto !important;content-visibility:visible !important;transition:none !important;}
     .cert-more summary{display:none;}
     /* Habilidades y certificados */
@@ -1679,42 +1681,128 @@
     apply(false);
   })();
 
-  // Carrusel de proyectos: flechas y puntos (el deslizamiento funciona igual sin JS)
+  // Carrusel de proyectos infinito: al activarse se añade una copia de las tarjetas a cada lado y, cuando el
+  // deslizamiento se detiene dentro de una copia, se salta (sin que se note) a la tarjeta real equivalente.
+  // Sin JavaScript sigue siendo un carrusel normal con scroll-snap, de la primera a la última.
   (function () {
     const track = document.getElementById('projTrack');
-    const cards = [...track.querySelectorAll('.proj-card')];
+    const real = [...track.querySelectorAll('.proj-card')];
+    const n = real.length;
     const dots = [...document.querySelectorAll('.car-dot')];
     const [prev, next] = document.querySelectorAll('.car-btn');
-    // Tarjeta actual según la posición del deslizamiento (0 al inicio, la última al final)
-    const current = () => {
-      const max = track.scrollWidth - track.clientWidth;
-      return max > 0 ? Math.round(track.scrollLeft / max * (cards.length - 1)) : 0;
-    };
-    const go = i => {
-      const c = cards[Math.max(0, Math.min(cards.length - 1, i))];
-      track.scrollTo({ left: c.offsetLeft - (track.clientWidth - c.offsetWidth) / 2, behavior: 'smooth' });
-    };
-    function update() {
-      const i = current();
-      dots.forEach((d, k) => d.setAttribute('aria-current', String(k === i)));
-      prev.disabled = track.scrollLeft <= 2;
-      next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
-    }
-    prev.addEventListener('click', () => go(current() - 1));
-    next.addEventListener('click', () => go(current() + 1));
-    dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
-    track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
-    window.addEventListener('resize', () => requestAnimationFrame(update));
+    let cards = real, ready = false, touching = false, timer = 0, shown = 0;
+
     // Estado inicial conocido (primera tarjeta) sin medir el layout al cargar
     dots.forEach((d, k) => d.setAttribute('aria-current', String(k === 0)));
-    prev.disabled = true;
+
+    const step = () => cards[1].offsetLeft - cards[0].offsetLeft;
+    const centered = i => cards[i].offsetLeft - (track.clientWidth - cards[i].offsetWidth) / 2;
+    const index = () => Math.max(0, Math.min(cards.length - 1, Math.round((track.scrollLeft - centered(0)) / step())));
+    // Salto instantáneo: sin scroll suave y con el scroll-snap apagado un momento para que no lo recoloque
+    const jump = left => {
+      track.style.scrollSnapType = 'none';
+      track.scrollTo({ left, behavior: 'instant' });
+      requestAnimationFrame(() => requestAnimationFrame(() => { track.style.scrollSnapType = ''; }));
+    };
+    const go = i => track.scrollTo({ left: centered(Math.max(0, Math.min(cards.length - 1, i))), behavior: 'smooth' });
+
+    function update() {
+      if (!ready) return;
+      shown = ((index() % n) + n) % n;
+      dots.forEach((d, k) => d.setAttribute('aria-current', String(k === shown)));
+    }
+    // Al detenerse el deslizamiento: si se ha entrado en una copia, volver a la tarjeta real equivalente
+    function settle() {
+      timer = 0;
+      if (!ready || touching) return;
+      const i = index();
+      const d = i < n ? n : i >= 2 * n ? -n : 0;
+      if (!d) return;
+      // La tarjeta a la que se salta debe verse exactamente igual que la que se deja: se le traspasa el valor
+      // que tienen ahora las transiciones a medias (zoom de la foto, botón +) y el estado hover
+      const held = [];
+      for (let j = Math.max(0, i - 3); j <= Math.min(cards.length - 1, i + 3); j++) {
+        const t = j + d;
+        if (t < 0 || t >= cards.length) continue;
+        [['.proj-bg', ['transform']], ['.proj-toggle', ['transform', 'backgroundColor']]].forEach(([sel, props]) => {
+          const from = cards[j].querySelector(sel), to = cards[t].querySelector(sel);
+          const cf = getComputedStyle(from), ct = getComputedStyle(to);
+          if (props.every(p => cf[p] === ct[p])) return;
+          to.style.transition = 'none';
+          props.forEach(p => { to.style[p] = cf[p]; });
+          held.push([to, props]);
+        });
+        if (cards[j].matches(':hover')) {
+          cards[t].classList.add('hov');
+          const release = () => track.querySelectorAll('.hov').forEach(c => c.classList.remove('hov'));
+          track.addEventListener('pointermove', release, { once: true });
+          track.addEventListener('pointerleave', release, { once: true });
+        }
+      }
+      jump(track.scrollLeft + d * step());
+      if (held.length) {
+        void track.offsetWidth;
+        requestAnimationFrame(() => held.forEach(([el, props]) => { el.style.transition = ''; props.forEach(p => { el.style[p] = ''; }); }));
+      }
+    }
+    const later = () => { clearTimeout(timer); timer = setTimeout(settle, 140); };
+
+    function init() {
+      if (ready) return;
+      ready = true;
+      const copy = c => {
+        const k = c.cloneNode(true);
+        k.classList.add('is-clone');
+        k.dataset.copy = c.id;
+        k.removeAttribute('id');
+        k.setAttribute('aria-hidden', 'true');
+        k.querySelectorAll('[id]').forEach(e => e.removeAttribute('id'));
+        k.querySelectorAll('a,summary,button').forEach(e => e.setAttribute('tabindex', '-1'));
+        return k;
+      };
+      track.prepend(...real.map(copy));
+      track.append(...real.map(copy));
+      cards = [...track.querySelectorAll('.proj-card')];
+      jump(centered(n));
+      update();
+    }
+
+    // Una tarjeta abierta se ve abierta también en sus copias
+    track.addEventListener('toggle', e => {
+      const c = e.target;
+      if (!ready || !c.classList || !c.classList.contains('proj-card')) return;
+      const k = cards.indexOf(c) % n;
+      cards.forEach((d, j) => { if (j % n === k && d !== c && d.open !== c.open) d.open = c.open; });
+    }, true);
+
+    prev.addEventListener('click', () => { init(); go(index() - 1); });
+    next.addEventListener('click', () => { init(); go(index() + 1); });
+    dots.forEach((d, i) => d.addEventListener('click', () => {
+      init();
+      const cur = index();
+      let best = i;
+      for (let c = i; c < cards.length; c += n) if (Math.abs(c - cur) < Math.abs(best - cur)) best = c;
+      go(best);
+    }));
+    track.addEventListener('scroll', () => { requestAnimationFrame(update); later(); }, { passive: true });
+    if ('onscrollend' in window) track.addEventListener('scrollend', settle);
+    // Con el dedo apoyado no se salta: se espera a soltarlo
+    track.addEventListener('touchstart', () => { touching = true; }, { passive: true });
+    ['touchend', 'touchcancel'].forEach(t => track.addEventListener(t, () => { touching = false; later(); }, { passive: true }));
+    window.addEventListener('resize', () => requestAnimationFrame(() => { if (ready) jump(centered(shown + n)); }));
+
+    // Las copias se crean al acercarse el carrusel a la pantalla (así no se mide el layout durante la carga)
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { init(); io.disconnect(); } }, { rootMargin: '600px 0px' });
+      io.observe(track);
+    } else init();
   })();
 
   // Impresión: se imprimen los 4 proyectos con su descripción
   (function () {
     let closed = [];
     window.addEventListener('beforeprint', () => {
-      closed = [...document.querySelectorAll('.proj-card:not([open]),.cert-more:not([open])')];
+      closed = [...document.querySelectorAll('.proj-card:not(.is-clone):not([open]),.cert-more:not([open])')];
       closed.forEach(d => { d.open = true; });
     });
     window.addEventListener('afterprint', () => { closed.forEach(d => { d.open = false; }); closed = []; });
@@ -2152,7 +2240,7 @@
         line(' ' + (items.length + 1) + '  * * *  ' + t().trNext, 't-ok');
       },
       projects() {
-        $$('.proj-card').forEach((c, i) => {
+        $$('.proj-card:not(.is-clone)').forEach((c, i) => {
           if (i) blank();
           line({ h: txt(c.querySelector('h3')) });
           line(lower(txt(c.querySelector('.date'))) + ' · ' + $$('.proj-tags > span', c).map(txt).join(', '), 't-dim');

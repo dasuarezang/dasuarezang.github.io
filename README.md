@@ -38,7 +38,7 @@ Ver online: https://dasuarezang.github.io/cv/
 | **Sobre mí** | Perfil profesional |
 | **Educación** | Grado en la ETSETB · UPC |
 | **Experiencia** | Traceroute con tarjetas y logos: Fòrum Telecos UPC y Real Madrid Official Store, con un extracto de la carta de recomendación |
-| **Proyectos** | Carrusel deslizable con tarjetas desplegables y las tecnologías de cada proyecto: red P2P para LLMs (con enlace a su código en GitHub), VitalLink (monitorización remota de salud con LoRaWAN, con enlace a su código), medidor de distancia por ultrasonidos y ROUV (vehículo subacuático) |
+| **Proyectos** | Carrusel infinito (da la vuelta del último al primero con flechas, puntos o deslizando; sin JavaScript es un carrusel normal) con tarjetas desplegables y las tecnologías de cada proyecto: red P2P para LLMs (con enlace a su código en GitHub), VitalLink (monitorización remota de salud con LoRaWAN, con enlace a su código), medidor de distancia por ultrasonidos y ROUV (vehículo subacuático) |
 | **Habilidades** | Redes, lenguajes, web y bases de datos, infraestructura y sistemas operativos, e idiomas |
 | **Certificados** | Una tarjeta por entidad (Harvard, IBM, Cisco), con enlace a la validación de cada certificado. Cada tarjeta enseña los 3 más recientes y despliega el resto con "ver más", así que la sección escala sin alargarse. En el PDF salen todos |
 
