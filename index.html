@@ -235,6 +235,11 @@
   @keyframes blink{50%{opacity:0;}}
   .hero .role{margin-top:20px;font-size:clamp(1rem,1.6vw,1.1rem);color:rgba(255,255,255,.62);max-width:34rem;line-height:1.65;}
   .hero .loc{margin-top:14px;display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.5);font-size:.9rem;}
+  /* Disponibilidad: punto verde de "en línea" */
+  .hero .status{margin-top:10px;font:500 .8rem/1.6 var(--mono);color:#86efac;}
+  .hero .status .nw{white-space:nowrap;}
+  .hero .status::before{content:"";display:inline-block;vertical-align:.08em;margin-right:10px;width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.55);animation:statusPing 2.4s ease-out infinite;}
+  @keyframes statusPing{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55);}70%,100%{box-shadow:0 0 0 7px rgba(34,197,94,0);}}
   .hero .loc .ic{color:var(--accent);font-size:1.15em;}
   .contact-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:40px;max-width:100%;}
   /* Botones con la misma estética que el badge de LinkedIn (rectángulo, mayúsculas espaciadas) */
@@ -283,6 +288,7 @@
   .hero-inner .typing{animation-delay:.25s;}
   .hero-inner .role{animation-delay:.32s;}
   .hero-inner .loc{animation-delay:.4s;}
+  .hero-inner .status{animation-delay:.44s;}
   .hero-inner .contact-row{animation-delay:.48s;}
   .profile-img{animation-duration:1.4s;}
 
@@ -1118,6 +1124,8 @@
     .tw .tw1{width:auto !important;}
     .hero .role,.hero .loc{color:#475569;}
     .hero .loc{justify-content:flex-start;margin-top:6px;}
+    .hero .status{margin-top:4px;color:#15803d;}
+    .hero .status::before{box-shadow:none;}
     .hero .loc .ic,.contact-row .ic{color:var(--accent-deep) !important;}
     .contact-row{justify-content:flex-start;margin-top:10px;gap:8px;}
     .contact-row a:not(.badge-link),.contact-row a:first-child{color:#0f172a;background:none;border:1px solid #cbd5e1;height:auto;padding:5px 10px;border-radius:7px;
@@ -1320,8 +1328,9 @@
     <p class="typing"><span class="sr"><span class="t-es">Estudiante de Telecomunicaciones · Futuro Network Engineer · Entusiasta de la alta disponibilidad</span><span class="t-en" lang="en">Telecommunications Engineering student · Future Network Engineer · High-Availability Systems Enthusiast</span></span>
       <span class="prompt" aria-hidden="true">&gt;_</span><span class="tw tw-es t-es" aria-hidden="true"><span class="tw1">Estudiante de Telecomunicaciones</span><span class="tw2">Futuro Network Engineer</span><span class="tw3">Entusiasta de la alta disponibilidad</span></span><span class="tw tw-en t-en" lang="en" aria-hidden="true"><span class="tw1">Telecommunications Engineering student</span><span class="tw2">Future Network Engineer</span><span class="tw3">High-Availability Systems Enthusiast</span></span><span class="cursor" aria-hidden="true"></span>
     </p>
-    <p class="role" data-i18n="hero.role"><span class="t-es">Estudiante de último año de Ingeniería de Tecnologías y Servicios de Telecomunicación en la ETSETB UPC, con base sólida en redes, ciberseguridad y desarrollo de sistemas.</span><span class="t-en" lang="en">Final-year Telecommunications Technologies and Services Engineering student at ETSETB UPC, with a solid foundation in networking, cybersecurity and systems development.</span></p>
+    <p class="role" data-i18n="hero.role"><span class="t-es">Estudiante de cuarto año de Ingeniería de Telecomunicación (Telemática) en la ETSETB UPC, enfocado en el diseño, despliegue y seguridad de infraestructuras de red.</span><span class="t-en" lang="en">Fourth-year Telecommunications Engineering student (Telematics) at ETSETB UPC, focused on the design, deployment and security of network infrastructure.</span></p>
     <div class="loc"><i class="ic ic-map-pin"></i><span data-i18n="hero.loc"><span class="t-es">Barcelona, España</span><span class="t-en" lang="en">Barcelona, Spain</span></span></div>
+    <p class="status" data-i18n="hero.status"><span class="t-es">Busco prácticas en ingeniería de redes <span class="nw">· Barcelona</span> <span class="nw">· desde febrero de 2027</span></span><span class="t-en" lang="en">Looking for a network engineering internship <span class="nw">· Barcelona</span> <span class="nw">· from February 2027</span></span></p>
     <div class="contact-row">
       <a href="mailto:daniel.suarez.angosto@gmail.com" title="daniel.suarez.angosto@gmail.com"><i class="ic ic-envelope-simple"></i><span class="t-es">Correo</span><span class="t-en" lang="en">Email</span></a>
       <a class="badge-link" href="https://linkedin.com/in/daniel-suarez-angosto" target="_blank" rel="noopener" aria-label="LinkedIn">
@@ -1338,9 +1347,10 @@
     <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">sobre-mi</span><span class="t-en" lang="en">about</span></span><h2 data-i18n="about.title"><span class="t-es">Sobre mí</span><span class="t-en" lang="en">About me</span></h2></div>
     <div class="about">
       <div class="about-text">
-        <p data-i18n="about.p1"><span class="t-es">Estudiante de último año de Ingeniería de Tecnologías y Servicios de Telecomunicación (Especialidad Telemática) en la ETSETB UPC, con sólida base técnica en redes, ciberseguridad y desarrollo de sistemas, tanto de software como de hardware.</span><span class="t-en" lang="en">Final-year Telecommunications Technologies and Services Engineering student (Telematics Specialization) at ETSETB UPC, with a strong technical background in networking, cybersecurity and systems development, both software and hardware.</span></p>
-        <p data-i18n="about.p2"><span class="t-es">Perfil multidisciplinar con experiencia en liderazgo de equipos, gestión de eventos tecnológicos de gran escala y orientación a resultados.</span><span class="t-en" lang="en">Multidisciplinary profile with experience in team leadership, large-scale tech event management and a results-driven mindset.</span></p>
-        <p data-i18n="about.p3"><span class="t-es">Proactivo, resolutivo y acostumbrado a entornos dinámicos y de alta exigencia.</span><span class="t-en" lang="en">Proactive, solution-oriented and used to dynamic, high-demand environments.</span></p>
+        <p data-i18n="about.p1"><span class="t-es">Mi objetivo es el diseño, despliegue y seguridad de infraestructuras de red. Tengo una base sólida en la capa física, el enrutamiento y los protocolos que sostienen las redes modernas, y me interesa especialmente cómo la automatización y el código pueden modernizar las arquitecturas de red.</span><span class="t-en" lang="en">My goal is the design, deployment and security of network infrastructure. I have a solid grounding in the physical layer, routing and the protocols behind modern networks, and I’m especially interested in how automation and code can modernize network architectures.</span></p>
+        <p data-i18n="about.p2"><span class="t-es">He complementado la carrera con certificaciones de Cisco (redes y ciberseguridad), IBM (IA) y Harvard (Python y SQL), y lo he llevado a la práctica en proyectos como VitalLink, un sistema IoT completo sobre LoRaWAN.</span><span class="t-en" lang="en">I’ve complemented my degree with certifications from Cisco (networking and cybersecurity), IBM (AI) and Harvard (Python and SQL), and put them into practice in projects such as VitalLink, an end-to-end IoT system over LoRaWAN.</span></p>
+        <p data-i18n="about.p3"><span class="t-es">Como vicepresidente del Fòrum Telecos UPC coordino al equipo que hace posibles eventos con más de 500 alumnos. Ahí he aprendido a coordinar personas, comunicar ideas complejas y mantener la cabeza fría bajo presión.</span><span class="t-en" lang="en">As Vice President of Fòrum Telecos UPC, I coordinate the team behind events with more than 500 students. There I’ve learned to coordinate people, communicate complex ideas and keep a cool head under pressure.</span></p>
+        <p data-i18n="about.p4"><span class="t-es">Busco unirme a un equipo de ingeniería de redes en Barcelona para hacer las prácticas a partir de febrero de 2027, aportar desde el primer día y seguir creciendo en la misma empresa al terminarlas.</span><span class="t-en" lang="en">I’m looking to join a network engineering team in Barcelona for an internship starting February 2027, add value from day one and keep growing with the same company once it ends.</span></p>
       </div>
     </div>
   </div>
@@ -1369,7 +1379,7 @@
       <div class="tl-item reveal">
         <div class="tl-logo"><img src="data:image/webp;base64,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" alt="Fòrum Telecos UPC" width="36" height="36"></div>
         <span class="tl-hop" aria-hidden="true">hop 02</span>
-        <div class="tl-head"><h3 data-i18n="exp1.role"><span class="t-es">Vicepresidente</span><span class="t-en" lang="en">Vice President</span></h3><span class="period" data-i18n="exp1.period"><span class="t-es">Septiembre 2025 — Actualidad</span><span class="t-en" lang="en">September 2025 — Present</span></span></div>
+        <div class="tl-head"><h3 data-i18n="exp1.role"><span class="t-es">Vicepresidente de Comunicaciones Institucionales</span><span class="t-en" lang="en">Vice President of Institutional Communications</span></h3><span class="period" data-i18n="exp1.period"><span class="t-es">Septiembre 2025 — Actualidad</span><span class="t-en" lang="en">September 2025 — Present</span></span></div>
         <div class="tl-role">Fòrum Telecos UPC</div>
         <ul>
           <li data-i18n="exp1.l1"><span class="t-es">Organicé el Fòrum Telecos UPC y el Startup Day 2026 en la ETSETB, eventos que conectan el talento universitario con el mundo profesional, dirigiendo un equipo de veinte personas.</span><span class="t-en" lang="en">Organized the Fòrum Telecos UPC and Startup Day 2026 at ETSETB, events that connect university talent with the professional world, leading a team of twenty people.</span></li>
