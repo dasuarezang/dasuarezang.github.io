@@ -1451,9 +1451,6 @@
               <li data-i18n="exp1.l3"><span class="t-es">Lidero el equipo de relaciones externas: contacto con empresas colaboradoras e instituciones, y seguimiento de los objetivos.</span><span class="t-en" lang="en">Lead the external relations team: liaison with partner companies and institutions, and tracking of objectives.</span><span class="t-ca" lang="ca">Lidero l’equip de relacions externes: contacte amb empreses col·laboradores i institucions, i seguiment dels objectius.</span></li>
               <li data-i18n="exp1.l4"><span class="t-es">Dirijo la estrategia de comunicación corporativa de la entidad, incluidas las redes sociales de los eventos.</span><span class="t-en" lang="en">Direct the organization’s corporate communication strategy, including social media for the events.</span><span class="t-ca" lang="ca">Dirigeixo l’estratègia de comunicació corporativa de l’entitat, incloses les xarxes socials dels esdeveniments.</span></li>
             </ul>
-              <ul class="r-skills" role="list">
-                <li><span class="t-es">Gestión de personas</span><span class="t-en" lang="en">People management</span><span class="t-ca" lang="ca">Gestió de persones</span></li>
-              </ul>
           </li>
           <li class="tl-r">
             <h4 data-i18n="exp0.role"><span class="t-es">Organizador</span><span class="t-en" lang="en">Organizer</span><span class="t-ca" lang="ca">Organitzador</span></h4>
@@ -1462,10 +1459,6 @@
               <li data-i18n="exp1.l1"><span class="t-es">Organicé el Fòrum Telecos UPC y el Startup Day 2026 en la ETSETB, eventos que conectan el talento universitario con el mundo profesional, dirigiendo un equipo de veinte personas.</span><span class="t-en" lang="en">Organized the Fòrum Telecos UPC and Startup Day 2026 at ETSETB, events that connect university talent with the professional world, leading a team of twenty people.</span><span class="t-ca" lang="ca">Vaig organitzar el Fòrum Telecos UPC i l’Startup Day 2026 a l’ETSETB, esdeveniments que connecten el talent universitari amb el món professional, al capdavant d’un equip de vint persones.</span></li>
               <li data-i18n="exp1.l2"><span class="t-es">Más de 500 alumnos reunidos en el Fòrum Telecos UPC y visibilidad para nuevas empresas en el Startup Day.</span><span class="t-en" lang="en">Brought together more than 500 students at the Fòrum Telecos UPC and gave visibility to new companies at the Startup Day.</span><span class="t-ca" lang="ca">Més de 500 alumnes reunits al Fòrum Telecos UPC i visibilitat per a noves empreses a l’Startup Day.</span></li>
             </ul>
-              <ul class="r-skills" role="list">
-                <li><span class="t-es">Teamwork</span><span class="t-en" lang="en">Teamwork</span><span class="t-ca" lang="ca">Treball en equip</span></li>
-                <li><span class="t-es">Planificación de eventos</span><span class="t-en" lang="en">Event planning</span><span class="t-ca" lang="ca">Planificació d’esdeveniments</span></li>
-              </ul>
           </li>
         </ol>
       </div>
@@ -2310,7 +2303,7 @@
             line(['  ', { h: txt(r.querySelector('h4')) }]);
             line('    ' + lower(txt(r.querySelector('.r-meta'))), 't-dim');
             $$('ul:not(.r-skills) li', r).forEach(li => line('    - ' + txt(li)));
-            line('    ' + $$('.r-skills li', r).map(txt).join(' · '), 't-dim');
+            if ($('.r-skills', r)) line('    ' + $$('.r-skills li', r).map(txt).join(' · '), 't-dim');
           });
         });
       },
