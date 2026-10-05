@@ -392,6 +392,26 @@
   .tl-quote figcaption{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;margin-top:10px;}
   .tl-quote .q-name{font-weight:600;font-size:.9rem;color:var(--ink);}
   .tl-quote .q-role{font:500 .68rem/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+  /* Varios puestos en la misma entidad (como en LinkedIn): entidad arriba, puestos debajo en orden inverso */
+  .tl-loc{display:flex;align-items:center;gap:6px;font-size:.88rem;font-weight:400;}
+  .tl-loc .ic{color:var(--accent-deep);font-size:1.05em;}
+  .tl-head .sep,.r-meta .sep{margin:0 .35em;opacity:.55;}
+  .tl-head .nw,.r-meta .nw{white-space:nowrap;}
+  .tl-head .dur,.r-meta .dur{color:var(--muted);white-space:nowrap;}
+  .tl-roles{list-style:none;margin:22px 0 0;padding:0;}
+  .tl-item .tl-roles > .tl-r{position:relative;margin:0;padding:0 0 26px 30px;}
+  .tl-item .tl-roles > .tl-r:last-child{padding-bottom:0;}
+  .tl-r::before{content:"";position:absolute;left:0;top:.42em;width:11px;height:11px;border-radius:50%;box-sizing:border-box;background:var(--paper);border:2px solid var(--accent);}
+  .tl-r:first-child::before{background:var(--accent);box-shadow:0 0 0 4px rgba(37,99,235,.14);}
+  .tl-r::after{content:"";position:absolute;left:5px;top:calc(.42em + 14px);bottom:6px;width:1px;background:linear-gradient(180deg,var(--accent),var(--hair));}
+  .tl-r:last-child::after{display:none;}
+  .tl-r h4{font-size:1.05rem;font-weight:600;letter-spacing:-.02em;line-height:1.3;color:var(--ink);overflow-wrap:anywhere;}
+  .r-meta{margin-top:5px;font:500 .68rem/1.5 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent-deep);}
+  .tl-item .tl-r ul:not(.r-skills){margin-top:12px;}
+  .r-skills{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0 !important;padding:0 !important;}
+  .tl-item .r-skills li{margin:0;padding:5px 10px 5px 9px;display:inline-flex;align-items:center;gap:7px;border-radius:999px;font:500 .64rem/1.2 var(--mono);letter-spacing:.06em;color:var(--ink-2);background:rgba(11,16,32,.05);box-shadow:inset 0 0 0 1px var(--line);}
+  .r-skills li::marker{content:none;}
+  .r-skills li::before{content:"";flex:none;width:6px;height:6px;border:1.5px solid var(--accent);transform:rotate(45deg);}
   .q-link{
     display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:8px 12px 8px 14px;border-radius:999px;
     font:600 .82rem/1 var(--font);color:var(--accent-deep);background:transparent;
@@ -802,6 +822,8 @@
     .section-head{gap:16px;}
     .timeline{--mk:34px;--tl-pad:46px;--tl-card:20px;}
     .tl-item{margin-bottom:20px;}
+    .tl-item .tl-roles > .tl-r{padding-left:24px;padding-bottom:22px;}
+    .tl-r ul:not(.r-skills){padding-left:16px !important;}
     .car-track{gap:20px;}
     .cert-group{padding:4px;}
     .cert-head{padding:10px 10px 12px 12px;}
@@ -1045,6 +1067,9 @@
     .sec-tag{color:var(--accent);background:rgba(96,165,250,.08);box-shadow:inset 0 0 0 1px rgba(96,165,250,.18);}
     .edu-card .school,.tl-head .period{color:var(--accent);}
     .tl-quote{background:rgba(96,165,250,.07);box-shadow:inset 0 0 0 1px rgba(96,165,250,.14);}
+    .r-meta,.tl-loc .ic{color:var(--accent);}
+    .tl-r:first-child::before{box-shadow:0 0 0 4px rgba(96,165,250,.16);}
+    .tl-item .r-skills li{background:rgba(255,255,255,.05);}
     .tl-item.lit .tl-hop{color:var(--accent);}
     .q-link{color:var(--accent);box-shadow:inset 0 0 0 1px rgba(96,165,250,.4);}
     .q-link:hover{background:rgba(96,165,250,.1);box-shadow:inset 0 0 0 1px rgba(96,165,250,.7);}
@@ -1215,6 +1240,18 @@
     .tl-quote .q-name{font-size:.82rem;}
     .tl-quote .q-role{font-size:.6rem;}
     .tl-item li,.proj-card li{margin-bottom:3px;}
+    /* Varios puestos en la misma entidad: compacto para que el PDF siga en 2 páginas */
+    .tl-loc{display:none;}
+    .tl-roles{margin:4px 0 0;}
+    .tl-item .tl-roles > .tl-r{padding:0 0 5px 18px;}
+    .tl-r::before{top:.3em;width:9px;height:9px;}
+    .tl-r:first-child::before{box-shadow:none;}
+    .tl-r::after{left:4px;top:calc(.3em + 11px);bottom:2px;}
+    .tl-r h4{display:inline;font-size:.95rem;}
+    .r-meta{display:inline;margin:0 0 0 8px;font-size:.58rem;}
+    .tl-item .tl-r ul:not(.r-skills){margin-top:4px;}
+    .r-skills{gap:4px;margin:3px 0 0 !important;}
+    .tl-item .r-skills li{padding:1px 7px 1px 6px;font-size:.56rem;background:none;box-shadow:inset 0 0 0 1px #cbd5e1;color:#334155;}
     .proj-link{display:block;margin:0;padding:0 14px 10px 30px;background:none;color:var(--accent-deep);font-size:.82rem;font-weight:400;}
     .proj-link .ic,.proj-link span{display:none !important;}
     .proj-link::after{content:attr(href);}
@@ -1404,14 +1441,33 @@
       <div class="tl-item reveal">
         <div class="tl-logo"><img src="data:image/webp;base64,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" alt="Fòrum Telecos UPC" width="36" height="36"></div>
         <span class="tl-hop" aria-hidden="true">hop 02</span>
-        <div class="tl-head"><h3 data-i18n="exp1.role"><span class="t-es">Vicepresidente de Comunicaciones Institucionales</span><span class="t-en" lang="en">Vice President of Institutional Communications</span><span class="t-ca" lang="ca">Vicepresident de Comunicacions Institucionals</span></h3><span class="period" data-i18n="exp1.period"><span class="t-es">Septiembre 2025 — Actualidad</span><span class="t-en" lang="en">September 2025 — Present</span><span class="t-ca" lang="ca">Setembre 2025 — Actualitat</span></span></div>
-        <div class="tl-role">Fòrum Telecos UPC</div>
-        <ul>
-          <li data-i18n="exp1.l1"><span class="t-es">Organicé el Fòrum Telecos UPC y el Startup Day 2026 en la ETSETB, eventos que conectan el talento universitario con el mundo profesional, dirigiendo un equipo de veinte personas.</span><span class="t-en" lang="en">Organized the Fòrum Telecos UPC and Startup Day 2026 at ETSETB, events that connect university talent with the professional world, leading a team of twenty people.</span><span class="t-ca" lang="ca">Vaig organitzar el Fòrum Telecos UPC i l’Startup Day 2026 a l’ETSETB, esdeveniments que connecten el talent universitari amb el món professional, al capdavant d’un equip de vint persones.</span></li>
-          <li data-i18n="exp1.l2"><span class="t-es">Más de 500 alumnos reunidos en el Fòrum Telecos UPC y visibilidad para nuevas empresas en el Startup Day.</span><span class="t-en" lang="en">Brought together more than 500 students at the Fòrum Telecos UPC and gave visibility to new companies at the Startup Day.</span><span class="t-ca" lang="ca">Més de 500 alumnes reunits al Fòrum Telecos UPC i visibilitat per a noves empreses a l’Startup Day.</span></li>
-          <li data-i18n="exp1.l3"><span class="t-es">Lidero el equipo de relaciones externas: contacto con empresas colaboradoras e instituciones, y seguimiento de los objetivos.</span><span class="t-en" lang="en">Lead the external relations team: liaison with partner companies and institutions, and tracking of objectives.</span><span class="t-ca" lang="ca">Lidero l’equip de relacions externes: contacte amb empreses col·laboradores i institucions, i seguiment dels objectius.</span></li>
-          <li data-i18n="exp1.l4"><span class="t-es">Dirijo la estrategia de comunicación corporativa de la entidad, incluidas las redes sociales de los eventos.</span><span class="t-en" lang="en">Direct the organization’s corporate communication strategy, including social media for the events.</span><span class="t-ca" lang="ca">Dirigeixo l’estratègia de comunicació corporativa de l’entitat, incloses les xarxes socials dels esdeveniments.</span></li>
-        </ul>
+        <div class="tl-head"><h3 data-i18n="exp1.company">Fòrum Telecos UPC</h3><span class="period" data-i18n="exp1.period"><span class="t-es">Octubre 2025 — Actualidad</span><span class="t-en" lang="en">October 2025 — Present</span><span class="t-ca" lang="ca">Octubre 2025 — Actualitat</span> <span class="nw"><span class="sep" aria-hidden="true">·</span> <span class="dur" data-from="2025-10"><span class="t-es">1 año 1 mes</span><span class="t-en" lang="en">1 yr 1 mo</span><span class="t-ca" lang="ca">1 any 1 mes</span></span></span></span></div>
+        <div class="tl-role tl-loc"><i class="ic ic-map-pin" aria-hidden="true"></i><span data-i18n="exp1.loc"><span class="t-es">Barcelona, Cataluña, España</span><span class="t-en" lang="en">Barcelona, Catalonia, Spain</span><span class="t-ca" lang="ca">Barcelona, Catalunya, Espanya</span></span></div>
+        <ol class="tl-roles">
+          <li class="tl-r">
+            <h4 data-i18n="exp1.role"><span class="t-es">Vicepresidente de Comunicaciones Institucionales</span><span class="t-en" lang="en">Vice President of Institutional Communications</span><span class="t-ca" lang="ca">Vicepresident de Comunicacions Institucionals</span></h4>
+            <div class="r-meta"><span class="r-period" data-i18n="exp1.rperiod"><span class="t-es">Marzo 2026 — Actualidad</span><span class="t-en" lang="en">March 2026 — Present</span><span class="t-ca" lang="ca">Març 2026 — Actualitat</span></span> <span class="nw"><span class="sep" aria-hidden="true">·</span> <span class="dur" data-from="2026-03"><span class="t-es">8 meses</span><span class="t-en" lang="en">8 mos</span><span class="t-ca" lang="ca">8 mesos</span></span></span></div>
+            <ul>
+              <li data-i18n="exp1.l3"><span class="t-es">Lidero el equipo de relaciones externas: contacto con empresas colaboradoras e instituciones, y seguimiento de los objetivos.</span><span class="t-en" lang="en">Lead the external relations team: liaison with partner companies and institutions, and tracking of objectives.</span><span class="t-ca" lang="ca">Lidero l’equip de relacions externes: contacte amb empreses col·laboradores i institucions, i seguiment dels objectius.</span></li>
+              <li data-i18n="exp1.l4"><span class="t-es">Dirijo la estrategia de comunicación corporativa de la entidad, incluidas las redes sociales de los eventos.</span><span class="t-en" lang="en">Direct the organization’s corporate communication strategy, including social media for the events.</span><span class="t-ca" lang="ca">Dirigeixo l’estratègia de comunicació corporativa de l’entitat, incloses les xarxes socials dels esdeveniments.</span></li>
+            </ul>
+              <ul class="r-skills" role="list">
+                <li><span class="t-es">Gestión de personas</span><span class="t-en" lang="en">People management</span><span class="t-ca" lang="ca">Gestió de persones</span></li>
+              </ul>
+          </li>
+          <li class="tl-r">
+            <h4 data-i18n="exp0.role"><span class="t-es">Organizador</span><span class="t-en" lang="en">Organizer</span><span class="t-ca" lang="ca">Organitzador</span></h4>
+            <div class="r-meta"><span class="r-period" data-i18n="exp0.rperiod"><span class="t-es">Octubre 2025 — Marzo 2026</span><span class="t-en" lang="en">October 2025 — March 2026</span><span class="t-ca" lang="ca">Octubre 2025 — Març 2026</span></span> <span class="nw"><span class="sep" aria-hidden="true">·</span> <span class="dur" data-from="2025-10" data-to="2026-03"><span class="t-es">6 meses</span><span class="t-en" lang="en">6 mos</span><span class="t-ca" lang="ca">6 mesos</span></span></span></div>
+            <ul>
+              <li data-i18n="exp1.l1"><span class="t-es">Organicé el Fòrum Telecos UPC y el Startup Day 2026 en la ETSETB, eventos que conectan el talento universitario con el mundo profesional, dirigiendo un equipo de veinte personas.</span><span class="t-en" lang="en">Organized the Fòrum Telecos UPC and Startup Day 2026 at ETSETB, events that connect university talent with the professional world, leading a team of twenty people.</span><span class="t-ca" lang="ca">Vaig organitzar el Fòrum Telecos UPC i l’Startup Day 2026 a l’ETSETB, esdeveniments que connecten el talent universitari amb el món professional, al capdavant d’un equip de vint persones.</span></li>
+              <li data-i18n="exp1.l2"><span class="t-es">Más de 500 alumnos reunidos en el Fòrum Telecos UPC y visibilidad para nuevas empresas en el Startup Day.</span><span class="t-en" lang="en">Brought together more than 500 students at the Fòrum Telecos UPC and gave visibility to new companies at the Startup Day.</span><span class="t-ca" lang="ca">Més de 500 alumnes reunits al Fòrum Telecos UPC i visibilitat per a noves empreses a l’Startup Day.</span></li>
+            </ul>
+              <ul class="r-skills" role="list">
+                <li><span class="t-es">Teamwork</span><span class="t-en" lang="en">Teamwork</span><span class="t-ca" lang="ca">Treball en equip</span></li>
+                <li><span class="t-es">Planificación de eventos</span><span class="t-en" lang="en">Event planning</span><span class="t-ca" lang="ca">Planificació d’esdeveniments</span></li>
+              </ul>
+          </li>
+        </ol>
       </div>
       <div class="tl-item reveal">
         <div class="tl-logo"><img src="data:image/webp;base64,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" alt="Real Madrid Official Store" width="36" height="36"></div>
@@ -1994,7 +2050,27 @@
   // La línea la mueve el CSS ligado al scroll cuando hay soporte; si no (o con "reducir movimiento"), este script.
   // Las posiciones de los saltos dentro de la sección se miden solo al cambiar el tamaño; al hacer scroll
   // basta con leer dónde está la sección y escribir lo justo (sin forzar maquetaciones en cada fotograma).
+    // Duraciones de la experiencia como en LinkedIn: meses naturales con ambos extremos incluidos
+  // (mar. 2026 - actualidad = 8 meses en octubre). El texto del HTML es el valor de respaldo sin JavaScript.
   (function () {
+    const UNITS = { es: { y: ['año', 'años'], m: ['mes', 'meses'] }, en: { y: ['yr', 'yrs'], m: ['mo', 'mos'] }, ca: { y: ['any', 'anys'], m: ['mes', 'mesos'] } };
+    const now = new Date();
+    document.querySelectorAll('.dur[data-from]').forEach(el => {
+      const [y1, m1] = el.dataset.from.split('-').map(Number);
+      const [y2, m2] = el.dataset.to ? el.dataset.to.split('-').map(Number) : [now.getFullYear(), now.getMonth() + 1];
+      const n = (y2 - y1) * 12 + (m2 - m1) + 1, y = Math.floor(n / 12), m = n % 12;
+      Object.keys(UNITS).forEach(l => {
+        const span = el.querySelector('.t-' + l);
+        if (!span) return;
+        const u = UNITS[l], out = [];
+        if (y) out.push(y + ' ' + u.y[y > 1 ? 1 : 0]);
+        if (m) out.push(m + ' ' + u.m[m > 1 ? 1 : 0]);
+        span.textContent = out.join(' ');
+      });
+    });
+  })();
+
+(function () {
     const tl = document.querySelector('.timeline');
     const fill = tl && tl.querySelector('.tl-fill');
     if (!fill) return;
@@ -2220,9 +2296,22 @@
       experience() {
         $$('.tl-item').forEach((c, i) => {
           if (i) blank();
-          line([{ h: txt(c.querySelector('.tl-head h3')) }, ' · ' + txt(c.querySelector('.tl-role'))]);
+          const roles = $$('.tl-r', c);
+          if (!roles.length) {
+            line([{ h: txt(c.querySelector('.tl-head h3')) }, ' · ' + txt(c.querySelector('.tl-role'))]);
+            line(lower(txt(c.querySelector('.tl-head .period'))), 't-dim');
+            $$('li', c).forEach(li => line('  - ' + txt(li)));
+            return;
+          }
+          // Varios puestos en la misma entidad: la entidad y debajo cada puesto, del más reciente al más antiguo
+          line([{ h: txt(c.querySelector('.tl-head h3')) }, ' · ' + txt(c.querySelector('.tl-loc'))]);
           line(lower(txt(c.querySelector('.tl-head .period'))), 't-dim');
-          $$('li', c).forEach(li => line('  - ' + txt(li)));
+          roles.forEach(r => {
+            line(['  ', { h: txt(r.querySelector('h4')) }]);
+            line('    ' + lower(txt(r.querySelector('.r-meta'))), 't-dim');
+            $$('ul:not(.r-skills) li', r).forEach(li => line('    - ' + txt(li)));
+            line('    ' + $$('.r-skills li', r).map(txt).join(' · '), 't-dim');
+          });
         });
       },
       traceroute() {
@@ -2231,7 +2320,9 @@
         const items = $$('.tl-item').reverse();
         items.forEach((c, i) => {
           const ms = (0.4 + i * 0.7 + Math.random() * 0.3).toFixed(2);
-          line([' ' + (i + 1) + '  ', { h: txt(c.querySelector('.tl-head h3')) }, ' · ' + txt(c.querySelector('.tl-role')) + '  ', lower(txt(c.querySelector('.tl-head .period'))) + '  ' + ms + ' ms']);
+          const multi = c.querySelector('.tl-r h4');
+          // Entidad con varios puestos: se muestra el puesto actual y la entidad
+          line([' ' + (i + 1) + '  ', { h: txt(multi || c.querySelector('.tl-head h3')) }, ' · ' + txt(multi ? c.querySelector('.tl-head h3') : c.querySelector('.tl-role')) + '  ', lower(txt(c.querySelector('.tl-head .period'))) + '  ' + ms + ' ms']);
         });
         line(' ' + (items.length + 1) + '  * * *  ' + t().trNext, 't-ok');
       },
