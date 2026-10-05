@@ -2303,7 +2303,7 @@
             line(['  ', { h: txt(r.querySelector('h4')) }]);
             line('    ' + lower(txt(r.querySelector('.r-meta'))), 't-dim');
             $$('ul:not(.r-skills) li', r).forEach(li => line('    - ' + txt(li)));
-            if ($('.r-skills', r)) line('    ' + $$('.r-skills li', r).map(txt).join(' · '), 't-dim');
+            if ($$('.r-skills', r).length) line('    ' + $$('.r-skills li', r).map(txt).join(' · '), 't-dim');
           });
         });
       },
