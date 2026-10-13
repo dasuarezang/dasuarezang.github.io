@@ -4,8 +4,6 @@ CV web personal: estudiante de último año de **Ingeniería de Tecnologías y S
 
 Ver online: https://dasuarezang.github.io/
 
-(La dirección antigua, https://dasuarezang.github.io/cv/, redirige a la nueva; el repositorio `cv` solo contiene esas redirecciones.)
-
 ---
 
 ## Características
