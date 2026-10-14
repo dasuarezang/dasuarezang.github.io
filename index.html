@@ -447,6 +447,7 @@
   .proj-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s var(--spring);}
   .proj-card:hover .proj-bg,.proj-card.hov .proj-bg{transform:scale(1.05);}
   #proyecto-4 .proj-bg,.proj-card[data-copy="proyecto-4"] .proj-bg{object-position:55% 60%;}
+  #proyecto-5 .proj-bg,.proj-card[data-copy="proyecto-5"] .proj-bg{object-position:92% 40%;}
   .proj-shade{position:absolute;inset:0;z-index:-1;pointer-events:none;
     background:linear-gradient(to top,rgba(5,7,12,.96) 0%,rgba(5,7,12,.72) 45%,rgba(5,7,12,.25) 100%);}
   .proj-shade::after{content:"";position:absolute;inset:0;background:rgba(5,7,12,.5);opacity:0;transition:opacity .7s var(--spring);}
@@ -1211,6 +1212,7 @@
     .proj-tags > span{color:#1e293b;background:#f1f5f9;border:1px solid #e2e8f0;padding:2px 7px;font-size:.66rem;}
     .proj-card ul{background:none;color:#475569;margin:0;padding:4px 14px 10px 30px;font-size:.88rem;}
     .proj-card.is-clone{display:none !important;}
+    #proyecto-5,.proj-card[data-copy="proyecto-5"]{display:none !important;}
     .proj-card::details-content,.cert-more::details-content{block-size:auto !important;content-visibility:visible !important;transition:none !important;}
     .cert-more summary{display:none;}
     /* Habilidades y certificados */
@@ -1485,6 +1487,22 @@
     <div class="section-head"><span class="sec-tag" aria-hidden="true"><span class="sp">$</span>cd ~/<span class="t-es">proyectos</span><span class="t-en" lang="en">projects</span><span class="t-ca" lang="ca">projectes</span></span><h2 data-i18n="proj.title"><span class="t-es">Proyectos</span><span class="t-en" lang="en">Projects</span><span class="t-ca" lang="ca">Projectes</span></h2></div>
     <div class="carousel">
       <div class="car-track" id="projTrack" tabindex="0" role="region" aria-label="Proyectos / Projects">
+      <details class="proj-card" id="proyecto-5">
+        <summary>
+          <img class="proj-bg" src="assets/proyecto-web.webp" loading="lazy" alt="Daniel Suárez Angosto: vista previa de la web del CV" decoding="async">
+          <span class="proj-shade" aria-hidden="true"></span>
+          <span class="date" data-i18n="p5.date"><span class="t-es">Septiembre 2026 — Octubre 2026</span><span class="t-en" lang="en">September 2026 — October 2026</span><span class="t-ca" lang="ca">Setembre 2026 — Octubre 2026</span></span>
+          <h3 data-i18n="p5.title"><span class="t-es">Web CV personal: rápida, accesible y trilingüe</span><span class="t-en" lang="en">Personal CV website: fast, accessible and trilingual</span><span class="t-ca" lang="ca">Web CV personal: ràpida, accessible i trilingüe</span></h3>
+          <span class="proj-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Python</span><span>Playwright</span><span>GitHub Actions</span></span>
+          <span class="proj-toggle" aria-hidden="true"><i class="ic ic-plus"></i></span>
+        </summary>
+        <ul>
+          <li data-i18n="p5.l1"><span class="t-es">Diseñé y desarrollé mi web de CV personal como una página rápida, accesible y sin dependencias, con estética de ingeniería de redes, usando HTML5, CSS3 (Grid, Flexbox, scroll-snap, :has()) y JavaScript puro solo como mejora progresiva, de modo que todo carga desde una única página sin servidores de terceros.</span><span class="t-en" lang="en">Designed and developed my personal CV website as a fast, accessible, dependency-free web page with a network-engineering look and feel, using HTML5, CSS3 (Grid, Flexbox, scroll-snap, :has()) and vanilla JavaScript only as progressive enhancement, so everything loads from a single page without third-party servers.</span><span class="t-ca" lang="ca">Vaig dissenyar i desenvolupar el meu web de CV personal com una pàgina ràpida, accessible i sense dependències, amb estètica d’enginyeria de xarxes, amb HTML5, CSS3 (Grid, Flexbox, scroll-snap, :has()) i JavaScript pur només com a millora progressiva, de manera que tot carrega des d’una única pàgina sense servidors de tercers.</span></li>
+          <li data-i18n="p5.l2"><span class="t-es">La hice totalmente trilingüe (español, inglés y catalán) con cambio de idioma instantáneo, y diseñé una interfaz inspirada en la terminal que incluye una línea de tiempo de experiencia estilo traceroute, un diagrama de red VitalLink animado en la portada y una terminal interactiva oculta que responde a comandos como whoami, projects o skills con el propio contenido del CV.</span><span class="t-en" lang="en">Made it fully trilingual (Spanish, English and Catalan) with instant language switching, and designed a terminal-inspired interface that includes a traceroute-style experience timeline, an animated VitalLink network diagram on the landing page, and a hidden interactive terminal that answers commands such as whoami, projects or skills using the CV’s own content.</span><span class="t-ca" lang="ca">La vaig fer totalment trilingüe (castellà, anglès i català) amb canvi d’idioma instantani, i vaig dissenyar una interfície inspirada en el terminal que inclou una línia de temps d’experiència estil traceroute, un diagrama de xarxa VitalLink animat a la portada i un terminal interactiu ocult que respon a comandes com whoami, projects o skills amb el propi contingut del CV.</span></li>
+          <li data-i18n="p5.l3"><span class="t-es">Automaticé el control de calidad con scripts de Python (Playwright y axe) que generan los CV en PDF descargables en cada idioma y verifican traducciones, enlaces, accesibilidad y maquetación en cada push mediante GitHub Actions. El resultado es una web responsive (de 280 px a 4K, con modo oscuro automático), con un LCP de unos 1,8 s y sin errores de accesibilidad, alojada en GitHub Pages.</span><span class="t-en" lang="en">Automated quality control with Python scripts (Playwright and axe) that generate the downloadable PDF CVs in each language and verify translations, links, accessibility and layout on every push through GitHub Actions. The result is a responsive site (from 280 px to 4K, with automatic dark mode) with an LCP of about 1.8 s and no accessibility errors, hosted on GitHub Pages.</span><span class="t-ca" lang="ca">Vaig automatitzar el control de qualitat amb scripts de Python (Playwright i axe) que generen els CV en PDF descarregables en cada idioma i verifiquen traduccions, enllaços, accessibilitat i maquetació a cada push mitjançant GitHub Actions. El resultat és un web responsive (de 280 px a 4K, amb mode fosc automàtic), amb un LCP d’uns 1,8 s i sense errors d’accessibilitat, allotjat a GitHub Pages.</span></li>
+        </ul>
+        <a class="proj-link" href="https://github.com/dasuarezang/dasuarezang.github.io" target="_blank" rel="noopener"><i class="ic ic-github-logo"></i><span class="t-es">Ver el código en GitHub</span><span class="t-en" lang="en">View the code on GitHub</span><span class="t-ca" lang="ca">Veure el codi a GitHub</span><i class="ic ic-arrow-up-right"></i></a>
+      </details>
       <details class="proj-card" id="proyecto-1">
         <summary>
           <img class="proj-bg" src="assets/proyecto-p2p.webp" loading="lazy" alt="Sistema de telecomunicaciones P2P para distribuir tareas pesadas" decoding="async">
@@ -1551,7 +1569,7 @@
       </div>
       <div class="car-nav">
         <button class="car-btn" type="button" data-dir="-1"><i class="ic ic-caret-left"></i><span class="sr"><span class="t-es">Proyecto anterior</span><span class="t-en" lang="en">Previous project</span><span class="t-ca" lang="ca">Projecte anterior</span></span></button>
-        <div class="car-dots"><button class="car-dot" type="button" data-i="0"><span class="sr">1</span></button><button class="car-dot" type="button" data-i="1"><span class="sr">2</span></button><button class="car-dot" type="button" data-i="2"><span class="sr">3</span></button><button class="car-dot" type="button" data-i="3"><span class="sr">4</span></button></div>
+        <div class="car-dots"><button class="car-dot" type="button" data-i="0"><span class="sr">1</span></button><button class="car-dot" type="button" data-i="1"><span class="sr">2</span></button><button class="car-dot" type="button" data-i="2"><span class="sr">3</span></button><button class="car-dot" type="button" data-i="3"><span class="sr">4</span></button><button class="car-dot" type="button" data-i="4"><span class="sr">5</span></button></div>
         <button class="car-btn" type="button" data-dir="1"><i class="ic ic-caret-right"></i><span class="sr"><span class="t-es">Proyecto siguiente</span><span class="t-en" lang="en">Next project</span><span class="t-ca" lang="ca">Projecte següent</span></span></button>
       </div>
     </div>

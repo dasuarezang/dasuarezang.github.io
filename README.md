@@ -58,7 +58,7 @@ Ver online: https://dasuarezang.github.io/
 | `scripts/` | `build_pdfs.py` genera los PDF y `check.py` comprueba la web antes de subir cambios |
 | `apple-touch-icon.png` | Icono al guardar la web en la pantalla de inicio del móvil |
 | `google27aa19f9bf52eea7.html` | Verificación de Google Search Console (no borrar) |
-| `assets/` | Foto de perfil, logo de la ETSETB, fotos de los 4 proyectos, logo de VitalLink y fuentes Geist y Geist Mono |
+| `assets/` | Foto de perfil, logo de la ETSETB, fotos de los 5 proyectos, logo de VitalLink y fuentes Geist y Geist Mono |
 
 ## Mantenimiento
 
