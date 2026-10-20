@@ -9,17 +9,17 @@ Ver online: https://dasuarezang.github.io/
 ## Características
 
 - **Sin dependencias externas.** Estilos, scripts, iconos y logos pequeños van dentro de `index.html`. Las fotos y las fuentes principales están en `assets/`. No se carga nada de otros servidores.
-- **Trilingüe ES / EN / CA.** El cambio de idioma es instantáneo y afecta a todo: textos, frase animada, insignias de idiomas, terminal, carta de recomendación y página 404. La primera visita se abre en castellano o en catalán según el idioma del navegador (y en inglés si no es ninguno de los dos). La elección manual se recuerda entre visitas y se comparte entre las páginas.
+- **Trilingüe ES / EN / CA.** El cambio de idioma es instantáneo y afecta a todo: textos, frase animada, terminal, carta de recomendación y página 404. La primera visita se abre en castellano o en catalán según el idioma del navegador (y en inglés si no es ninguno de los dos). La elección manual se recuerda entre visitas y se comparte entre las páginas.
 - **Funciona sin JavaScript.** El cambio de idioma, el menú móvil, la frase animada y el carrusel están hechos con HTML y CSS, así que funcionan también en visores de archivos del móvil que bloquean JavaScript. El JavaScript solo añade extras.
-- **Estética de terminal.** Etiquetas `$ cd ~/sección`, esquinas tipo plano técnico en las tarjetas, navegación en fuente monoespaciada y logo `>_ DSA`.
+- **Estética de terminal.** Etiquetas `$ cd ~/sección`, esquinas tipo plano técnico en las tarjetas, navegación en fuente monoespaciada y logo `>_ DSA`. Ni un círculo ni una esquina redondeada en toda la web (CV, carta y 404). Los botones son órdenes en monoespaciada (`correo`, `linkedin ↗`, `github ↗`) que se invierten de golpe al pasar por encima, como un texto seleccionado; las fechas van como texto monoespaciado en azul y las tecnologías, en etiquetas rectas con borde fino.
 - **Portada con red animada.** Un diagrama del proyecto VitalLink (Raspberry Pi, Arduino, TTN, Node-RED, PostgreSQL, Next.js) rodea la foto, con paquetes y pulsos animados. La animación se pausa cuando no se ve y se desactiva con *reducir movimiento*.
 - **Experiencia como `traceroute`.** La línea de tiempo se rellena al hacer scroll y cada salto (*hop*) se enciende al llegar a él. El salto 01 es el puesto más antiguo.
 - **Terminal escondida.** Se abre con la tecla `º` (o `` ` ``) o con el botón del pie. Responde con el propio contenido del CV: `whoami`, `about`, `education`, `experience`, `traceroute`, `projects`, `skills`, `certs`, `contact`, `email`, `cv`, `ping`, `lang es|en|ca`, entre otros. En pantallas táctiles se usa con botones, sin abrir el teclado.
 - **Diseño adaptable.** Probado de 280 px (móvil plegable) a 4K, en vertical y en horizontal, con los motores de Chrome, Safari y Firefox y sin scroll horizontal. Con el móvil en horizontal, el menú se reparte en dos columnas.
 - **Modo oscuro automático** según el ajuste del sistema.
-- **PDF descargable.** El botón *Descargar CV* baja un PDF ya generado en el idioma activo (`cv-daniel-suarez-es.pdf`, `-en.pdf` y `-ca.pdf`): un CV limpio en blanco de 2 páginas A4 con todas las secciones y los proyectos desplegados. También se puede usar *Imprimir → Guardar como PDF*.
+- **PDF descargable.** El botón del pie, que muestra el nombre del archivo y sus páginas (`cv-daniel-suarez-es.pdf - 2 págs`), baja un PDF ya generado en el idioma activo (`cv-daniel-suarez-es.pdf`, `-en.pdf` y `-ca.pdf`): un CV limpio en blanco de 2 páginas A4 con todas las secciones y los proyectos desplegados. También se puede usar *Imprimir → Guardar como PDF*.
 - **Accesible.** Enlace "Saltar al contenido", navegación por teclado, textos alternativos, zonas táctiles de tamaño adecuado y respeto a *reducir movimiento*. Sin errores de accesibilidad según axe en los tres idiomas, en claro y oscuro, en escritorio y móvil.
-- **Ligero y rápido.** `index.html` pesa unos 285 KB (88 KB comprimido). Las imágenes van en WebP y las fotos de los proyectos se cargan solo al llegar a ellas. Las fuentes están reducidas a los caracteres y pesos que se usan y se precargan. Medido en Chromium sin limitar la red: LCP de 1,7 a 1,9 s, CLS por debajo de 0,01 y sin errores en la consola.
+- **Ligero y rápido.** `index.html` pesa unos 240 KB (72 KB comprimido). Las imágenes van en WebP y las fotos de los proyectos se cargan solo al llegar a ellas. Las fuentes están reducidas a los caracteres y pesos que se usan y se precargan. Medido en Chromium sin limitar la red: LCP de 1,7 a 1,9 s, CLS por debajo de 0,01 y sin errores en la consola.
 - **Listo para compartir.** Metadatos Open Graph con imagen de vista previa para LinkedIn, WhatsApp o X, datos estructurados de schema.org, sitemap, favicon propio e icono para la pantalla de inicio del móvil.
 
 ### Detalles de la interfaz
@@ -28,6 +28,7 @@ Ver online: https://dasuarezang.github.io/
 - Menú móvil a pantalla completa, con el icono de hamburguesa que se transforma en una X.
 - Animaciones de entrada al hacer scroll y transiciones con curvas tipo muelle.
 - Botón de correo que además copia la dirección y lo confirma con un aviso.
+- Pie con los logos de correo, GitHub y LinkedIn sin botón: al pasar por encima, su contorno se ilumina en azul.
 - Botón para volver arriba.
 
 ## Secciones
@@ -39,7 +40,7 @@ Ver online: https://dasuarezang.github.io/
 | **Educación** | Grado en la ETSETB · UPC |
 | **Experiencia** | Traceroute con tarjetas y logos: Fòrum Telecos UPC y Real Madrid Official Store, con un extracto de la carta de recomendación |
 | **Proyectos** | Carrusel infinito (da la vuelta del último al primero con flechas, puntos o deslizando; sin JavaScript es un carrusel normal) con tarjetas desplegables y las tecnologías de cada proyecto: red P2P para LLMs (con enlace a su código en GitHub), VitalLink (monitorización remota de salud con LoRaWAN, con enlace a su código), medidor de distancia por ultrasonidos y ROUV (vehículo subacuático) |
-| **Habilidades** | Redes, lenguajes, web y bases de datos, infraestructura y sistemas operativos, e idiomas |
+| **Habilidades** | Redes, lenguajes, web y bases de datos, infraestructura y sistemas operativos, e idiomas. Cada grupo es un comentario (`# REDES`) seguido de un listado en columnas, como la salida de `ls` |
 | **Certificados** | Una tarjeta por entidad (Harvard, IBM, Cisco), con enlace a la validación de cada certificado. Cada tarjeta enseña los 3 más recientes y despliega el resto con "ver más", así que la sección escala sin alargarse. En el PDF salen todos |
 
 ## Archivos
@@ -81,9 +82,8 @@ HTML5 · CSS3 (Grid, Flexbox, scroll-snap, `<details>`, `:has()`, `:target`, ani
 
 - Iconos: [Phosphor Icons](https://phosphoricons.com) (MIT)
 - Fuentes: [Geist y Geist Mono](https://vercel.com/font) y [Press Start 2P](https://fonts.google.com/specimen/Press+Start+2P) (SIL Open Font License)
-- Insignias: [shields.io](https://shields.io)
 - Los logotipos de UPC · ETSETB, Fòrum Telecos UPC, Real Madrid, Harvard, IBM y Cisco pertenecen a sus respectivos propietarios y se usan solo para identificar la institución o empresa.
 
 ---
 
-© 2026 Daniel Suárez Angosto — Todos los derechos reservados.
+`copyright 2026 Daniel Suárez Angosto --all-rights-reserved`
