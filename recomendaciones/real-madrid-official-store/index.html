@@ -185,6 +185,29 @@
     .actions{flex-direction:column;align-items:stretch;width:100%;}
     .btn{justify-content:center;}
   }
+  /* ===== Estética de terminal (como la barra del CV): rectángulos, borde fino y marcas en las esquinas ===== */
+  .pill,.lang-switch{
+    border-radius:0;
+    background-image:
+      linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),
+      linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),
+      linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),
+      linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6)),linear-gradient(rgba(96,165,250,.6),rgba(96,165,250,.6));
+    background-repeat:no-repeat;
+    background-size:8px 1.5px,1.5px 8px,8px 1.5px,1.5px 8px,8px 1.5px,1.5px 8px,8px 1.5px,1.5px 8px;
+    background-position:left top,left top,right top,right top,left bottom,left bottom,right bottom,right bottom;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);
+  }
+  .pill{font:500 .78rem/1 var(--mono);letter-spacing:.01em;text-transform:lowercase;}
+  .pill:hover{background-color:rgba(37,99,235,.35);box-shadow:inset 0 0 0 1px var(--accent);}
+  .lang-switch::before,.lang-switch button{border-radius:0;}
+  .eyebrow{padding:0;border-radius:0;background:none;box-shadow:none;gap:0;letter-spacing:.14em;}
+  .eyebrow::before{content:"#";width:auto;height:auto;margin-right:1.2ch;border-radius:0;background:none;color:var(--accent);letter-spacing:0;}
+  .frame{border-radius:0;}
+  .paper,.translation,.btn,.to-tr{border-radius:0;}
+  .btn{font:500 .88rem/1 var(--mono);}
+  .btn-ghost:hover,.to-tr:hover{box-shadow:inset 0 0 0 1px var(--accent);}
+  @media (max-width:480px){.frame,.paper{border-radius:0;}}
   @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}html{scroll-behavior:auto;}}
   @media print{
     body{background:#fff;}

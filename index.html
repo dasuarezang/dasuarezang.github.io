@@ -1150,7 +1150,39 @@
     nav.links a:hover,nav.links a:focus-visible{background:rgba(255,255,255,.06);}
     nav.links a[aria-current="location"]{color:#fff;background:none;box-shadow:none;}
     nav.links a[aria-current="location"]::before{opacity:1;}
+    /* Mismo hueco a la derecha del selector de idioma que a la izquierda del logo (18px + 4px del logo) */
+    .nav-inner{padding-right:22px;}
   }
+
+  /* ===== Estética de terminal (3): ninguna esquina redondeada ===== */
+  :root{--r-xl:0px;}
+  .nav-inner,.lang-switch,.lang-switch span,.lang-switch::before,.lang-hit,.nav-toggle,nav.links a,nav.links .nav-foot a,
+  .contact-row a:not(.badge-link),a.badge-link,a.badge-link img,
+  .skill-group h3 .ic,.badges img,
+  .term-open,.term-hint kbd,.footer-links a.dl-cv,.to-top,.toast,.toast > .ic,.skip-link{border-radius:0;}
+  /* Botones: rectángulos con borde fino que se ilumina en azul, como el cursor de la terminal */
+  .contact-row a:not(.badge-link):hover,.contact-row a:not(.badge-link):focus-visible,
+  .term-open:hover,.term-open:focus-visible{box-shadow:inset 0 0 0 1px var(--accent);}
+  .contact-row a:first-child:hover,.contact-row a:first-child:focus-visible{box-shadow:inset 0 0 0 1px var(--accent-deep),0 10px 24px -12px rgba(96,165,250,.6);}
+  /* Redes del pie: solo el logo; al pasar por encima, resplandor azul en su contorno */
+  .socials{display:flex;align-items:center;gap:8px;}
+  .footer-links a.social{
+    width:auto;height:auto;padding:6px;border-radius:0;font-size:1.6rem;color:rgba(255,255,255,.78);
+    background:none;box-shadow:none;
+    filter:drop-shadow(0 0 0 rgba(96,165,250,0)) drop-shadow(0 0 0 rgba(96,165,250,0));
+    transition:color .5s var(--spring),filter .5s var(--spring),transform .6s var(--spring);
+  }
+  .footer-links a.social:hover,.footer-links a.social:focus-visible{
+    background:none;color:#fff;transform:translateY(-2px);
+    filter:drop-shadow(0 0 2px rgba(96,165,250,.9)) drop-shadow(0 0 10px rgba(96,165,250,.7));
+    animation:socialGlow 1.8s ease-in-out .5s infinite alternate;
+  }
+  @keyframes socialGlow{
+    to{filter:drop-shadow(0 0 3px rgba(96,165,250,1)) drop-shadow(0 0 16px rgba(37,99,235,.85));}
+  }
+  /* Derechos como una orden de terminal */
+  .copyright{font:400 .78rem/1.4 var(--mono);letter-spacing:.01em;}
+  .copyright .prompt{color:var(--accent);margin-right:1ch;}
 
   /* ===== Impresión / Guardar como PDF: CV limpio en blanco, todo visible ===== */
   @media print{
@@ -1692,16 +1724,16 @@
   <div class="footer-inner">
     <div>
       <div class="fname"><span class="logo-term" aria-hidden="true">&gt;_ DSA</span>Daniel Suárez Angosto</div>
-      <div class="copyright">&copy; <span id="year">2026</span> — <span data-i18n="footer.rights"><span class="t-es">Todos los derechos reservados</span><span class="t-en" lang="en">All rights reserved</span><span class="t-ca" lang="ca">Tots els drets reservats</span></span></div>
+      <div class="copyright"><span class="prompt" aria-hidden="true">&gt;_</span>copyright <span id="year">2026</span> --all-rights-reserved</div>
     </div>
     <div class="footer-links">
       <button class="term-open" type="button" id="termOpen" aria-haspopup="dialog"><span class="term-open-ic" aria-hidden="true">&gt;_</span>Terminal</button>
       <span class="t-es"><a class="dl-cv" href="cv-daniel-suarez-es.pdf" download="CV - Daniel Suárez Angosto (ES).pdf" type="application/pdf"><i class="ic ic-download-simple" aria-hidden="true"></i>Descargar CV</a></span><span class="t-en" lang="en"><a class="dl-cv" href="cv-daniel-suarez-en.pdf" download="CV - Daniel Suárez Angosto (EN).pdf" type="application/pdf"><i class="ic ic-download-simple" aria-hidden="true"></i>Download CV</a></span><span class="t-ca" lang="ca"><a class="dl-cv" href="cv-daniel-suarez-ca.pdf" download="CV - Daniel Suárez Angosto (CA).pdf" type="application/pdf"><i class="ic ic-download-simple" aria-hidden="true"></i>Descarregar CV</a></span>
-      <a href="mailto:daniel.suarez.angosto@gmail.com" aria-label="Email"><i class="ic ic-envelope-simple"></i></a>
-      <a href="https://github.com/dasuarezang" target="_blank" rel="noopener" aria-label="GitHub"><i class="ic ic-github-logo"></i></a>
-      <a class="badge-link" href="https://linkedin.com/in/daniel-suarez-angosto" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22111%22 height=%2228%22 role=%22img%22 aria-label=%22LINKEDIN%22%3E%3Ctitle%3ELINKEDIN%3C/title%3E%3Cg shape-rendering=%22crispEdges%22%3E%3Crect width=%22111%22 height=%2228%22 fill=%22%230077b5%22/%3E%3C/g%3E%3Cg fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22Verdana,Geneva,DejaVu Sans,sans-serif%22 text-rendering=%22geometricPrecision%22 font-size=%22100%22%3E%3Cimage x=%229%22 y=%227%22 width=%2214%22 height=%2214%22 href=%22data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2MtMS4xNDQgMC0yLjA2My0uOTI2LTIuMDYzLTIuMDY1IDAtMS4xMzguOTItMi4wNjMgMi4wNjMtMi4wNjMgMS4xNCAwIDIuMDY0LjkyNSAyLjA2NCAyLjA2MyAwIDEuMTM5LS45MjUgMi4wNjUtMi4wNjQgMi4wNjV6bTEuNzgyIDEzLjAxOUgzLjU1NVY5aDMuNTY0djExLjQ1MnpNMjIuMjI1IDBIMS43NzFDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzc0IDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPg==%22/%3E%3Ctext transform=%22scale(.1)%22 x=%22655%22 y=%22175%22 textLength=%22670%22 font-weight=%22bold%22%3ELINKEDIN%3C/text%3E%3C/g%3E%3C/svg%3E" alt="LinkedIn">
-      </a>
+      <span class="socials">
+        <a class="social" href="mailto:daniel.suarez.angosto@gmail.com" aria-label="Email"><i class="ic ic-envelope-simple"></i></a>
+        <a class="social" href="https://github.com/dasuarezang" target="_blank" rel="noopener" aria-label="GitHub"><i class="ic ic-github-logo"></i></a>
+        <a class="social" href="https://linkedin.com/in/daniel-suarez-angosto" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ic ic-linkedin-logo"></i></a>
+      </span>
     </div>
     <button class="term-hint" type="button" id="termHint"><span class="t-es">psst… pulsa <kbd>º</kbd> en cualquier momento para abrir la terminal</span><span class="t-en" lang="en">psst… press <kbd>`</kbd> anytime to open the terminal</span><span class="t-ca" lang="ca">psst… prem <kbd>º</kbd> en qualsevol moment per obrir el terminal</span></button>
   </div>
