@@ -1199,9 +1199,30 @@
   @media screen and (prefers-color-scheme: dark){
     .skill-group h3::before,.ls .lvl{color:var(--accent);}
   }
+  /* ===== Estética de terminal (5): ni un círculo ni una esquina redondeada ===== */
+  /* Fechas del grado y de los proyectos: texto monoespaciado en azul, como las de la experiencia */
+  .edu-card .period,.proj-card .date{padding:0;border-radius:0;background:none;box-shadow:none;}
+  .edu-card .period{font:500 .72rem/1.4 var(--mono);letter-spacing:.1em;color:var(--accent-deep);}
+  .proj-card .date{color:var(--accent);text-shadow:0 1px 8px rgba(5,7,12,.8);}
+  /* Tecnologías: etiquetas rectas con borde fino, sin relleno */
+  .proj-tags > span,.tl-item .r-skills li{border-radius:0;background:none;}
+  /* Botones y marcas que eran círculos o píldoras */
+  .cert-go,.cert-logo,.proj-logo,.proj-toggle,.car-btn,.car-dot,.tl-logo,.tl-logo img,.tl-r::before,.q-link,.term-close,.term-chips button{border-radius:0;}
+  .cert-go{background:none;box-shadow:inset 0 0 0 1px rgba(11,16,32,.16);transition:none;}
+  .cert-item:hover .cert-go,.cert-item:focus-visible .cert-go{transform:none;color:#fff;background:var(--accent-deep);box-shadow:inset 0 0 0 1px var(--accent-deep);}
+  .car-btn:active{transform:translateY(1px);}
+  .car-dot{width:8px;}
+  .car-dot[aria-current="true"]{transform:none;width:20px;}
+  /* Viñetas cuadradas */
+  .tl-item ul:not(.r-skills),.proj-card ul{list-style-type:square;}
+  @media screen and (prefers-color-scheme: dark){
+    .edu-card .period{color:var(--accent);background:none;}
+    .cert-go{background:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);}
+    .cert-item:hover .cert-go,.cert-item:focus-visible .cert-go{background:var(--accent-deep);color:#fff;}
+  }
+  @media (hover:none){.cert-item:hover .cert-go{background:none;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(11,16,32,.16);}}
   /* Derechos como una orden de terminal */
   .copyright{font:400 .78rem/1.4 var(--mono);letter-spacing:.01em;}
-  .copyright .prompt{color:var(--accent);margin-right:1ch;}
 
   /* ===== Impresión / Guardar como PDF: CV limpio en blanco, todo visible ===== */
   @media print{
@@ -1741,11 +1762,11 @@
   <div class="footer-inner">
     <div>
       <div class="fname"><span class="logo-term" aria-hidden="true">&gt;_ DSA</span>Daniel Suárez Angosto</div>
-      <div class="copyright"><span class="prompt" aria-hidden="true">&gt;_</span>copyright <span id="year">2026</span> --all-rights-reserved</div>
+      <div class="copyright">copyright <span id="year">2026</span> --all-rights-reserved</div>
     </div>
     <div class="footer-links">
       <button class="term-open" type="button" id="termOpen" aria-haspopup="dialog"><span class="term-open-ic" aria-hidden="true">&gt;_</span>Terminal</button>
-      <span class="t-es"><a class="dl-cv" href="cv-daniel-suarez-es.pdf" download="CV - Daniel Suárez Angosto (ES).pdf" type="application/pdf"><i class="ic ic-download-simple" aria-hidden="true"></i><span class="sr">Descargar CV: </span>cv-daniel-suarez-es.pdf<span class="meta" aria-hidden="true">· 2 págs</span></a></span><span class="t-en" lang="en"><a class="dl-cv" href="cv-daniel-suarez-en.pdf" download="CV - Daniel Suárez Angosto (EN).pdf" type="application/pdf"><i class="ic ic-download-simple" aria-hidden="true"></i><span class="sr">Download CV: </span>cv-daniel-suarez-en.pdf<span class="meta" aria-hidden="true">· 2 pp</span></a></span><span class="t-ca" lang="ca"><a class="dl-cv" href="cv-daniel-suarez-ca.pdf" download="CV - Daniel Suárez Angosto (CA).pdf" type="application/pdf"><i class="ic ic-download-simple" aria-hidden="true"></i><span class="sr">Descarregar CV: </span>cv-daniel-suarez-ca.pdf<span class="meta" aria-hidden="true">· 2 pàg</span></a></span>
+      <span class="t-es"><a class="dl-cv" href="cv-daniel-suarez-es.pdf" download="CV - Daniel Suárez Angosto (ES).pdf" type="application/pdf"><i class="ic ic-download-simple" aria-hidden="true"></i><span class="sr">Descargar CV: </span>cv-daniel-suarez-es.pdf<span class="meta" aria-hidden="true">- 2 págs</span></a></span><span class="t-en" lang="en"><a class="dl-cv" href="cv-daniel-suarez-en.pdf" download="CV - Daniel Suárez Angosto (EN).pdf" type="application/pdf"><i class="ic ic-download-simple" aria-hidden="true"></i><span class="sr">Download CV: </span>cv-daniel-suarez-en.pdf<span class="meta" aria-hidden="true">- 2 pp</span></a></span><span class="t-ca" lang="ca"><a class="dl-cv" href="cv-daniel-suarez-ca.pdf" download="CV - Daniel Suárez Angosto (CA).pdf" type="application/pdf"><i class="ic ic-download-simple" aria-hidden="true"></i><span class="sr">Descarregar CV: </span>cv-daniel-suarez-ca.pdf<span class="meta" aria-hidden="true">- 2 pàg</span></a></span>
       <span class="socials">
         <a class="social" href="mailto:daniel.suarez.angosto@gmail.com" aria-label="Email"><i class="ic ic-envelope-simple"></i></a>
         <a class="social" href="https://github.com/dasuarezang" target="_blank" rel="noopener" aria-label="GitHub"><i class="ic ic-github-logo"></i></a>
