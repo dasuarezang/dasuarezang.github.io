@@ -19,6 +19,25 @@ from _site import ROOT, serve
 LANGS = {'es': 'es-ES', 'en': 'en-US', 'ca': 'ca-ES'}
 MAX_PAGES = 2
 
+# Quita las transparencias del PDF, que algunos visores (móvil, vista previa del correo) pintan como recuadros
+# negros: los iconos pasan de máscara CSS a imagen SVG ya coloreada y la foto se aplana sobre blanco en JPEG.
+FLATTEN = """async () => {
+  document.querySelectorAll('.ic').forEach(el => {
+    const cs = getComputedStyle(el, '::before');
+    const ic = cs.getPropertyValue('--ic').trim();
+    if (ic && cs.display !== 'none') el.style.setProperty('--icp', ic.replace(/currentColor/g, encodeURIComponent(cs.backgroundColor)));
+  });
+  for (const img of document.querySelectorAll('.profile-img')) {
+    await img.decode();
+    const c = document.createElement('canvas');
+    c.width = img.naturalWidth; c.height = img.naturalHeight;
+    const g = c.getContext('2d');
+    g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(img, 0, 0);
+    img.srcset = ''; img.src = c.toDataURL('image/jpeg', 0.9);
+    await img.decode();
+  }
+}"""
+
 
 def build(out_dir=ROOT):
     """Genera los tres PDF en out_dir y devuelve {idioma: ruta}."""
@@ -35,6 +54,7 @@ def build(out_dir=ROOT):
             page.evaluate("document.querySelectorAll('.proj-card:not(.is-clone)').forEach(d => { d.open = true; })")
             page.evaluate("l => { document.title = 'CV - Daniel Suárez Angosto (' + l.toUpperCase() + ')'; }", lang)
             page.emulate_media(media='print')
+            page.evaluate(FLATTEN)
             path = pathlib.Path(out_dir) / ('cv-daniel-suarez-%s.pdf' % lang)
             path.write_bytes(page.pdf(format='A4', print_background=True))
             result[lang] = path

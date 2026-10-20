@@ -17,7 +17,7 @@ Ver online: https://dasuarezang.github.io/
 - **Terminal escondida.** Se abre con la tecla `º` (o `` ` ``) o con el botón del pie. Responde con el propio contenido del CV: `whoami`, `about`, `education`, `experience`, `traceroute`, `projects`, `skills`, `certs`, `contact`, `email`, `cv`, `ping`, `lang es|en|ca`, entre otros. En pantallas táctiles se usa con botones, sin abrir el teclado.
 - **Diseño adaptable.** Probado de 280 px (móvil plegable) a 4K, en vertical y en horizontal, con los motores de Chrome, Safari y Firefox y sin scroll horizontal. Con el móvil en horizontal, el menú se reparte en dos columnas.
 - **Modo oscuro automático** según el ajuste del sistema.
-- **PDF descargable.** El botón del pie, que muestra el nombre del archivo y sus páginas (`cv-daniel-suarez-es.pdf - 2 págs`), baja un PDF ya generado en el idioma activo (`cv-daniel-suarez-es.pdf`, `-en.pdf` y `-ca.pdf`): un CV limpio en blanco de 2 páginas A4 con todas las secciones y los proyectos desplegados. También se puede usar *Imprimir → Guardar como PDF*.
+- **PDF descargable.** El botón del pie, que muestra el nombre del archivo y sus páginas (`cv-daniel-suarez-es.pdf - 2 págs`), baja un PDF ya generado en el idioma activo (`cv-daniel-suarez-es.pdf`, `-en.pdf` y `-ca.pdf`): un CV limpio en blanco de 2 páginas A4 con todas las secciones y los proyectos desplegados. El menú del móvil también lo tiene, debajo de los tres contactos y con su mismo ancho. El PDF no lleva transparencias (iconos coloreados y foto aplanada), para que ningún visor pinte recuadros negros. También se puede usar *Imprimir → Guardar como PDF*.
 - **Accesible.** Enlace "Saltar al contenido", navegación por teclado, textos alternativos, zonas táctiles de tamaño adecuado y respeto a *reducir movimiento*. Sin errores de accesibilidad según axe en los tres idiomas, en claro y oscuro, en escritorio y móvil.
 - **Ligero y rápido.** `index.html` pesa unos 240 KB (72 KB comprimido). Las imágenes van en WebP y las fotos de los proyectos se cargan solo al llegar a ellas. Las fuentes están reducidas a los caracteres y pesos que se usan y se precargan. Medido en Chromium sin limitar la red: LCP de 1,7 a 1,9 s, CLS por debajo de 0,01 y sin errores en la consola.
 - **Listo para compartir.** Metadatos Open Graph con imagen de vista previa para LinkedIn, WhatsApp o X, datos estructurados de schema.org, sitemap, favicon propio e icono para la pantalla de inicio del móvil.
@@ -25,7 +25,7 @@ Ver online: https://dasuarezang.github.io/
 ### Detalles de la interfaz
 
 - Navegación flotante con el apartado activo resaltado y una barra de progreso de lectura.
-- Menú móvil a pantalla completa, con el icono de hamburguesa que se transforma en una X.
+- Menú móvil a pantalla completa, con el icono de hamburguesa que se transforma en una X, los contactos y el botón para descargar el CV.
 - Animaciones de entrada al hacer scroll y transiciones con curvas tipo muelle.
 - Botón de correo que además copia la dirección y lo confirma con un aviso.
 - Pie con los logos de correo, GitHub y LinkedIn sin botón: al pasar por encima, su contorno se ilumina en azul.
