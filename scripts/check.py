@@ -28,6 +28,8 @@ from playwright.sync_api import sync_playwright
 from _site import ROOT, serve
 from build_pdfs import LANGS, MAX_PAGES, build, pages_and_text
 
+OTHER_SITES = ('https://dasuarezang.github.io/kreix-web/',)   # GitHub Pages de otros repositorios
+
 PAGES = ['index.html', '404.html', 'recomendaciones/real-madrid-official-store/index.html']
 errors, warnings = [], []
 
@@ -116,7 +118,8 @@ def check_files(offline):
         for r in refs(html):
             if not r or r.startswith(('data:', 'mailto:', 'tel:', '#', '%23', 'javascript:')):
                 continue
-            r = r.replace('https://dasuarezang.github.io/', '/')
+            if not r.startswith(OTHER_SITES):                  # otras webs del mismo dominio (otros repos): externas
+                r = r.replace('https://dasuarezang.github.io/', '/')
             if r.startswith(('http://', 'https://')):
                 external.add(r)
                 continue
