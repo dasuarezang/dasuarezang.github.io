@@ -1225,6 +1225,7 @@
   .proj-tags > span,.tl-item .r-skills li{border-radius:0;background:none;}
   /* Botones y marcas que eran círculos o píldoras */
   .cert-go,.cert-logo,.proj-logo,.proj-toggle,.car-btn,.car-dot,.tl-logo,.tl-logo img,.tl-r::before,.q-link,.term-close,.term-chips button{border-radius:0;}
+  .proj-logo.is-app{border-radius:0;background:none;box-shadow:none;}   /* el logo de Kreix va tal cual, con sus esquinas redondeadas */
   .cert-go{background:none;box-shadow:inset 0 0 0 1px rgba(11,16,32,.16);transition:none;}
   .cert-item:hover .cert-go,.cert-item:focus-visible .cert-go{transform:none;color:#fff;background:var(--accent-deep);box-shadow:inset 0 0 0 1px var(--accent-deep);}
   .car-btn:active{transform:translateY(1px);}
@@ -1591,7 +1592,7 @@
         <summary>
           <img class="proj-bg" src="assets/proyecto-kreix.webp" loading="lazy" alt="Kreix: pantalla de Inicio con el patrimonio neto, el rendimiento y el cielo con Blitzen y Black" decoding="async">
           <span class="proj-shade" aria-hidden="true"></span>
-          <img class="proj-logo" src="assets/kreix-logo.webp" alt="Logo de Kreix" width="80" height="80" loading="lazy" decoding="async">
+          <img class="proj-logo is-app" src="assets/kreix-logo.webp" alt="Logo de Kreix" width="80" height="80" loading="lazy" decoding="async">
           <span class="date" data-i18n="p6.date"><span class="t-es">Octubre 2026</span><span class="t-en" lang="en">October 2026</span><span class="t-ca" lang="ca">Octubre 2026</span></span>
           <h3 data-i18n="p6.title"><span class="t-es">Kreix: finanzas personales offline y cifradas para Windows</span><span class="t-en" lang="en">Kreix: offline, encrypted personal finance for Windows</span><span class="t-ca" lang="ca">Kreix: finances personals offline i xifrades per a Windows</span></h3>
           <span class="proj-tags"><span>Python</span><span>PySide6</span><span>SQLAlchemy</span><span>AES · PBKDF2</span><span>Pytest</span><span>PyInstaller</span></span>
