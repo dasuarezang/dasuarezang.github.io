@@ -39,7 +39,7 @@ Ver online: https://dasuarezang.github.io/
 | **Sobre mí** | Perfil profesional |
 | **Educación** | Grado en la ETSETB · UPC |
 | **Experiencia** | Traceroute con tarjetas y logos: Fòrum Telecos UPC y Real Madrid Official Store, con un extracto de la carta de recomendación |
-| **Proyectos** | Carrusel infinito (da la vuelta del último al primero con flechas, puntos o deslizando; sin JavaScript es un carrusel normal) con tarjetas desplegables y las tecnologías de cada proyecto: red P2P para LLMs (con enlace a su código en GitHub), VitalLink (monitorización remota de salud con LoRaWAN, con enlace a su código), medidor de distancia por ultrasonidos y ROUV (vehículo subacuático) |
+| **Proyectos** | Carrusel infinito (da la vuelta del último al primero con flechas, puntos o deslizando; sin JavaScript es un carrusel normal) con tarjetas desplegables y las tecnologías de cada proyecto: Kreix (finanzas personales offline y cifradas para Windows y móvil, con enlaces a su web, a su código y a la app del móvil; en el PDF, resumido), esta misma web, red P2P para LLMs (con enlace a su código en GitHub), VitalLink (monitorización remota de salud con LoRaWAN, con enlace a su código), medidor de distancia por ultrasonidos y ROUV (vehículo subacuático) |
 | **Habilidades** | Redes, lenguajes, web y bases de datos, infraestructura y sistemas operativos, e idiomas. Cada grupo es un comentario (`# REDES`) seguido de un listado en columnas, como la salida de `ls` |
 | **Certificados** | Una tarjeta por entidad (Harvard, IBM, Cisco), con enlace a la validación de cada certificado. Cada tarjeta enseña los 3 más recientes y despliega el resto con "ver más", así que la sección escala sin alargarse. En el PDF salen todos |
 
@@ -59,7 +59,7 @@ Ver online: https://dasuarezang.github.io/
 | `scripts/` | `build_pdfs.py` genera los PDF y `check.py` comprueba la web antes de subir cambios |
 | `apple-touch-icon.png` | Icono al guardar la web en la pantalla de inicio del móvil |
 | `google27aa19f9bf52eea7.html` | Verificación de Google Search Console (no borrar) |
-| `assets/` | Foto de perfil, logo de la ETSETB, fotos de los 5 proyectos, logo de VitalLink y fuentes Geist y Geist Mono |
+| `assets/` | Foto de perfil, logo de la ETSETB, fotos de los 6 proyectos, logos de VitalLink y Kreix y fuentes Geist y Geist Mono |
 
 ## Mantenimiento
 
